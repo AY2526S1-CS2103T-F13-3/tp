@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; is always valid
  */
 public class Remark {
-    public static final String EMPTY_REMARK = new Remark("");
+    public static final Remark EMPTY_REMARK = new Remark("");
 
     public final String value;
 
