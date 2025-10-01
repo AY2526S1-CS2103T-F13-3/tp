@@ -9,7 +9,7 @@
         "project-team": "Project team",
         "john-doe": "John Doe",
         "jane-doe": "Jane Doe",
-        "johnny-doe": "Johnny Doe",
+        "simantak-dabhade": "Simantak Dabhade",
         "jean-doe": "Jean Doe",
         "james-doe": "James Doe"
       },
@@ -145,6 +145,14 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/simantak.md",
+      "title": "Simantak's Profile Page",
+      "headings": {
+        "project-playbook-io": "Project: playbook.io"
       },
       "headingKeywords": {}
     }
