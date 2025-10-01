@@ -14,7 +14,7 @@ You can reach us at the email `simantak@u.nus.edu`
 
 ### Simantak Dabahde
 
-<img src="images/simantak-dabhade.png.png" width="200px">
+<img src="images/simantak-dabhade.png" width="200px">
 
 [[github](http://github.com/simantak-dabahde)] [[portfolio](team/simantak.md)]
 
@@ -53,7 +53,7 @@ You can reach us at the email `simantak@u.nus.edu`
 
 ### Goh Joshua
 
-<img src="images/joshua.png" width="200px">
+<img src="images/goh-joshua.png" width="200px">
 
 [[github](http://github.com/goh-joshua)]
 [[portfolio](team/goh-joshua.md)]
