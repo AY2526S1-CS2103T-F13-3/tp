@@ -141,6 +141,14 @@
       "headingKeywords": {}
     },
     {
+      "src": "team/cameron.md",
+      "title": "Cameron's Project Portfolio Page",
+      "headings": {
+        "project-playbook-io": "Project: playbook.io"
+      },
+      "headingKeywords": {}
+    },
+    {
       "src": "team/johndoe.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
