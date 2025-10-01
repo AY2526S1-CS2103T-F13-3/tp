@@ -7,11 +7,11 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "simantak-dabhade": "Simantak Dabhade",
+        "simantak-dabahde": "Simantak Dabahde",
+        "nguyen-ngoc-dang-khoa": "Nguyen Ngoc Dang Khoa",
         "tan-xuan-xuan-kelly": "Tan Xuan Xuan Kelly",
         "loh-zi-yang-cameron": "Loh Zi Yang Cameron",
-        "goh-joshua": "Goh Joshua",
-        "nguyen-ngoc-dang-khoa": "Nguyen Ngoc Dang Khoa"
+        "goh-joshua": "Goh Joshua"
       },
       "headingKeywords": {}
     },
@@ -167,6 +167,14 @@
     {
       "src": "team/kelly.md",
       "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-playbook-io": "Project: playbook.io"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/khoa.md",
+      "title": "Khoa's Profile Page",
       "headings": {
         "project-playbook-io": "Project: playbook.io"
       },
