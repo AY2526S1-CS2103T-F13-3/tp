@@ -7,11 +7,11 @@
       "headings": {
         "about-us": "About Us",
         "project-team": "Project team",
-        "john-doe": "John Doe",
-        "jane-doe": "Jane Doe",
         "simantak-dabhade": "Simantak Dabhade",
-        "jean-doe": "Jean Doe",
-        "james-doe": "James Doe"
+        "tan-xuan-xuan-kelly": "Tan Xuan Xuan Kelly",
+        "loh-zi-yang-cameron": "Loh Zi Yang Cameron",
+        "goh-joshua": "Goh Joshua",
+        "nguyen-ngoc-dang-khoa": "Nguyen Ngoc Dang Khoa"
       },
       "headingKeywords": {}
     },
@@ -145,6 +145,14 @@
       "title": "John Doe's Project Portfolio Page",
       "headings": {
         "project-addressbook-level-3": "Project: AddressBook Level 3"
+      },
+      "headingKeywords": {}
+    },
+    {
+      "src": "team/kelly.md",
+      "title": "John Doe's Project Portfolio Page",
+      "headings": {
+        "project-playbook-io": "Project: playbook.io"
       },
       "headingKeywords": {}
     },
