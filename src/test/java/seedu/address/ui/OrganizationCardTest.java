@@ -1,39 +1,61 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.lang.reflect.Field;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.control.Label;
 import seedu.address.model.organization.Organization;
 import seedu.address.testutil.OrganizationBuilder;
 
 /**
- * Unit tests for {@code OrganizationCard}.
- * Verifies that {@code Organization} data is correctly built and accessible.
+ * Tests for {@link OrganizationCard}.
  */
 public class OrganizationCardTest {
 
-    @Test
-    public void organizationCard_validOrganization_fieldsCorrect() {
-        Organization organization = new OrganizationBuilder().build();
-        assertNotNull(organization);
-        assertEquals("Nike", organization.getName().fullOrganizationName);
-        assertEquals("98765432", organization.getPhone().value);
-        assertEquals("john.doe@nike.com", organization.getEmail().value);
+    @BeforeAll
+    static void setupToolkit() {
+        JavaFxTestUtil.initFxToolkit();
     }
 
     @Test
-    public void organizationCard_customData_fieldsCorrect() {
+    public void constructor_populatesLabels() {
+        Organization organization = new OrganizationBuilder().build();
+        OrganizationCard card = JavaFxTestUtil.callOnFxThread(() -> new OrganizationCard(organization, 2));
+
+        assertEquals("2. ", getLabelText(card, "id"));
+        assertEquals("Nike", getLabelText(card, "name"));
+        assertEquals("98765432", getLabelText(card, "phone"));
+        assertEquals("john.doe@nike.com", getLabelText(card, "email"));
+    }
+
+    @Test
+    public void constructor_differentOrganization_updatesFields() {
         Organization organization = new OrganizationBuilder()
                 .withName("Test Sports Corp")
                 .withPhone("87654321")
                 .withEmail("contact@testsports.com")
                 .build();
+        OrganizationCard card = JavaFxTestUtil.callOnFxThread(() -> new OrganizationCard(organization, 4));
 
-        assertNotNull(organization);
-        assertEquals("Test Sports Corp", organization.getName().fullOrganizationName);
-        assertEquals("87654321", organization.getPhone().value);
-        assertEquals("contact@testsports.com", organization.getEmail().value);
+        assertEquals("4. ", getLabelText(card, "id"));
+        assertEquals("Test Sports Corp", getLabelText(card, "name"));
+        assertEquals("87654321", getLabelText(card, "phone"));
+        assertEquals("contact@testsports.com", getLabelText(card, "email"));
+    }
+
+    private String getLabelText(OrganizationCard card, String fieldName) {
+        return JavaFxTestUtil.callOnFxThread(() -> {
+            try {
+                Field field = OrganizationCard.class.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return ((Label) field.get(card)).getText();
+            } catch (ReflectiveOperationException e) {
+                throw new AssertionError(e);
+            }
+        });
     }
 }

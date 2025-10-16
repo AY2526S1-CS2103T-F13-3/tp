@@ -1,28 +1,41 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.lang.reflect.Field;
+
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javafx.scene.control.Label;
 import seedu.address.model.athlete.Athlete;
 import seedu.address.testutil.athlete.AthleteBuilder;
 
+/**
+ * Tests for {@link AthleteCard}.
+ */
 public class AthleteCardTest {
 
-    @Test
-    public void athleteCard_validAthlete_fieldsCorrect() {
-        Athlete athlete = new AthleteBuilder().build();
-        assertNotNull(athlete);
-        assertEquals("Amy Bee", athlete.getName().fullName);
-        assertEquals("Swimming", athlete.getSport().value);
-        assertEquals("20", athlete.getAge().value);
-        assertEquals("85355255", athlete.getPhone().value);
-        assertEquals("amy@gmail.com", athlete.getEmail().value);
+    @BeforeAll
+    static void setupToolkit() {
+        JavaFxTestUtil.initFxToolkit();
     }
 
     @Test
-    public void athleteCard_customData_fieldsCorrect() {
+    public void constructor_populatesLabels() {
+        Athlete athlete = new AthleteBuilder().build();
+        AthleteCard card = JavaFxTestUtil.callOnFxThread(() -> new AthleteCard(athlete, 1));
+
+        assertEquals("1. ", getLabelText(card, "id"));
+        assertEquals("Amy Bee", getLabelText(card, "name"));
+        assertEquals("Swimming", getLabelText(card, "sport"));
+        assertEquals("Age: 20", getLabelText(card, "age"));
+        assertEquals("85355255", getLabelText(card, "phone"));
+        assertEquals("amy@gmail.com", getLabelText(card, "email"));
+    }
+
+    @Test
+    public void constructor_differentAthlete_updatesAllFields() {
         Athlete athlete = new AthleteBuilder()
                 .withName("John Doe")
                 .withSport("Basketball")
@@ -30,12 +43,25 @@ public class AthleteCardTest {
                 .withPhone("98765432")
                 .withEmail("john@example.com")
                 .build();
+        AthleteCard card = JavaFxTestUtil.callOnFxThread(() -> new AthleteCard(athlete, 5));
 
-        assertNotNull(athlete);
-        assertEquals("John Doe", athlete.getName().fullName);
-        assertEquals("Basketball", athlete.getSport().value);
-        assertEquals("25", athlete.getAge().value);
-        assertEquals("98765432", athlete.getPhone().value);
-        assertEquals("john@example.com", athlete.getEmail().value);
+        assertEquals("5. ", getLabelText(card, "id"));
+        assertEquals("John Doe", getLabelText(card, "name"));
+        assertEquals("Basketball", getLabelText(card, "sport"));
+        assertEquals("Age: 25", getLabelText(card, "age"));
+        assertEquals("98765432", getLabelText(card, "phone"));
+        assertEquals("john@example.com", getLabelText(card, "email"));
+    }
+
+    private String getLabelText(AthleteCard card, String fieldName) {
+        return JavaFxTestUtil.callOnFxThread(() -> {
+            try {
+                Field field = AthleteCard.class.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                return ((Label) field.get(card)).getText();
+            } catch (ReflectiveOperationException e) {
+                throw new AssertionError(e);
+            }
+        });
     }
 }

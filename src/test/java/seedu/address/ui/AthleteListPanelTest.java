@@ -1,48 +1,91 @@
 package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.reflect.Field;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import seedu.address.model.athlete.Athlete;
 import seedu.address.testutil.athlete.AthleteBuilder;
 
+/**
+ * Tests for {@link AthleteListPanel}.
+ */
 public class AthleteListPanelTest {
 
-    @Test
-    public void athleteList_emptyList_success() {
-        List<Athlete> emptyList = new ArrayList<>();
-        assertTrue(emptyList.isEmpty());
+    @BeforeAll
+    static void setupToolkit() {
+        JavaFxTestUtil.initFxToolkit();
     }
 
     @Test
-    public void athleteList_listWithAthletes_success() {
-        List<Athlete> athleteList = new ArrayList<>();
-        athleteList.add(new AthleteBuilder().build());
-        athleteList.add(new AthleteBuilder().withName("Jane Doe").withSport("Tennis").build());
+    public void constructor_bindsObservableList() {
+        ObservableList<Athlete> athletes = FXCollections.observableArrayList(
+                new AthleteBuilder().withName("Jane Doe").build(),
+                new AthleteBuilder().withName("John Smith").build());
 
-        assertEquals(2, athleteList.size());
-        assertEquals("Amy Bee", athleteList.get(0).getName().fullName);
-        assertEquals("Jane Doe", athleteList.get(1).getName().fullName);
+        AthleteListPanel panel = JavaFxTestUtil.callOnFxThread(() -> new AthleteListPanel(athletes));
+        ListView<Athlete> listView = getListView(panel);
+
+        assertSame(athletes, listView.getItems());
+        assertEquals(2, listView.getItems().size());
     }
 
     @Test
-    public void athleteList_singleAthlete_success() {
-        List<Athlete> athleteList = new ArrayList<>();
-        Athlete athlete = new AthleteBuilder()
-                .withName("Test Athlete")
-                .withSport("Running")
-                .withAge("22")
-                .withPhone("12345678")
-                .withEmail("test@example.com")
-                .build();
-        athleteList.add(athlete);
+    public void athleteListViewCell_updateItem_togglesGraphic() {
+        ObservableList<Athlete> athletes = FXCollections.observableArrayList(
+                new AthleteBuilder().withName("Jane Doe").build());
+        AthleteListPanel panel = JavaFxTestUtil.callOnFxThread(() -> new AthleteListPanel(athletes));
+        ListCell<Athlete> cell = createCell(panel);
 
-        assertEquals(1, athleteList.size());
-        assertEquals("Test Athlete", athleteList.get(0).getName().fullName);
+        invokeUpdateItem(cell, athletes.get(0), false);
+        assertNotNull(JavaFxTestUtil.callOnFxThread(cell::getGraphic));
+
+        invokeUpdateItem(cell, null, true);
+        assertNull(JavaFxTestUtil.callOnFxThread(cell::getGraphic));
+        assertNull(JavaFxTestUtil.callOnFxThread(cell::getText));
+    }
+
+    private ListView<Athlete> getListView(AthleteListPanel panel) {
+        return JavaFxTestUtil.callOnFxThread(() -> {
+            try {
+                Field field = AthleteListPanel.class.getDeclaredField("athleteListView");
+                field.setAccessible(true);
+                @SuppressWarnings("unchecked")
+                ListView<Athlete> listView = (ListView<Athlete>) field.get(panel);
+                return listView;
+            } catch (ReflectiveOperationException e) {
+                throw new AssertionError(e);
+            }
+        });
+    }
+
+    private ListCell<Athlete> createCell(AthleteListPanel panel) {
+        return JavaFxTestUtil.callOnFxThread(() -> {
+            ListView<Athlete> listView = getListView(panel);
+            return listView.getCellFactory().call(listView);
+        });
+    }
+
+    private <T> void invokeUpdateItem(ListCell<T> cell, T item, boolean empty) {
+        JavaFxTestUtil.runOnFxThreadAndWait(() -> {
+            try {
+                java.lang.reflect.Method method = javafx.scene.control.Cell.class
+                        .getDeclaredMethod("updateItem", Object.class, boolean.class);
+                method.setAccessible(true);
+                method.invoke(cell, item, empty);
+            } catch (ReflectiveOperationException e) {
+                throw new AssertionError(e);
+            }
+        });
     }
 }
