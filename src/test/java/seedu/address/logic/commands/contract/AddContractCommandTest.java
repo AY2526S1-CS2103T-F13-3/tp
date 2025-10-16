@@ -104,9 +104,9 @@ public class AddContractCommandTest {
         AddContractCommand cmd = new AddContractCommand(ATHLETE_NAME, SPORT, ORG_NAME,
                 invalidStart, invalidEnd, AMT);
 
-        assertThrows(CommandException.class,
-                String.format(AddContractCommand.MESSAGE_INVALID_DATE_RANGE, invalidStart, invalidEnd),
-                () -> cmd.execute(modelStub));
+        String expectedMessage = String.format(
+                AddContractCommand.MESSAGE_INVALID_DATE_RANGE, invalidStart, invalidEnd);
+        assertThrows(CommandException.class, expectedMessage, () -> cmd.execute(modelStub));
         assertTrue(modelStub.contractsAdded.isEmpty());
     }
 
