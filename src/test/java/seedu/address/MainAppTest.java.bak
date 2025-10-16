@@ -6,11 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CompletableFuture;
@@ -24,15 +29,14 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataLoadingException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,19 +50,13 @@ import seedu.address.model.contract.ReadOnlyContractList;
 import seedu.address.model.organization.OrganizationList;
 import seedu.address.model.organization.ReadOnlyOrganizationList;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.JsonAddressBookStorage;
-import seedu.address.storage.JsonAthleteListStorage;
-import seedu.address.storage.JsonContractListStorage;
-import seedu.address.storage.JsonOrganizationListStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.testutil.OrganizationBuilder;
 import seedu.address.testutil.athlete.AthleteBuilder;
 import seedu.address.testutil.contract.ContractBuilder;
 import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
 
 /**
  * Tests for {@link MainApp}.
@@ -205,6 +203,9 @@ public class MainAppTest {
 
         FullInitMainApp app = new FullInitMainApp(configPath, prefsPath,
                 addressPath, athletePath, contractPath, organizationPath);
+
+        setApplicationParameters(app, Collections.singletonMap("config", configPath.toString()));
+
         app.init();
 
         assertNotNull(app.getConfig());
@@ -223,6 +224,39 @@ public class MainAppTest {
             throw new AssertionError(e);
         } catch (InvocationTargetException e) {
             throw new AssertionError(e.getCause());
+        }
+    }
+
+    private void setApplicationParameters(Application app, Map<String, String> namedParameters) {
+        try {
+            Class<?> implClass = Class.forName("com.sun.javafx.application.ParametersImpl");
+            Constructor<?> targetConstructor = null;
+            for (Constructor<?> candidate : implClass.getDeclaredConstructors()) {
+                Class<?>[] parameterTypes = candidate.getParameterTypes();
+                boolean matches = true;
+                for (Class<?> type : parameterTypes) {
+                    if (!List.class.isAssignableFrom(type) && !Map.class.isAssignableFrom(type)) {
+                        matches = false;
+                        break;
+                    }
+                }
+                if (matches) {
+                    targetConstructor = candidate;
+                    break;
+                }
+            }
+            if (targetConstructor == null) {
+                throw new AssertionError("Unable to locate ParametersImpl constructor");
+            }
+            Constructor<?> constructor = implClass.getDeclaredConstructor(Map.class, String[].class);
+            constructor.setAccessible(true);
+            Object parameters = constructor.newInstance(new HashMap<>(namedParameters), new String[0]);
+            Method registerMethod = implClass.getDeclaredMethod("registerParameters",
+                    Application.class, Application.Parameters.class);
+            registerMethod.setAccessible(true);
+            registerMethod.invoke(null, app, parameters);
+        } catch (ReflectiveOperationException e) {
+            throw new AssertionError(e);
         }
     }
 
@@ -537,33 +571,6 @@ public class MainAppTest {
                 throw new IllegalStateException("Failed to persist user prefs", e);
             }
             return prefs;
-        }
-
-        @Override
-        public void init() throws Exception {
-            config = initConfig(configPath);
-            LogsCenter.init(config);
-
-            UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
-            UserPrefs userPrefs = initPrefs(userPrefsStorage);
-
-            storage = new StorageManager(
-                    new JsonAddressBookStorage(userPrefs.getAddressBookFilePath()),
-                    userPrefsStorage,
-                    new JsonAthleteListStorage(userPrefs.getAthleteListFilePath()),
-                    new JsonContractListStorage(userPrefs.getContractListFilePath()),
-                    new JsonOrganizationListStorage(userPrefs.getOrganizationListFilePath()));
-
-            try {
-                Method initModelMethod = MainApp.class.getDeclaredMethod(
-                        "initModelManager", Storage.class, ReadOnlyUserPrefs.class);
-                initModelMethod.setAccessible(true);
-                model = (Model) initModelMethod.invoke(this, storage, userPrefs);
-            } catch (ReflectiveOperationException e) {
-                throw new IllegalStateException("Failed to initialise model", e);
-            }
-            logic = new LogicManager(model, storage);
-            ui = new UiManager(logic);
         }
 
         Config getConfig() {
