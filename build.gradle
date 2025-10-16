@@ -29,7 +29,15 @@ test {
         '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
         '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
         '--add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED',
-        '--add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED'
+        '--add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/javafx.scene=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/javafx.stage=ALL-UNNAMED',
+        '--add-opens=javafx.controls/javafx.scene.control=ALL-UNNAMED',
+        '--add-opens=javafx.fxml/javafx.fxml=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.javafx.css=ALL-UNNAMED',
+        '--add-opens=javafx.base/com.sun.javafx.collections=ALL-UNNAMED',
+        '--add-opens=javafx.base/com.sun.javafx.event=ALL-UNNAMED'
     ]
 
     systemProperty 'testfx.headless', 'true'
@@ -79,8 +87,7 @@ dependencies {
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
-    testRuntimeOnly  group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
-
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
     testRuntimeOnly "org.testfx:openjfx-monocle:${javaFxVersion}"
 }
 
