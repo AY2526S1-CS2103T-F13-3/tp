@@ -23,6 +23,21 @@ checkstyle {
 test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
+
+    jvmArgs += [
+        '--add-opens=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
+        '--add-opens=javafx.graphics/com.sun.javafx.tk=ALL-UNNAMED',
+        '--add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED'
+    ]
+
+    systemProperty 'testfx.headless', 'true'
+    systemProperty 'java.awt.headless', 'true'
+    systemProperty 'glass.platform', 'Monocle'
+    systemProperty 'monocle.platform', 'Headless'
+    systemProperty 'prism.order', 'sw'
+    systemProperty 'quantum.multithreaded', 'false'
 }
 
 task coverage(type: JacocoReport) {
@@ -56,13 +71,17 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'win'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'mac'
+    implementation group: 'org.openjfx', name: 'javafx-swing', version: javaFxVersion, classifier: 'linux'
 
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
 
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+    testRuntimeOnly  group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
 
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+    testRuntimeOnly "org.testfx:openjfx-monocle:${javaFxVersion}"
 }
 
 shadowJar {
