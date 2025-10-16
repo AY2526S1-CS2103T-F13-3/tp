@@ -93,6 +93,23 @@ public class AddContractCommandTest {
         assertTrue(modelStub.contractsAdded.isEmpty());
     }
 
+    @Test
+    public void execute_startAfterEnd_throwsCommandException() {
+        ModelStubAcceptingContractAdded modelStub = new ModelStubAcceptingContractAdded();
+        modelStub.addAthlete(validAthlete());
+        modelStub.addOrganization(validOrganization());
+
+        Date8 invalidStart = new Date8("02012025");
+        Date8 invalidEnd = new Date8("01012025");
+        AddContractCommand cmd = new AddContractCommand(ATHLETE_NAME, SPORT, ORG_NAME,
+                invalidStart, invalidEnd, AMT);
+
+        assertThrows(CommandException.class,
+                String.format(AddContractCommand.MESSAGE_INVALID_DATE_RANGE, invalidStart, invalidEnd),
+                () -> cmd.execute(modelStub));
+        assertTrue(modelStub.contractsAdded.isEmpty());
+    }
+
     // -------------------------------------------------------------------------
     // equals() and toString()
     // -------------------------------------------------------------------------
