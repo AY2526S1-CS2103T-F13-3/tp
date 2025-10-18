@@ -8,6 +8,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.organization.Organization;
 
 /**
@@ -20,11 +21,14 @@ public class OrganizationListPanel extends UiPart<Region> {
     @FXML
     private ListView<Organization> organizationListView;
 
+    private final ObservableList<Contract> allContracts;
+
     /**
      * Creates a {@code OrganizationListPanel} with the given {@code ObservableList}.
      */
-    public OrganizationListPanel(ObservableList<Organization> organizationList) {
+    public OrganizationListPanel(ObservableList<Organization> organizationList, ObservableList<Contract> allContracts) {
         super(FXML);
+        this.allContracts = allContracts;
         organizationListView.setItems(organizationList);
         organizationListView.setCellFactory(listView -> new OrganizationListViewCell());
     }
@@ -41,7 +45,7 @@ public class OrganizationListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new OrganizationCard(organization, getIndex() + 1).getRoot());
+                setGraphic(new OrganizationCard(organization, getIndex() + 1, allContracts).getRoot());
             }
         }
     }

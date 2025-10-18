@@ -1,9 +1,16 @@
 package seedu.address.ui;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.stream.Collectors;
+
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.athlete.Athlete;
+import seedu.address.model.contract.Contract;
 import seedu.address.model.organization.Organization;
 
 /**
@@ -32,16 +39,32 @@ public class OrganizationCard extends UiPart<Region> {
     private Label phone;
     @FXML
     private Label email;
+    @FXML
+    private Label totalContracts;
+    @FXML
+    private Label athleteList;
 
     /**
      * Creates a {@code OrganizationCard} with the given {@code Organization} and index to display.
      */
-    public OrganizationCard(Organization organization, int displayedIndex) {
+    public OrganizationCard(Organization organization, int displayedIndex, ObservableList<Contract> allContracts) {
         super(FXML);
         this.organization = organization;
         id.setText(displayedIndex + ". ");
         name.setText(organization.getName().fullOrganizationName);
         phone.setText(organization.getPhone().value);
         email.setText(organization.getEmail().value);
+        int totalAmount = organization.getTotalContractAmount(allContracts);
+        String formattedAmount = NumberFormat.getNumberInstance(Locale.US).format(totalAmount);
+        totalContracts.setText("Total Contract Value: $" + formattedAmount);
+        ObservableList<Athlete> athletes = organization.getAthletes(allContracts);
+        if (athletes.isEmpty()) {
+            athleteList.setText("Athletes: None");
+        } else {
+            String athleteNames = athletes.stream()
+                    .map(a -> a.getName().fullName)
+                    .collect(Collectors.joining(", "));
+            athleteList.setText("Athletes: " + athleteNames);
+        }
     }
 }

@@ -3,8 +3,13 @@ package seedu.address.model.organization;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.athlete.Athlete;
+import seedu.address.model.contract.Contract;
 
 /**
  * Represents an Organization in playbook.io.
@@ -37,6 +42,29 @@ public class Organization {
 
     public OrganizationEmail getEmail() {
         return email;
+    }
+
+    public ObservableList<Athlete> getAthletes(ObservableList<Contract> allContracts) {
+        if (allContracts == null || allContracts.isEmpty()) {
+            return FXCollections.observableArrayList();
+        }
+
+        return allContracts.stream()
+                .filter(contract -> contract.getOrganization().equals(this))
+                .map(Contract::getAthlete)
+                .distinct()
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    public int getTotalContractAmount(ObservableList<Contract> allContracts) {
+        if (allContracts == null || allContracts.isEmpty()) {
+            return 0;
+        }
+
+        return allContracts.stream()
+                .filter(contract -> contract.getOrganization().equals(this))
+                .mapToInt(contract -> contract.getAmount().value)
+                .sum();
     }
 
     /**
