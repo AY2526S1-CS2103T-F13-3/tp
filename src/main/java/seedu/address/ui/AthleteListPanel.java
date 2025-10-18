@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.athlete.Athlete;
+import seedu.address.model.contract.Contract;
 
 /**
  * Panel containing the list of athletes.
@@ -19,12 +20,14 @@ public class AthleteListPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Athlete> athleteListView;
+    private final ObservableList<Contract> allContracts;
 
     /**
      * Creates a {@code AthleteListPanel} with the given {@code ObservableList}.
      */
-    public AthleteListPanel(ObservableList<Athlete> athleteList) {
+    public AthleteListPanel(ObservableList<Athlete> athleteList, ObservableList<Contract> contractList) {
         super(FXML);
+        this.allContracts = contractList;
         athleteListView.setItems(athleteList);
         athleteListView.setCellFactory(listView -> new AthleteListViewCell());
     }
@@ -41,7 +44,7 @@ public class AthleteListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new AthleteCard(athlete, getIndex() + 1).getRoot());
+                setGraphic(new AthleteCard(athlete, getIndex() + 1, allContracts).getRoot());
             }
         }
     }

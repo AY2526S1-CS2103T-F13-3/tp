@@ -151,7 +151,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        athleteListPanel = new AthleteListPanel(logic.getFilteredAthleteList());
+        athleteListPanel = new AthleteListPanel(logic.getFilteredAthleteList(), logic.getFilteredContractList());
         athleteListPanelPlaceholder.getChildren().add(athleteListPanel.getRoot());
 
         organizationListPanel = new OrganizationListPanel(logic.getFilteredOrganizationList());
