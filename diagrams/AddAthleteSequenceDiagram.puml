@@ -1,0 +1,70 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAthleteCommandParser" as AddAthleteCommandParser LOGIC_COLOR
+participant "c:AddAthleteCommand" as AddAthleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add-a NAME LeBron ...")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("add-a NAME LeBron ...")
+activate AddressBookParser
+
+create AddAthleteCommandParser
+AddressBookParser -> AddAthleteCommandParser
+activate AddAthleteCommandParser
+
+AddAthleteCommandParser --> AddressBookParser
+deactivate AddAthleteCommandParser
+
+AddressBookParser -> AddAthleteCommandParser : parse arguments
+activate AddAthleteCommandParser
+
+create AddAthleteCommand
+AddAthleteCommandParser -> AddAthleteCommand
+activate AddAthleteCommand
+
+AddAthleteCommand --> AddAthleteCommandParser :
+deactivate AddAthleteCommand
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> AddAthleteCommand : execute(m)
+activate AddAthleteCommand
+
+AddAthleteCommand -> Model : hasAthlete(toAdd)?
+activate Model
+
+Model --> AddAthleteCommand : boolean
+deactivate Model
+
+alt athlete does not exist
+    AddAthleteCommand -> Model : addAthlete(toAdd)
+    activate Model
+    Model --> AddAthleteCommand
+    deactivate Model
+
+    create CommandResult
+    AddAthleteCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> AddAthleteCommand
+    deactivate CommandResult
+end
+
+AddAthleteCommand --> LogicManager : r
+deactivate AddAthleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

@@ -1,0 +1,72 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":DeleteAthleteCommandParser" as DeleteAthleteCommandParser LOGIC_COLOR
+participant "c:DeleteAthleteCommand" as DeleteAthleteCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant "m:Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("delete-a NAME LeBron SPORT Basketball")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("delete-a NAME LeBron SPORT Basketball")
+activate AddressBookParser
+
+create DeleteAthleteCommandParser
+AddressBookParser -> DeleteAthleteCommandParser
+activate DeleteAthleteCommandParser
+
+DeleteAthleteCommandParser --> AddressBookParser
+deactivate DeleteAthleteCommandParser
+
+AddressBookParser -> DeleteAthleteCommandParser : parse arguments
+activate DeleteAthleteCommandParser
+
+create DeleteAthleteCommand
+DeleteAthleteCommandParser -> DeleteAthleteCommand
+activate DeleteAthleteCommand
+
+DeleteAthleteCommand --> DeleteAthleteCommandParser :
+deactivate DeleteAthleteCommand
+
+AddressBookParser --> LogicManager : command
+deactivate AddressBookParser
+
+LogicManager -> DeleteAthleteCommand : execute(m)
+activate DeleteAthleteCommand
+
+DeleteAthleteCommand -> Model : getFilteredAthleteList()
+activate Model
+Model --> DeleteAthleteCommand : lastShownList
+deactivate Model
+
+alt athlete exists
+    DeleteAthleteCommand -> Model : deleteAthlete(athleteToDelete)
+    activate Model
+    Model --> DeleteAthleteCommand
+    deactivate Model
+
+    create CommandResult
+    DeleteAthleteCommand -> CommandResult
+    activate CommandResult
+    CommandResult --> DeleteAthleteCommand
+    deactivate CommandResult
+
+else athlete does not exist
+    DeleteAthleteCommand -> DeleteAthleteCommand : throw CommandException
+end
+
+DeleteAthleteCommand --> LogicManager : r / exception
+deactivate DeleteAthleteCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
