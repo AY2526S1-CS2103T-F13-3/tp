@@ -4,51 +4,62 @@ skinparam arrowThickness 1.1
 skinparam arrowColor MODEL_COLOR
 skinparam classBackgroundColor MODEL_COLOR
 
-Package Model as ModelPackage <<Rectangle>>{
-Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
-Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
-Class "<<interface>>\nModel" as Model
-Class AddressBook
-Class ModelManager
-Class UserPrefs
+package Model as ModelPackage <<Rectangle>> {
+    Class "<<interface>>\nReadOnlyAddressBook" as ReadOnlyAddressBook
+    Class "<<interface>>\nReadOnlyUserPrefs" as ReadOnlyUserPrefs
+    Class "<<interface>>\nModel" as Model
+    Class AddressBook
+    Class ModelManager
+    Class UserPrefs
 
-Class UniquePersonList
-Class Person
-Class Address
-Class Email
-Class Name
-Class Phone
-Class Tag
+    ' domain-level collections
+    Class UniqueAthleteList
+    Class UniqueOrganizationList
+    Class UniqueContractList
 
-Class I #FFFFFF
+    ' domain entities
+    Class Athlete
+    Class Organization
+    Class Contract
 }
 
 Class HiddenOutside #FFFFFF
 HiddenOutside ..> Model
 
+' --- hierarchy and interfaces ---
 AddressBook .up.|> ReadOnlyAddressBook
-
+UserPrefs .up.|> ReadOnlyUserPrefs
 ModelManager .up.|> Model
-Model .right.> ReadOnlyUserPrefs
+
+' --- Model references ---
 Model .left.> ReadOnlyAddressBook
+Model .right.> ReadOnlyUserPrefs
+
+' --- ModelManager composition ---
 ModelManager -left-> "1" AddressBook
 ModelManager -right-> "1" UserPrefs
-UserPrefs .up.|> ReadOnlyUserPrefs
 
-AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
-Person *--> Name
-Person *--> Phone
-Person *--> Email
-Person *--> Address
-Person *--> "*" Tag
+' --- AddressBook contains all domain lists ---
+AddressBook *--> "1" UniqueAthleteList
+AddressBook *--> "1" UniqueOrganizationList
+AddressBook *--> "1" UniqueContractList
 
-Person -[hidden]up--> I
-UniquePersonList -[hidden]right-> I
+' --- each list contains entities ---
+UniqueAthleteList *--> "*" Athlete
+UniqueOrganizationList *--> "*" Organization
+UniqueContractList *--> "*" Contract
 
-Name -[hidden]right-> Phone
-Phone -[hidden]right-> Address
-Address -[hidden]right-> Email
+' --- entity relationships ---
+Contract --> Athlete : references >
+Contract --> Organization : references >
 
-ModelManager --> "~* filtered" Person
+' --- filtered lists (observed by UI) ---
+ModelManager --> "~* filtered" Athlete
+ModelManager --> "~* filtered" Organization
+ModelManager --> "~* filtered" Contract
+
+' --- layout helpers ---
+Athlete -[hidden]right-> Organization
+Organization -[hidden]right-> Contract
+
 @enduml

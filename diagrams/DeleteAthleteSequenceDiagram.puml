@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete-a NAME LeBron SPORT Basketball")
+[-> LogicManager : execute("delete-a n/LeBron s/Basketball")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("delete-a NAME LeBron SPORT Basketball")
+LogicManager -> AddressBookParser : parseCommand("delete-a n/LeBron s/Basketball")
 activate AddressBookParser
 
 create DeleteAthleteCommandParser
@@ -26,6 +26,7 @@ activate DeleteAthleteCommandParser
 
 DeleteAthleteCommandParser --> AddressBookParser
 deactivate DeleteAthleteCommandParser
+destroy DeleteAthleteCommandParser
 
 AddressBookParser -> DeleteAthleteCommandParser : parse arguments
 activate DeleteAthleteCommandParser
@@ -36,9 +37,11 @@ activate DeleteAthleteCommand
 
 DeleteAthleteCommand --> DeleteAthleteCommandParser :
 deactivate DeleteAthleteCommand
+destroy DeleteAthleteCommand
 
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
+destroy AddressBookParser
 
 LogicManager -> DeleteAthleteCommand : execute(m)
 activate DeleteAthleteCommand
@@ -59,14 +62,16 @@ alt athlete exists
     activate CommandResult
     CommandResult --> DeleteAthleteCommand
     deactivate CommandResult
-
+    destroy CommandResult
 else athlete does not exist
     DeleteAthleteCommand -> DeleteAthleteCommand : throw CommandException
 end
 
 DeleteAthleteCommand --> LogicManager : r / exception
 deactivate DeleteAthleteCommand
+destroy DeleteAthleteCommand
 
 [<--LogicManager
 deactivate LogicManager
+destroy LogicManager
 @enduml
