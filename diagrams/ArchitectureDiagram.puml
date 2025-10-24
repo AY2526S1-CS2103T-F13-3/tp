@@ -31,9 +31,4 @@ Storage -up[STORAGE_COLOR].> Model : Saves/Loads Data
 Storage .right[STORAGE_COLOR].> DataFile : JSON Files
 Agent ..> UI : Interacts With
 
-note right of Agent : Sports agents manage\nmultiple athletes
-note left of DataFile : Stores all athlete,\norganization, and\ncontract data
-Agent -[#purple]-> UI : User Input
-UI -[#orange]-> Agent : Feedback
-
 @enduml
