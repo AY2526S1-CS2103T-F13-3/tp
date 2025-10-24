@@ -4,7 +4,7 @@
 !include <office/Users/user>
 !include style.puml
 
-Package " "<<Rectangle>>{
+Package "Architecture" <<Rectangle>>{
     Class UI UI_COLOR
     Class Logic LOGIC_COLOR
     Class Storage STORAGE_COLOR
@@ -13,8 +13,8 @@ Package " "<<Rectangle>>{
     Class Commons LOGIC_COLOR_T2
 }
 
-Class "<$user>" as Agent MODEL_COLOR_T2
-Class "<$documents>" as DataFile UI_COLOR_T1
+Class "<$user>" as Agent USER_COLOR
+Class "<$documents>" as DataFile STORAGE_COLOR_T1
 
 ' Relationships between main architecture components
 UI -[#green]> Logic : Executes Commands
@@ -30,5 +30,10 @@ Main -down[hidden]-> Commons
 Storage -up[STORAGE_COLOR].> Model : Saves/Loads Data
 Storage .right[STORAGE_COLOR].> DataFile : JSON Files
 Agent ..> UI : Interacts With
+
+note right of Agent : Sports agents manage\nmultiple athletes
+note left of DataFile : Stores all athlete,\norganization, and\ncontract data
+Agent -[#purple]-> UI : User Input
+UI -[#orange]-> Agent : Feedback
 
 @enduml
