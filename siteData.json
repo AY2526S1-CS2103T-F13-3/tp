@@ -132,6 +132,7 @@
         "tips-and-best-practices": "Tips and Best Practices",
         "effective-workflows": "Effective Workflows",
         "common-pitfalls-and-amp-solutions": "Common Pitfalls &amp; Solutions",
+        "problem-app-behaves-unexpectedly-after-deleting-files-solution-never-delete-individual-json-files-in-the-data-folder-if-you-need-to-reset-your-data-delete-the-entire-folder-instead": "Problem: App behaves unexpectedly after deleting files\nSolution: Never delete individual JSON files in the data folder.\nIf you need to reset your data, delete the entire folder instead.",
         "troubleshooting-and-faq": "Troubleshooting and FAQ",
         "display-and-window-issues": "Display and Window Issues",
         "common-error-messages": "Common Error Messages",
@@ -164,7 +165,7 @@
       "src": "team/goh-joshua.md",
       "title": "John Doe's Project Portfolio Page",
       "headings": {
-        "project-addressbook-level-3": "Project: AddressBook Level 3"
+        "project-playbook-io": "Project: playbook.io"
       },
       "headingKeywords": {}
     },
