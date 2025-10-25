@@ -60,7 +60,15 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-person": "Deleting a person",
+        "adding-an-athlete": "Adding an athlete",
+        "deleting-an-athlete": "Deleting an athlete",
+        "adding-an-organization": "Adding an organization",
+        "deleting-an-organization": "Deleting an organization",
+        "adding-a-contract": "Adding a contract",
+        "deleting-a-contract": "Deleting a contract",
+        "finding-an-athlete": "Finding an athlete",
+        "finding-an-organization": "Finding an organization",
+        "finding-a-contract": "Finding a contract",
         "saving-data": "Saving data"
       },
       "headingKeywords": {}
