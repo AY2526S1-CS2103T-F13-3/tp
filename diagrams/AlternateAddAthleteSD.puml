@@ -14,31 +14,23 @@ box Model MODEL_COLOR_T1
 participant "m:Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add-a n/LeBron s/Basketball p/91234567 e/lebron@example.com")
+[-> LogicManager : execute("add-a n/LeBron James s/Basketball a/40 p/98765432 e/james@example.com")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add-a n/LeBron s/Basketball p/91234567 e/lebron@example.com")
+LogicManager -> AddressBookParser : parseCommand("add-a n/LeBron James s/Basketball a/40 p/98765432 e/james@example.com")
 activate AddressBookParser
 
-create AddAthleteCommandParser
-AddressBookParser -> AddAthleteCommandParser
-activate AddAthleteCommandParser
+ref over AddressBookParser, AddAthleteCommandParser, AddAthleteCommand
+  parse details and build add command
+end ref
 
+' create AddAthleteCommand
+' AddAthleteCommandParser -> AddAthleteCommand
+' activate AddAthleteCommand
 
-AddAthleteCommandParser --> AddressBookParser
-deactivate AddAthleteCommandParser
-destroy AddAthleteCommandParser
-
-AddressBookParser -> AddAthleteCommandParser : parse arguments
-activate AddAthleteCommandParser
-
-create AddAthleteCommand
-AddAthleteCommandParser -> AddAthleteCommand
-activate AddAthleteCommand
-
-AddAthleteCommand --> AddAthleteCommandParser :
-deactivate AddAthleteCommand
-destroy AddAthleteCommand
+' AddAthleteCommand --> AddAthleteCommandParser :
+' deactivate AddAthleteCommand
+' destroy AddAthleteCommand
 
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser

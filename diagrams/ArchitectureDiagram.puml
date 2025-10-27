@@ -16,10 +16,12 @@ Package "Architecture" <<Rectangle>>{
 Class "<$user>" as Agent USER_COLOR
 Class "<$documents>" as DataFile STORAGE_COLOR_T1
 
+Agent -[hidden]-> UI
+
 ' Relationships between main architecture components
 UI -[#green]> Logic : Executes Commands
 UI -right[#green]-> Model : Observes Data
-Logic -[#blue]-> Storage : Reads/Writes Data
+Logic -[#blue]-> Storage : Reads / Writes Data
 Logic -down[#blue]-> Model : Updates Model
 Main -[#grey]-> UI : Initializes
 Main -[#grey]-> Logic : Initializes
@@ -27,9 +29,8 @@ Main -[#grey]-> Storage : Initializes
 Main -up[#grey]-> Model : Initializes
 Main -down[hidden]-> Commons
 
-Storage -up[STORAGE_COLOR].> Model : Saves/Loads Data
-Storage .right[STORAGE_COLOR].> DataFile : JSON Files
-Agent ..> UI : Interacts With
+Storage -up[STORAGE_COLOR].> Model : Saves / Loads Data
+Storage .right[STORAGE_COLOR].> DataFile : Read / Writes JSON
 
 note right of Agent : Sports agents manage\nmultiple athletes
 note left of DataFile : Stores all athlete,\norganization, and\ncontract data

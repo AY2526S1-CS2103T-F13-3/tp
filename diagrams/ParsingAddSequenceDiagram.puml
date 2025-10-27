@@ -1,0 +1,34 @@
+@startuml parseDetails
+!include style.puml
+skinparam ArrowFontStyle plain
+
+hide footbox
+
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":AddAthleteCommandParser" as AddAthleteCommandParser LOGIC_COLOR
+participant "c:AddAthleteCommand" as AddAthleteCommand LOGIC_COLOR
+
+activate AddressBookParser
+group sd parse details and build add command
+  create AddAthleteCommandParser
+  AddressBookParser -> AddAthleteCommandParser
+  activate AddAthleteCommandParser
+
+
+  AddAthleteCommandParser --> AddressBookParser
+  deactivate AddAthleteCommandParser
+  destroy AddAthleteCommandParser
+
+  AddressBookParser -> AddAthleteCommandParser : create & parse arguments
+
+  create AddAthleteCommand
+  AddAthleteCommandParser -> AddAthleteCommand : new(...)
+  activate AddAthleteCommand
+
+  AddAthleteCommand --> AddAthleteCommandParser : constructed
+  deactivate AddAthleteCommand
+  destroy AddAthleteCommand
+
+  AddAthleteCommandParser --> AddressBookParser : parsed command
+end
+@enduml
