@@ -1,0 +1,67 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor LOGIC_COLOR_T4
+skinparam classBackgroundColor LOGIC_COLOR
+skinparam classAttributeIconSize 0
+
+package Logic as LogicPackage {
+
+package "Parser Classes" as ParserClasses {
+}
+
+class FindCommand {
+    - SearchScope scope
+    - String keyword
+    + execute(Model model) : CommandResult
+}
+
+enum SearchScope {
+    ATHLETE_NAME
+    ATHLETE_SPORT
+    ORGANIZATION_NAME
+    CONTRACT_ATHLETE_NAME
+    CONTRACT_ORGANIZATION_NAME
+    CONTRACT_SPORT
+    ..
+    + apply(Model model, String keywordLower) : int
+}
+
+class CommandResult
+abstract class Command
+
+interface Logic
+class LogicManager
+}
+
+package Model {
+class Model
+}
+
+package Storage {
+}
+
+' Relationships
+LogicManager .right.|> Logic
+LogicManager -right-> "1" ParserClasses
+ParserClasses ..> FindCommand : <<create>>
+
+FindCommand -up-|> Command
+LogicManager .left.> Command : <<call>>
+LogicManager --> Model
+LogicManager --> Storage
+
+FindCommand *-- SearchScope : <<use>>
+SearchScope ..> Model : <<call>>
+
+Logic ..> CommandResult
+LogicManager .down.> CommandResult
+Command .up.> CommandResult : <<create>>
+
+note right of SearchScope
+Each constant (e.g., ATHLETE_NAME, ORGANIZATION_NAME)
+overrides apply() to call Model filter methods like
+updateFilteredAthleteList() or updateFilteredOrganizationList().
+end note
+
+@enduml

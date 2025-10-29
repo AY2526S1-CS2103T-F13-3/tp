@@ -52,6 +52,8 @@
         "storage-component": "Storage component",
         "common-classes": "Common classes",
         "data-types-and-overflow-protection": "Data Types and Overflow Protection",
+        "implementation": "Implementation",
+        "implemented-find-command": "[Implemented] Find command",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",

@@ -1,0 +1,28 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:User executes `find -co Arsenal`;
+
+if () then ([command parsed successfully])
+    :Parser constructs FindCommand
+    with scope CONTRACT_ORG_NAME
+    and keyword "Arsenal";
+    :LogicManager calls FindCommand.execute(Model);
+
+    :FindCommand determines search scope;
+    :Builds case-insensitive regex Pattern;
+    :Model updates filtered Contract list
+    using predicate;
+    :UI refreshes to display all Contracts
+    whose organization names match "Arsenal";
+    :CommandResult is returned with
+    match count and active tab = Contracts;
+else ([parse error])
+    :Display invalid command message to user;
+endif
+
+stop
+@enduml

@@ -1,0 +1,25 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+:Lowercase both text and keyword;
+if (haystack contains keyword?) then (yes)
+  :Match found;
+else (no)
+  :Compute Levenshtein distance between\nhaystack and keyword;
+  if (<= allowable threshold?) then (yes)
+    :Match found;
+  else (no)
+    :Split haystack into words;
+    :Check each token with Levenshtein;
+    if (any <= threshold?) then (yes)
+      :Match found;
+    else (no)
+      :No match;
+    endif
+  endif
+endif
+stop
+@enduml
