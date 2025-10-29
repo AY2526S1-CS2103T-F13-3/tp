@@ -5,21 +5,26 @@ skinparam ArrowFontSize 12
 
 start
 :Lowercase both text and keyword;
-if (haystack contains keyword?) then (yes)
-  :Match found;
-else (no)
-  :Compute Levenshtein distance between\nhaystack and keyword;
-  if (<= allowable threshold?) then (yes)
-    :Match found;
-  else (no)
-    :Split haystack into words;
-    :Check each token with Levenshtein;
-    if (any <= threshold?) then (yes)
-      :Match found;
-    else (no)
-      :No match;
+
+if () then ([haystack contains keyword])
+    :Immediate match found;
+else ([no substring match])
+    :Compute Levenshtein distance between
+    haystack and keyword;
+
+    if () then ([within allowable threshold])
+        :Match found based on edit distance;
+    else ([above threshold])
+        :Split haystack into words;
+        :Compare each token using Levenshtein distance;
+
+        if () then ([token within threshold])
+            :Match found from word-level comparison;
+        else ([no token match])
+            :No match found;
+        endif
     endif
-  endif
 endif
+
 stop
 @enduml
