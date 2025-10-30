@@ -6,7 +6,7 @@ hide footbox
 
 participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
 participant ":DeleteAthleteCommandParser" as DeleteAthleteCommandParser LOGIC_COLOR
-participant "d:DeleteAthleteCommand" as DeleteAthleteCommand LOGIC_COLOR
+participant "c:DeleteAthleteCommand" as DeleteAthleteCommand LOGIC_COLOR
 
 activate AddressBookParser
 group sd parse details and build delete command
