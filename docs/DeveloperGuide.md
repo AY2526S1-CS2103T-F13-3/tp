@@ -16,6 +16,8 @@ pageNav: 3
 This project was built upon the [_AddressBook-Level3 (AB3)_](https://github.com/nus-cs2103-AY2526S1/tp) codebase
 provided by the National University of Singapore’s **CS2103T Software Engineering** module.
 
+This project also makes use of the [_Apache Commons Validator_](https://commons.apache.org/proper/commons-validator/) library for email validation functionality, licensed under the Apache License 2.0.
+
 ---
 
 ## **Setting up, getting started**

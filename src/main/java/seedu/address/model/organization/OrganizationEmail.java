@@ -3,6 +3,8 @@ package seedu.address.model.organization;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 /**
  * Represents an Organization's email in playbook.io.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}.
@@ -49,7 +51,8 @@ public class OrganizationEmail {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.length() <= 50 && test.matches(VALIDATION_REGEX);
+        EmailValidator validator = EmailValidator.getInstance();
+        return validator.isValid(test);
     }
 
     @Override
