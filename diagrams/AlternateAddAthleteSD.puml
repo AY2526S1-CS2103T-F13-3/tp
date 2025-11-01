@@ -1,36 +1,44 @@
 @startuml
 !include style.puml
+
+' ==== Font & Layout Settings ====
+' Balanced for readability and compactness
+skinparam defaultFontSize 15
+skinparam sequenceMessageFontSize 15
+skinparam participantFontSize 17
+skinparam noteFontSize 14
+skinparam sequenceLifeLineFontSize 14
 skinparam ArrowFontStyle plain
 
+' Layout compression and width control
+skinparam maxMessageSize 55
+skinparam ParticipantPadding 10
+skinparam BoxPadding 8
+scale 1.0
+
+' ==== Participants ====
 box Logic LOGIC_COLOR_T1
-participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
-participant ":AddAthleteCommandParser" as AddAthleteCommandParser LOGIC_COLOR
-participant "c:AddAthleteCommand" as AddAthleteCommand LOGIC_COLOR
-participant "r:CommandResult" as CommandResult LOGIC_COLOR
+participant "Logic\nManager" as LogicManager LOGIC_COLOR
+participant "AddressBook\nParser" as AddressBookParser LOGIC_COLOR
+participant "AddAthlete\nCommandParser" as AddAthleteCommandParser LOGIC_COLOR
+participant "AddAthlete\nCommand" as AddAthleteCommand LOGIC_COLOR
+participant "Command\nResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant "m:Model" as Model MODEL_COLOR
+participant "Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add-a n/LeBron James s/Basketball a/40 p/98765432 e/james@example.com")
+' ==== Sequence Flow ====
+[-> LogicManager : execute("add-a n/LeBron James s/Basketball\na/40 p/98765432 e/james@example.com")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("add-a n/LeBron James s/Basketball a/40 p/98765432 e/james@example.com")
+LogicManager -> AddressBookParser : parseCommand("add-a n/LeBron James s/Basketball\na/40 p/98765432 e/james@example.com")
 activate AddressBookParser
 
 ref over AddressBookParser, AddAthleteCommandParser, AddAthleteCommand
-  parse details and build add command
+  parse details and build AddAthleteCommand
 end ref
-
-' create AddAthleteCommand
-' AddAthleteCommandParser -> AddAthleteCommand
-' activate AddAthleteCommand
-
-' AddAthleteCommand --> AddAthleteCommandParser :
-' deactivate AddAthleteCommand
-' destroy AddAthleteCommand
 
 AddressBookParser --> LogicManager : command
 deactivate AddressBookParser
@@ -61,11 +69,11 @@ else athlete already exists
     AddAthleteCommand -> AddAthleteCommand : throw CommandException
 end
 
-AddAthleteCommand --> LogicManager : r / exception
+AddAthleteCommand --> LogicManager : result / exception
 deactivate AddAthleteCommand
 destroy AddAthleteCommand
 
-[<--LogicManager
+[<-- LogicManager
 deactivate LogicManager
 destroy LogicManager
 @enduml
