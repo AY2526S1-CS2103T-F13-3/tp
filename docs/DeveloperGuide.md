@@ -825,12 +825,15 @@ otherwise)
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Athlete**: An individual sports performer managed by the agent, with contact details and sport specialization.
+* **Command Line Interface**: A text-based interface that allows users to interact with the application by typing commands.
 * **Contract**: A business agreement between an athlete and organization, including financial terms and duration.
 * **Fuzzy Matching**: A search method that finds results even with typos or partial matches, using intelligent algorithms.
+* **Graphical User Interface**: visual interface that allows users to interact with the application through graphical elements such as buttons, menus, and icons.
+* **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Organization**: Any business entity that contracts with athletes - teams, sponsors, agencies, brands, etc.
 * **Sports Agent**: A professional who represents athletes in contract negotiations and career management.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Appendix: Instructions for manual testing
