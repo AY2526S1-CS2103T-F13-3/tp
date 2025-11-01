@@ -36,7 +36,7 @@ You can reach us at the email `simantak@u.nus.edu`
 <img src="images/kellytxn.png" width="200px">
 
 [[github](https://github.com/kellytxn)]
-[[portfolio](team/kelly.md)]
+[[portfolio](team/kellytxn.md)]
 
 * Role: Developer
 * Role: Documentation + Deliverables and Deadlines
