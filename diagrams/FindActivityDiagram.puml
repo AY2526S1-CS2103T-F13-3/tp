@@ -20,7 +20,7 @@ if () then ([command parsed successfully])
     whose organization names match "Arsenal";
     :CommandResult is returned with
     match count and active tab = Contracts;
-else ([parse error])
+else ([else])
     :Display invalid command message to user;
 endif
 
