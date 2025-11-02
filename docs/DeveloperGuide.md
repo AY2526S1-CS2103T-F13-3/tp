@@ -363,30 +363,25 @@ Contracts **cannot be edited** due to the absence of a unique identity field (co
 
 ##### For `edit-a` (Athlete)
 
-| Parameter | Description |
-|------------|-------------|
-| `n/NAME`   | **(Compulsory)** — Full name of the athlete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces). |
-| `s/SPORT`  | **(Compulsory)** — Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters). |
-| `a/AGE`    | Optional — Age of the athlete (positive integers only, ranging from 1 to 99). |
-| `p/PHONE`  | Optional — Phone number of the athlete (8-digit Singapore phone number only; must start with 6, 8, or 9). |
-| `e/EMAIL`  | Optional — Email address of the athlete (case-insensitive; must follow standard email format; maximum of 50 characters). |
-
----
+| Parameter | Description                                                                                                                                                                                        |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `n/NAME`   | Compulsory — Full name of the athlete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces). |
+| `s/SPORT`  | Compulsory — Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters).                                                                        |
+| `a/AGE`    | Optional — Age of the athlete (positive integers only, ranging from 1 to 99).                                                                                                                      |
+| `p/PHONE`  | Optional — Phone number of the athlete (8-digit Singapore phone number only; must start with 6, 8, or 9).                                                                                          |
+| `e/EMAIL`  | Optional — Email address of the athlete (case-insensitive; must follow standard email format; maximum of 50 characters).                                                                           |
 
 ##### For `edit-o` (Organization)
 
 | Parameter | Description |
 |------------|-------------|
-| `o/ORG_NAME` | **(Compulsory)** — Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with an alphanumeric character; maximum of 50 characters, including spaces). |
+| `o/ORG_NAME` | Compulsory — Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with an alphanumeric character; maximum of 50 characters, including spaces). |
 | `p/PHONE`  | Optional — Phone number of the organization (8-digit Singapore phone number only; must start with 6, 8, or 9). |
 | `e/EMAIL`  | Optional — Email address of the organization (case-insensitive; must follow standard email format; maximum of 50 characters). |
-
----
 
 Unspecified fields remain unchanged, and identifier fields (e.g., `NAME`, `SPORT`, or `ORG_NAME`) cannot be updated.  
 At least **one optional parameter** must be specified; otherwise, the command will result in an error.
 
----
 
 #### Example usages
 
@@ -394,11 +389,11 @@ At least **one optional parameter** must be specified; otherwise, the command wi
 - `edit-o o/Nike p/91234567 e/partnerships@nikeglobal.com`
 
 These commands:  
-   •	Locate the target athlete or organization using their identifier fields (name + sport for athlete, name for organization)  
+   •	Locate the target athlete or organization using their identifier fields (`NAME` + `SPORT` for athlete, `ORG_NAME` for organization)  
 	•	Modify only the editable attributes  
 	•	Validate and save the updated record via the Model  
 
-⸻
+---
 #### How it works
 
 **Step 1.** The user executes `edit-a n/LeBron James s/Basketball e/lebron@newagency.com p/98765432` or
@@ -413,7 +408,7 @@ Each parser builds an **Edit Descriptor**:
   which stores only the fields provided by the user (wrapped in `Optional<>`).
 
 **Step 3.** The command locates the target record:
-- `edit-a` finds the athlete using the pair `(NAME, SPORT)`
+- `edit-a` finds the athlete using the pair `NAME` + `SPORT`
 - `edit-o` finds the organization using `ORG_NAME`  
 If no matching record exists, the command displays an error message and terminates.
 
@@ -431,6 +426,8 @@ If no matching record exists, the command displays an error message and terminat
 **Step 6.** The UI automatically refreshes:
 - The `ObservableList` reflects the updated entity
 - A success message is shown in the result display pane.
+
+---
 
 #### Object Diagram
 
@@ -470,6 +467,7 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
   ```
   edit-o o/Nike e/partners@nike.com
   ```
+---
 
 #### Design considerations
 
@@ -483,8 +481,6 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
   - **Pros:** Flexible for rare rename cases.
   - **Cons:** Increases complexity and risk of identity collisions or inconsistent references.
 
----
-
 **Aspect: Contract immutability**
 
 - **Rationale:**
@@ -493,8 +489,6 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 - **Alternative approach (future consideration):**
   Introduce a unique `contractId` field to allow safe contract editing later.
-
----
 
 **Aspect: Partial editing**
 
