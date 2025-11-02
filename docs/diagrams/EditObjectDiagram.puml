@@ -23,7 +23,6 @@ object command as "<u>command : EditAthleteCommand</u>" {
 object descriptor as "<u>descriptor : EditAthleteDescriptor</u>" {
   phone = "98765432"
   email = "lebron@newagency.com"
-  age = "(null)"
 }
 
 object model as "<u>model : Model</u>"

@@ -443,6 +443,8 @@ with corresponding modifications to support editable fields instead of creation.
 
 #### Command format
 
+> **Note:** Parameters enclosed in square brackets `[ ]` are optional.
+
 **1. Edit Athlete**
 
 ```
