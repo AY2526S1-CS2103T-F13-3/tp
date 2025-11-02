@@ -89,7 +89,7 @@ public class AthleteTest {
     @Test
     public void getTotalContractAmount_withContracts_returnsCorrectTotal() {
         Athlete athlete = new AthleteBuilder().build();
-        
+
         Contract contract1 = new ContractBuilder()
                 .withAthlete(athlete)
                 .withAmount(1000000L)
@@ -98,9 +98,9 @@ public class AthleteTest {
                 .withAthlete(athlete)
                 .withAmount(2000000L)
                 .build();
-        
+
         ObservableList<Contract> contracts = FXCollections.observableArrayList(contract1, contract2);
-        
+
         long totalAmount = athlete.getTotalContractAmount(contracts);
         assertEquals(3000000L, totalAmount);
     }
