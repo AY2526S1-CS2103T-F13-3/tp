@@ -68,7 +68,6 @@ public class AddAthleteCommand extends Command {
 
         boolean hadActiveFilters = model.hasActiveFilters();
         model.addAthlete(toAdd);
-        
         String successMessage = String.format(MESSAGE_SUCCESS, AthleteMessages.format(toAdd));
         if (hadActiveFilters) {
             model.clearAllFilters();
