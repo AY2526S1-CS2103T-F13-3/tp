@@ -86,7 +86,7 @@ public class JsonContractListStorageTest {
                 .withOrganization(new OrganizationBuilder().withName("Nike Sports").build())
                 .withStartDate("01012025")
                 .withEndDate("31122025")
-                .withAmount(7000000)
+                .withAmount(7000000L)
                 .build();
         original.addContract(newContract);
         original.removeContract(MESSI_MIAMI);

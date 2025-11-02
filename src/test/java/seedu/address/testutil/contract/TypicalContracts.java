@@ -20,7 +20,7 @@ public class TypicalContracts {
             .withOrganization(new OrganizationBuilder().withName("Inter Miami CF").build())
             .withStartDate("01012024")
             .withEndDate("31122024")
-            .withAmount(5000000)
+            .withAmount(5000000L)
             .build();
 
     public static final Contract RONALDO_ALNASSR = new ContractBuilder()
@@ -29,7 +29,7 @@ public class TypicalContracts {
             .withOrganization(new OrganizationBuilder().withName("Al Nassr").build())
             .withStartDate("01022024")
             .withEndDate("31012025")
-            .withAmount(6000000)
+            .withAmount(6000000L)
             .build();
 
     public static final Contract LEBRON_LAKERS = new ContractBuilder()
@@ -38,7 +38,7 @@ public class TypicalContracts {
             .withOrganization(new OrganizationBuilder().withName("LA Lakers").build())
             .withStartDate("01072023")
             .withEndDate("30062024")
-            .withAmount(4500000)
+            .withAmount(4500000L)
             .build();
 
     public static final Contract FEDERER_UNIQLO = new ContractBuilder()
@@ -47,7 +47,7 @@ public class TypicalContracts {
             .withOrganization(new OrganizationBuilder().withName("Uniqlo").build())
             .withStartDate("01032022")
             .withEndDate("28022025")
-            .withAmount(3000000)
+            .withAmount(3000000L)
             .build();
 
     private TypicalContracts() {} // prevents instantiation

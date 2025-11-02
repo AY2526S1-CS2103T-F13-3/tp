@@ -7,6 +7,11 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.contract.Contract;
+import seedu.address.testutil.contract.ContractBuilder;
+
 /**
  * Unit tests for {@link Organization}.
  */
@@ -84,5 +89,22 @@ public class OrganizationTest {
                 + ", email=" + nike.getEmail()
                 + "}";
         assertEquals(expected, nike.toString());
+    }
+
+    @Test
+    public void getTotalContractAmount_withContracts_returnsCorrectTotal() {
+        Contract contract1 = new ContractBuilder()
+                .withOrganization(nike)
+                .withAmount(3000000L)
+                .build();
+        Contract contract2 = new ContractBuilder()
+                .withOrganization(nike)
+                .withAmount(7000000L)
+                .build();
+        
+        ObservableList<Contract> contracts = FXCollections.observableArrayList(contract1, contract2);
+        
+        long totalAmount = nike.getTotalContractAmount(contracts);
+        assertEquals(10000000L, totalAmount);
     }
 }

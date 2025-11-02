@@ -26,7 +26,7 @@ public class ContractCardTest {
                 .withSport("Basketball")
                 .withStartDate("15062024")
                 .withEndDate("14062025")
-                .withAmount(1000000)
+                .withAmount(1000000L)
                 .build();
 
         assertNotNull(contract);

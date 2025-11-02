@@ -35,7 +35,7 @@ public class ContractBuilder {
         this.organization = new OrganizationBuilder().build();
         this.startDate = new Date8(DEFAULT_START_DATE);
         this.endDate = new Date8(DEFAULT_END_DATE);
-        this.amount = new Amount(Integer.parseInt(DEFAULT_AMOUNT));
+        this.amount = new Amount(Long.parseLong(DEFAULT_AMOUNT));
     }
 
     /**
@@ -108,10 +108,10 @@ public class ContractBuilder {
     /**
      * Sets the amount of the contract.
      *
-     * @param amount the amount in integer format
+     * @param amount the amount in long format
      * @return this builder instance for chaining
      */
-    public ContractBuilder withAmount(Integer amount) {
+    public ContractBuilder withAmount(Long amount) {
         this.amount = new Amount(amount);
         return this;
     }
