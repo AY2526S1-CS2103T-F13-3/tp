@@ -16,111 +16,69 @@ import seedu.address.model.organization.ReadOnlyOrganizationList;
  * The unified API of the Model component.
  */
 public interface Model {
-    // ============================================================
-    // Predicates
-    // ============================================================
     Predicate<Organization> PREDICATE_SHOW_ALL_ORGANIZATIONS = unused -> true;
     Predicate<Athlete> PREDICATE_SHOW_ALL_ATHLETES = unused -> true;
     Predicate<Contract> PREDICATE_SHOW_ALL_CONTRACTS = unused -> true;
 
-    // ============================================================
-    // User Preferences
-    // ============================================================
-
     /** Returns the user preferences. */
     ReadOnlyUserPrefs getUserPrefs();
-
     /** Replaces user preferences data with {@code userPrefs}. */
     void setUserPrefs(ReadOnlyUserPrefs userPrefs);
-
     /** Returns the GUI settings. */
     GuiSettings getGuiSettings();
-
     /** Sets the GUI settings. */
     void setGuiSettings(GuiSettings guiSettings);
-
     /** Returns the address book file path. */
     Path getAddressBookFilePath();
-
     /** Sets the address book file path. */
     void setAddressBookFilePath(Path addressBookFilePath);
 
-    // ============================================================
-    // Person Logic
-    // ============================================================
-
     /** Returns the AddressBook. */
     ReadOnlyAddressBook getAddressBook();
-
     /** Replaces address book data with {@code addressBook}. */
     void setAddressBook(ReadOnlyAddressBook addressBook);
 
-    // ============================================================
-    // Organization Logic
-    // ============================================================
-
     /** Returns the OrganizationList. */
     ReadOnlyOrganizationList getOrganizationList();
-
     /** Returns true if an organization with the same identity exists. */
     boolean hasOrganization(Organization organization);
-
     /** Deletes the given organization. */
     void deleteOrganization(Organization target);
-
     /** Adds the given organization. */
     void addOrganization(Organization organization);
-
     /** Replaces the given organization with an edited one. */
     void setOrganization(Organization target, Organization editedOrganization);
-
     /** Returns an unmodifiable view of the filtered organization list. */
     ObservableList<Organization> getFilteredOrganizationList();
-
     /** Updates the filtered organization list using the given predicate. */
     void updateFilteredOrganizationList(Predicate<Organization> predicate);
 
-    // ============================================================
-    // Athlete Logic
-    // ============================================================
-
     /** Returns the AthleteList. */
     ReadOnlyAthleteList getAthleteList();
-
     /** Returns true if an athlete with the same identity exists. */
     boolean hasAthlete(Athlete athlete);
-
     /** Deletes the given athlete. */
     void deleteAthlete(Athlete target);
-
     /** Adds the given athlete. */
     void addAthlete(Athlete athlete);
-
     /** Returns an unmodifiable view of the filtered athlete list. */
     ObservableList<Athlete> getFilteredAthleteList();
-
     /** Updates the filtered athlete list using the given predicate. */
     void updateFilteredAthleteList(Predicate<Athlete> predicate);
 
-    // ============================================================
-    // Contract Logic
-    // ============================================================
-
     /** Returns the ContractList. */
     ReadOnlyContractList getContractList();
-
     /** Returns true if a contract with the same identity exists. */
     boolean hasContract(Contract contract);
-
     /** Adds the given contract. */
     void addContract(Contract contract);
-
     /** Deletes the given contract. */
     void deleteContract(Contract target);
-
     /** Returns an unmodifiable view of the filtered contract list. */
     ObservableList<Contract> getFilteredContractList();
-
     /** Updates the filtered contract list using the given predicate. */
     void updateFilteredContractList(Predicate<Contract> predicate);
+
+    boolean hasActiveFilters();
+    void clearAllFilters();
 }

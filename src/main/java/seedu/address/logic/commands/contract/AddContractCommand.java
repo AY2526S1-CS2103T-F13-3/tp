@@ -116,9 +116,16 @@ public class AddContractCommand extends Command {
 
         ensureNoTotalOverflow(model, athlete, organization);
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addContract(toAdd);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, ContractMessages.format(toAdd)));
+        String successMessage = String.format(MESSAGE_SUCCESS, ContractMessages.format(toAdd));
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+            successMessage += "\n\nYour 'find' filter was removed so you can see the new contract that has been added.";
+        }
+
+        return new CommandResult(successMessage, CommandResult.UiTab.CONTRACTS);
     }
 
     private Athlete findAthleteByNameOrThrow(Model model, Name name, Sport sport) throws CommandException {

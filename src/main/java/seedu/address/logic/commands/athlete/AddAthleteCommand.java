@@ -66,9 +66,16 @@ public class AddAthleteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ATHLETE);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addAthlete(toAdd);
-        assert model.hasAthlete(toAdd) : "Athlete should exist in model after adding";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, AthleteMessages.format(toAdd)));
+        
+        String successMessage = String.format(MESSAGE_SUCCESS, AthleteMessages.format(toAdd));
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+            successMessage += "\n\nYour 'find' filter was removed so you can see the new athlete that has been added.";
+        }
+
+        return new CommandResult(successMessage, CommandResult.UiTab.ATHLETES);
     }
 
     /**

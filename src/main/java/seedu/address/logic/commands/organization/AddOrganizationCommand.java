@@ -55,15 +55,21 @@ public class AddOrganizationCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        assert toAdd != null : "Organization to add should not be null";
-
         if (model.hasOrganization(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ORGANIZATION);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addOrganization(toAdd);
-        assert model.hasOrganization(toAdd) : "Organization should exist in model after adding";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+
+        String successMessage = String.format(MESSAGE_SUCCESS, Messages.format(toAdd));
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+            successMessage += "\n\nYour 'find' filter was removed so you can see the new organization that has been "
+                    + "added.";
+        }
+
+        return new CommandResult(successMessage, CommandResult.UiTab.ORGANIZATIONS);
     }
 
     /**

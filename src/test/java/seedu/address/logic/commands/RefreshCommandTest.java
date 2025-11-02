@@ -200,6 +200,16 @@ public class RefreshCommandTest {
             throw new AssertionError("Should not be called");
         }
 
+        @Override
+        public boolean hasActiveFilters() {
+            throw new AssertionError("Should not be called");
+        }
+
+        @Override
+        public void clearAllFilters() {
+            throw new AssertionError("Should not be called");
+        }
+
     }
 
     /**

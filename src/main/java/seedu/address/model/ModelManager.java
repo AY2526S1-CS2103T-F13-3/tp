@@ -319,6 +319,20 @@ public class ModelManager implements Model {
         list.setPredicate(predicate == null ? null : predicate::test);
     }
 
+    @Override
+    public boolean hasActiveFilters() {
+        return getFilteredAthleteList().size() < getAddressBook().getAthleteList().size()
+                || getFilteredOrganizationList().size() < getAddressBook().getOrganizationList().size()
+                || getFilteredContractList().size() < getContractList().getContractList().size();
+    }
+
+    @Override
+    public void clearAllFilters() {
+        updateFilteredAthleteList(PREDICATE_SHOW_ALL_ATHLETES);
+        updateFilteredOrganizationList(PREDICATE_SHOW_ALL_ORGANIZATIONS);
+        updateFilteredContractList(PREDICATE_SHOW_ALL_CONTRACTS);
+    }
+
     // =====================================================================================
     // Equality
     // =====================================================================================

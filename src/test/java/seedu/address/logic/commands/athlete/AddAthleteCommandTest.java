@@ -241,6 +241,16 @@ public class AddAthleteCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public boolean hasActiveFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllFilters() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -282,6 +292,11 @@ public class AddAthleteCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public boolean hasActiveFilters() {
+            return false; // No filters active in test
         }
     }
 }
