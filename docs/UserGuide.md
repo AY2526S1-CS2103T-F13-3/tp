@@ -85,14 +85,14 @@ This guide is designed for **sports agents and talent managers** operating in Si
    Open a terminal, navigate (`cd`) to that folder, and run:
 
    ```
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
    For example, if your `.jar` file is in the Downloads folder:
 
    ```
    cd Downloads
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
 5. **First Look**

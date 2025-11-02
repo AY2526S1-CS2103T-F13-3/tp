@@ -999,7 +999,7 @@ Given below are instructions to test the app manually.
 2. Open a terminal, navigate (`cd`) to that folder, and run:
 
    ```
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
 **Expected:**

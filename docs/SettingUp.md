@@ -12,37 +12,51 @@
 --- -->
 
 ### Steps to take
+1. **Check Java Version**
 
-1. **Check your system requirements**
+   Ensure you have Java `17` or above installed on your computer.
 
-   Make sure you have **Java 17 or above** installed on your computer.
-   You can verify this by running the following command in your terminal or command prompt:
-   `java -version`
-   If Java is not installed, download it from [Oracle’s JDK 17 page](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) or use [OpenJDK 17](https://openjdk.org/projects/jdk/17/).
+   ```
+   java -version
+   ```
 
-   <box type="tip" seamless>
-   **Tip:** The app will not run properly on older Java versions.
-   </box>
+   **Mac users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html) to install the correct JDK version.
+   **Windows users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html) to install the correct JDK version.
+   **Linux users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html) to install the correct JDK version.
 
-2. **Download the latest release**
+2. **Download playbook.io**
 
-   Go to the [_Releases_](https://github.com/AY2526S1-CS2103T-F13-3/tp/releases) page of our GitHub repository and download the latest `.jar` file.
+   Download the latest `.jar` file from the [playbook.io Releases](https://github.com/AY2526S1-CS2103T-F13-3/tp/releases) page.
 
-3. **Run the application**
+3. **Set Up Home Folder**
 
-   Open a terminal in the folder containing the downloaded `.jar` file and run:
-   `java -jar playbook.jar`
+   Copy the `.jar` file to the folder you want to use as the **home folder** for playbook.io. This is where your data files will be stored.
+
+4. **Launch the Application**
+
+   Open a terminal, navigate (`cd`) to that folder, and run:
+
+   ```
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
+   ```
+
+   For example, if your `.jar` file is in the Downloads folder:
+
+   ```
+   cd Downloads
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
+   ```
    The application window should appear, ready for use.
 
-4. **Saving your data**
+5. **Saving your data**
 
    The app automatically saves your data to a JSON file on your computer whenever changes are made.
    You do not need to manually save your progress.
 
-5. **Getting help**
+6. **Getting help**
 
    Within the app, type `help` to get a link for our UserGuide.
-   You can also refer to the [_User Guide_](UserGuide.md) for detailed instructions and examples.
+   You can also refer to the [_User Guide_](https://ay2526s1-cs2103t-f13-3.github.io/tp/UserGuide.html) for detailed instructions and examples.
 
 ---
 
@@ -52,6 +66,6 @@ If you encounter errors while running the `.jar` file, check:
 
 - That you’re using **Java 17 or newer**
 - The `.jar` file is located in a folder you have permission to access
-- You’re using the correct command syntax:
+- You’re using the correct command syntax
 
 ---
