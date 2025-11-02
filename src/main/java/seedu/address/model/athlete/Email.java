@@ -15,7 +15,7 @@ public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Error: Emails should be of the format local-part@domain "
-            + "(e.g., user@example.com) and adhere to the following constraints:\n"
+            + "(e.g., user@u.nus.edu) and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
             + "characters.\n"

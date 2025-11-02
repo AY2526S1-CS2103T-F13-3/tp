@@ -317,10 +317,10 @@ Persistent data stored on disk remains unchanged.
 
 The following scenario demonstrates how a typical command executes:
 
-**Step 1.** The user executes `find -co Arsenal`.
-**Step 2.** The parser constructs a `FindCommand` with scope `CONTRACT_ORGANIZATION` and keyword `Arsenal`.
-**Step 3.** The command invokes `model.updateFilteredContractList(predicate)`.
-**Step 4.** The UI’s observable list updates, displaying all contracts linked to organizations matching “Arsenal”.
+**Step 1.** The user executes `find -co Arsenal`.  
+**Step 2.** The parser constructs a `FindCommand` with scope `CONTRACT_ORGANIZATION` and keyword `Arsenal`.  
+**Step 3.** The command invokes `model.updateFilteredContractList(predicate)`.  
+**Step 4.** The UI’s observable list updates, displaying all contracts linked to organizations matching “Arsenal”.  
 **Step 5.** A `CommandResult` reports the number of matching contracts and switches the active tab to **Contracts**.
 
 <puml src="diagrams/FindActivityDiagram.puml" alt="FindActivityDiagram" width="500" />
@@ -351,7 +351,7 @@ The following scenario demonstrates how a typical command executes:
 
 #### Proposed Implementation
 
-The **Edit** feature enables users to update existing **athlete** and **organization** records in Playbook.io —
+The **Edit** feature enables users to update existing **athlete** and **organization** records in playbook.io —
 without deleting and recreating them.
 This feature improves data maintenance by allowing users to correct or update details such as contact information, age, and email, while keeping unique identifiers intact.
 
@@ -359,13 +359,32 @@ Contracts **cannot be edited** due to the absence of a unique ID field (contract
 
 ---
 
-#### Supported Commands
+#### Parameters
 
-| Command | Target       | Editable Fields                                                                 | Non-Editable (Identifier) Fields |
-|----------|---------------|--------------------------------------------------------------------------------|----------------------------------|
-| `edit-a` | Athlete       | `phone`, `email`, `age`, `address`, etc.                                       | `name`, `sport`                 |
-| `edit-o` | Organization  | `phone`, `email`, and other organization details                               | `name`                          |
-| `edit-c` | Contract      | — (unsupported)                                                                | —                                |
+##### For `edit-a` (Athlete)
+
+| Parameter | Description |
+|------------|-------------|
+| `n/NAME`   | **(Compulsory)** — Full name of the athlete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces). |
+| `s/SPORT`  | **(Compulsory)** — Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters). |
+| `a/AGE`    | Optional — Age of the athlete (positive integers only, ranging from 1 to 99). |
+| `p/PHONE`  | Optional — Phone number of the athlete (8-digit Singapore phone number only; must start with 6, 8, or 9). |
+| `e/EMAIL`  | Optional — Email address of the athlete (case-insensitive; must follow standard email format; maximum of 50 characters). |
+
+---
+
+##### For `edit-o` (Organization)
+
+| Parameter | Description |
+|------------|-------------|
+| `o/ORG_NAME` | **(Compulsory)** — Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with an alphanumeric character; maximum of 50 characters, including spaces). |
+| `p/PHONE`  | Optional — Phone number of the organization (8-digit Singapore phone number only; must start with 6, 8, or 9). |
+| `e/EMAIL`  | Optional — Email address of the organization (case-insensitive; must follow standard email format; maximum of 50 characters). |
+
+---
+
+Unspecified fields remain unchanged, and identifier fields (e.g., `NAME`, `SPORT`, or `ORG_NAME`) cannot be updated.  
+At least **one optional parameter** must be specified; otherwise, the command will result in an error.
 
 ---
 
@@ -479,14 +498,14 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 - Only provided fields are updated.
 - Missing parameters mean “no change”.
-- This matches the behavior of other Playbook.io commands (e.g., `find` and `delete` using name-based lookups).
+- This matches the behavior of other playbook.io commands (e.g., `find` and `delete` using name-based lookups).
 
 ---
 
 **Summary**
 
 The **Edit** feature introduces safe, partial, and controlled updates for athletes and organizations, while maintaining identifier integrity and data consistency.
-By disallowing name/sport or organization name edits, and excluding contracts from editing, the design ensures that all records remain uniquely identifiable and logically consistent across the Playbook.io system.
+By disallowing name/sport or organization name edits, and excluding contracts from editing, the design ensures that all records remain uniquely identifiable and logically consistent across the playbook.io system.
 
 --------------------------------------------------------------------------------------------------------------------
 

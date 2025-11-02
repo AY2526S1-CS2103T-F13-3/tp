@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.athlete.Email;
 import seedu.address.model.organization.OrganizationContactName;
 import seedu.address.model.organization.OrganizationEmail;
 import seedu.address.model.organization.OrganizationName;
@@ -104,7 +105,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!OrganizationEmail.isValidEmail(trimmedEmail)) {
-            throw new ParseException(OrganizationEmail.MESSAGE_CONSTRAINTS);
+            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
         }
         return new OrganizationEmail(trimmedEmail);
     }
