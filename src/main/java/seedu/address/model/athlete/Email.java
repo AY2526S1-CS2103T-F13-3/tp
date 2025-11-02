@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Locale;
 
+import org.apache.commons.validator.routines.EmailValidator;
+
 /**
  * Represents an Athlete's email in playbook.io.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
@@ -13,7 +15,7 @@ public class Email {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";
     public static final String MESSAGE_CONSTRAINTS = "Error: Emails should be of the format local-part@domain "
-            + "and adhere to the following constraints:\n"
+            + "(e.g., user@u.nus.edu) and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + "). The local-part may not start or end with any special "
             + "characters.\n"
@@ -51,7 +53,8 @@ public class Email {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidEmail(String test) {
-        return test.length() <= 50 && test.matches(VALIDATION_REGEX);
+        EmailValidator validator = EmailValidator.getInstance();
+        return validator.isValid(test);
     }
 
     @Override

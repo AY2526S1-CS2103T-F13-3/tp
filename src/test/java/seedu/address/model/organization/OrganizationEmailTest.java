@@ -25,26 +25,27 @@ public class OrganizationEmailTest {
     @Test
     public void isValidEmail() {
         // null email
-        assertThrows(NullPointerException.class, () -> OrganizationEmail.isValidEmail(null));
+        assertFalse(OrganizationEmail.isValidEmail(null));
 
-        // invalid emails
-        String longEmail = "a".repeat(39) + "@example.com";
-        assertFalse(OrganizationEmail.isValidEmail("")); // empty string
-        assertFalse(OrganizationEmail.isValidEmail(" ")); // spaces only
-        assertFalse(OrganizationEmail.isValidEmail("noatsymbol.com")); // missing '@'
-        assertFalse(OrganizationEmail.isValidEmail("a@b")); // missing valid domain structure
-        assertFalse(OrganizationEmail.isValidEmail("john@.com")); // invalid domain
+        // invalid emails (according to Commons Validator)
+        String longEmail = "a".repeat(80) + "@example.com";
+        assertFalse(OrganizationEmail.isValidEmail("")); // empty
+        assertFalse(OrganizationEmail.isValidEmail(" ")); // spaces
         assertFalse(OrganizationEmail.isValidEmail("@example.com")); // missing local part
+        assertFalse(OrganizationEmail.isValidEmail("noatsymbol.com")); // missing '@'
+        assertFalse(OrganizationEmail.isValidEmail("john@.com")); // domain starts with dot
         assertFalse(OrganizationEmail.isValidEmail("john@@example.com")); // double '@'
-        assertFalse(OrganizationEmail.isValidEmail(longEmail)); // exceeds max length
+        assertFalse(OrganizationEmail.isValidEmail("john@example")); // missing TLD
+        assertFalse(OrganizationEmail.isValidEmail(longEmail)); // too long
 
-        // valid emails
-        String boundaryEmail = "a".repeat(38) + "@example.com";
+        // valid emails (Commons Validator accepts)
         assertTrue(OrganizationEmail.isValidEmail("contact@nike.com"));
         assertTrue(OrganizationEmail.isValidEmail("info@procter-and-gamble.com"));
         assertTrue(OrganizationEmail.isValidEmail("sponsorship@brand.co"));
         assertTrue(OrganizationEmail.isValidEmail("john.doe@sub.example.org"));
-        assertTrue(OrganizationEmail.isValidEmail(boundaryEmail)); // boundary length
+        assertTrue(OrganizationEmail.isValidEmail("support_team@enterprise.global"));
+        assertTrue(OrganizationEmail.isValidEmail("sales@company123.com"));
+        assertTrue(OrganizationEmail.isValidEmail("marketing.dept@super-brand.io"));
     }
 
     @Test

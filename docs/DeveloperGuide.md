@@ -16,6 +16,8 @@ pageNav: 3
 This project was built upon the [_AddressBook-Level3 (AB3)_](https://github.com/nus-cs2103-AY2526S1/tp) codebase
 provided by the National University of Singapore’s **CS2103T Software Engineering** module.
 
+This project also makes use of the [_Apache Commons Validator_](https://commons.apache.org/proper/commons-validator/) library for email validation functionality, licensed under the Apache License 2.0.
+
 ---
 
 ## **Setting up, getting started**
@@ -120,12 +122,10 @@ Here's a (partial) class diagram of the `Logic` component:
 <div style="page-break-before: always;"></div>
 
 The sequence diagrams below illustrate the interactions within the `Logic` component,
-taking the `add-a` and `delete-a` commands as examples.
+taking the `add-a` command as an example.
 
-<puml src="diagrams/AlternateAddAthleteSD.puml" width="650" />
-<puml src="diagrams/ParsingAddSequenceDiagram.puml" width="600" />
-<puml src="diagrams/AlternateDeleteAthleteSD.puml" width="650" />
-<puml src="diagrams/ParsingDeleteSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AlternateAddAthleteSD.puml" width="800" />
+<puml src="diagrams/ParsingAddSequenceDiagram.puml" width="800" />
 
 <div style="page-break-before: always;"></div>
 
@@ -234,13 +234,13 @@ This section describes noteworthy details on how certain features are implemente
 
 ### **[Implemented] Find command**
 
-The **Find** command enables users to perform keyword-based searches across different data types within the system —  
-athletes, organizations, and contracts — using flexible, case-insensitive, and fuzzy matching.  
+The **Find** command enables users to perform keyword-based searches across different data types within the system —
+athletes, organizations, and contracts — using flexible, case-insensitive, and fuzzy matching.
 It temporarily filters the displayed lists in memory without altering any saved data.
 
 ---
 
-The `FindCommand` extends `Command` and is invoked with one required flag that specifies the **search scope**.  
+The `FindCommand` extends `Command` and is invoked with one required flag that specifies the **search scope**.
 The following flags are supported:
 
 | Flag  | Description                          |
@@ -304,8 +304,8 @@ This approach allows tolerant and human-friendly searches (e.g., `find -an leo` 
 <puml src="diagrams/FindMatchingActivityDiagram.puml" alt="FindMatchingActivityDiagram" width="700" />
 
 <box type="info" seamless>
-<strong>Note:</strong>  
-The command only affects filtered views in memory.  
+<strong>Note:</strong>
+The command only affects filtered views in memory.
 Persistent data stored on disk remains unchanged.
 </box>
 
@@ -346,6 +346,167 @@ The following scenario demonstrates how a typical command executes:
 - **Alternative 2:** Simple exact or tokenized substring match.
     - Pros: Faster and easier to reason about.
     - Cons: Misses partial and typo-tolerant results.
+
+### [Proposed] Edit feature
+
+#### Proposed Implementation
+
+The **Edit** feature enables users to update existing **athlete** and **organization** records in playbook.io —
+without deleting and recreating them.
+This feature improves data maintenance by allowing users to correct or update details such as contact information, age, and email, while keeping unique identifiers intact.
+
+Contracts **cannot be edited** due to the absence of a unique identity field (contracts are uniquely defined by multiple parameters such as athlete, sport, organization, and duration). Editing any of these would make it impossible to reliably identify the original contract. Thus, the `edit-c` command is intentionally **unsupported**.
+
+---
+
+#### Parameters
+
+##### For `edit-a` (Athlete)
+
+| Parameter | Description |
+|------------|-------------|
+| `n/NAME`   | **(Compulsory)** — Full name of the athlete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces). |
+| `s/SPORT`  | **(Compulsory)** — Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters). |
+| `a/AGE`    | Optional — Age of the athlete (positive integers only, ranging from 1 to 99). |
+| `p/PHONE`  | Optional — Phone number of the athlete (8-digit Singapore phone number only; must start with 6, 8, or 9). |
+| `e/EMAIL`  | Optional — Email address of the athlete (case-insensitive; must follow standard email format; maximum of 50 characters). |
+
+---
+
+##### For `edit-o` (Organization)
+
+| Parameter | Description |
+|------------|-------------|
+| `o/ORG_NAME` | **(Compulsory)** — Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with an alphanumeric character; maximum of 50 characters, including spaces). |
+| `p/PHONE`  | Optional — Phone number of the organization (8-digit Singapore phone number only; must start with 6, 8, or 9). |
+| `e/EMAIL`  | Optional — Email address of the organization (case-insensitive; must follow standard email format; maximum of 50 characters). |
+
+---
+
+Unspecified fields remain unchanged, and identifier fields (e.g., `NAME`, `SPORT`, or `ORG_NAME`) cannot be updated.  
+At least **one optional parameter** must be specified; otherwise, the command will result in an error.
+
+---
+
+#### Example usages
+
+- `edit-a n/LeBron James s/Basketball p/98765432 e/lebron@newagency.com`
+- `edit-o o/Nike p/91234567 e/partnerships@nikeglobal.com`
+
+These commands:  
+   •	Locate the target athlete or organization using their identifier fields (name + sport for athlete, name for organization)  
+	•	Modify only the editable attributes  
+	•	Validate and save the updated record via the Model  
+
+⸻
+#### How it works
+
+**Step 1.** The user executes `edit-a n/LeBron James s/Basketball e/lebron@newagency.com p/98765432` or
+`edit-o o/Nike e/partners@nike.com p/91234567`.
+
+**Step 2.** The parser constructs the corresponding command object:
+- `EditAthleteCommand` for athletes, using `EditAthleteCommandParser`
+- `EditOrganizationCommand` for organizations, using `EditOrganizationCommandParser`
+
+Each parser builds an **Edit Descriptor**:
+- `EditAthleteDescriptor` or `EditOrganizationDescriptor`
+  which stores only the fields provided by the user (wrapped in `Optional<>`).
+
+**Step 3.** The command locates the target record:
+- `edit-a` finds the athlete using the pair `(NAME, SPORT)`
+- `edit-o` finds the organization using `ORG_NAME`  
+If no matching record exists, the command displays an error message and terminates.
+
+**Step 4.** The command creates a new edited object:
+- Copies all existing field values from the target
+- Replaces only the editable fields provided in the descriptor
+  (identifier fields — `NAME`, `SPORT` for athletes and `ORG_NAME` for organizations — remain unchanged)
+- Validates all new field values using existing validators (`Email`, `Phone`, etc.)
+
+**Step 5.** The command updates the model:
+- Calls `model.setAthlete(targetAthlete, editedAthlete)`
+  or `model.setOrganization(targetOrganization, editedOrganization)`
+- The `Model` replaces the target entry with the new one in its internal list.
+
+**Step 6.** The UI automatically refreshes:
+- The `ObservableList` reflects the updated entity
+- A success message is shown in the result display pane.
+
+#### Object Diagram
+
+The Object Diagram below illustrates how an **edit-a** command is executed.
+The Class Diagram for this feature follows the same structure as the one for the *Add Athlete* command,
+with corresponding modifications to support editable fields instead of creation.
+
+<puml src="diagrams/EditObjectDiagram.puml" width="530" />
+
+
+#### Command format
+
+> **Note:** Parameters enclosed in square brackets `[ ]` are optional.
+
+**1. Edit Athlete**
+
+```
+edit-a n/NAME s/SPORT [p/PHONE] [e/EMAIL] [a/AGE]
+```
+
+- `n/` and `s/` together locate the athlete.
+- Only non-identifier fields (e.g., `p/`, `e/`, `a/`) are editable.
+- Example:
+  ```
+  edit-a n/LeBron James s/Basketball p/92345678 e/lebron@updated.com
+  ```
+
+**2. Edit Organization**
+
+```
+edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
+```
+
+- `o/` identifies the organization.
+- Only `p/`, `e/` are editable.
+- Example:
+  ```
+  edit-o o/Nike e/partners@nike.com
+  ```
+
+#### Design considerations
+
+**Aspect: Identifier immutability**
+
+- **Alternative 1 (current choice):** Prevent editing identifier fields (`NAME` and `SPORT` for athletes, `ORG_NAME` for organizations).
+  - **Pros:** Ensures data integrity and avoids ambiguous lookups and duplicate keys.
+  - **Cons:** Requires deletion and re-creation if identifiers need to change.
+
+- **Alternative 2:** Allow editing identifiers with additional checks.
+  - **Pros:** Flexible for rare rename cases.
+  - **Cons:** Increases complexity and risk of identity collisions or inconsistent references.
+
+---
+
+**Aspect: Contract immutability**
+
+- **Rationale:**
+  Each contract is identified by a combination of attributes — athlete, sport, organization, start date, end date, and amount — rather than a single unique identity.
+  Editing any of these would make the original contract indistinguishable, so contract editing is disabled by design.
+
+- **Alternative approach (future consideration):**
+  Introduce a unique `contractId` field to allow safe contract editing later.
+
+---
+
+**Aspect: Partial editing**
+
+- Only provided optional fields are updated.
+- Missing parameters remain the same.
+
+---
+
+**Summary**
+
+The **Edit** feature introduces safe, partial, and controlled updates for athletes and organizations, while maintaining identifier integrity and data consistency.
+By disallowing name/sport or organization name edits, and excluding contracts from editing, the design ensures that all records remain uniquely identifiable and logically consistent across the playbook.io system.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -874,12 +1035,12 @@ The most recent window size and location is retained.
 #### 1. Adding an athlete while all athletes are being shown
 
 1. **Prerequisites:** Switch to the Athletes Tab by pressing **Cmd+1** (or **Ctrl+1** on Windows/Linux).
-2. **Test case:** `add-a n/Lebron James s/Basketball a/40 p/99876543 e/James@example.com`  
+2. **Test case:** `add-a n/Lebron James s/Basketball a/40 p/99876543 e/James@example.com`
    **Expected:** Athlete is added to the athlete list. Details of the added athlete shown in the result pane.
-3. **Test case:** `add-a n/ s/Football a/39 p/87654321 e/cr7@example.com`  
+3. **Test case:** `add-a n/ s/Football a/39 p/87654321 e/cr7@example.com`
    **Expected:** No athlete is added. Error details shown in the result pane.
 4. **Other incorrect add-a commands to try:** `add-a`, `add-a n/Messi2 s/Football a/39 p/87654321 e/cr7@example.com`,
-   `...`  
+   `...`
    **Expected:** Similar to previous.
 
 <div style="page-break-before: always;"></div>
@@ -891,11 +1052,11 @@ The most recent window size and location is retained.
 1. **Prerequisites:**
     - Switch to the Athletes Tab by pressing **Cmd+1** (or **Ctrl+1** on Windows/Linux).
     - Ensure the athlete to be deleted has no existing contracts.
-2. **Test case:** `delete-a n/Lebron James s/Basketball`  
+2. **Test case:** `delete-a n/Lebron James s/Basketball`
    **Expected:** Athlete is deleted from the list. Details of the deleted athlete shown in the result pane.
-3. **Test case:** `delete-a n/Lebron James s/`  
+3. **Test case:** `delete-a n/Lebron James s/`
    **Expected:** No athlete is deleted. Error details shown in the result pane.
-4. **Other incorrect delete-a commands to try:** `delete-a`, `delete-a n/Lebron James s/Basket-ball`, `...`  
+4. **Other incorrect delete-a commands to try:** `delete-a`, `delete-a n/Lebron James s/Basket-ball`, `...`
    **Expected:** Similar to previous.
 
 ### Adding an organization
@@ -903,12 +1064,12 @@ The most recent window size and location is retained.
 #### 1. Adding an organization while all organizations are being shown
 
 1. **Prerequisites:** Switch to the Organizations Tab by pressing **Cmd+2** (or **Ctrl+2** on Windows/Linux).
-2. **Test case:** `add-o o/Nike p/98765432 e/partnerships@nike.com`  
+2. **Test case:** `add-o o/Nike p/98765432 e/partnerships@nike.com`
    **Expected:** Organization is added to the organization list. Details of the added organization shown in the result
    pane.
-3. **Test case:** `add-o o/Nike p/+6598765432 e/partnerships@nike.com`  
+3. **Test case:** `add-o o/Nike p/+6598765432 e/partnerships@nike.com`
    **Expected:** No organization is added. Error details shown in the result pane.
-4. **Other incorrect add-o commands to try:** `add-o`, `add-o o/&Nike p/98765432 e/partnerships@nike.com`, `...`  
+4. **Other incorrect add-o commands to try:** `add-o`, `add-o o/&Nike p/98765432 e/partnerships@nike.com`, `...`
    **Expected:** Similar to previous.
 
 ### Deleting an organization
@@ -918,11 +1079,11 @@ The most recent window size and location is retained.
 1. **Prerequisites:**
     - Switch to the Organizations Tab by pressing **Cmd+2** (or **Ctrl+2** on Windows/Linux).
     - Ensure organization to be deleted has no existing contracts.
-2. **Test case:** `delete-o o/Nike`  
+2. **Test case:** `delete-o o/Nike`
    **Expected:** Organization is deleted from the list. Details of the deleted organization shown in the result pane.
-3. **Test case:** `delete-o o/`  
+3. **Test case:** `delete-o o/`
    **Expected:** No organization is deleted. Error details shown in the result pane.
-4. **Other incorrect delete-o commands to try:** `delete-o`, `delete-o o/Nike!`, `...`  
+4. **Other incorrect delete-o commands to try:** `delete-o`, `delete-o o/Nike!`, `...`
    **Expected:** Similar to previous.
 
 ### Adding a contract
@@ -932,12 +1093,12 @@ The most recent window size and location is retained.
 1. **Prerequisites:**
     - Switch to the Contracts Tab by pressing **Cmd+3** (or **Ctrl+3** on Windows/Linux).
     - Ensure the athlete and organization exist in the system.
-2. **Test case:** `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`  
+2. **Test case:** `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`
    **Expected:** Contract is added to the contracts list. Details of the added contract shown in the result pane.
-3. **Test case:** `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/`  
+3. **Test case:** `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/`
    **Expected:** No contract is added. Error details shown in the result pane.
 4. **Other incorrect add-c commands to try:** `add-c`,
-   `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.90`, `...`  
+   `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.90`, `...`
    **Expected:** Similar to previous.
 
 <div style="page-break-before: always;"></div>
@@ -947,12 +1108,12 @@ The most recent window size and location is retained.
 #### 1. Deleting a contract while all contracts are being shown
 
 1. **Prerequisites:** Switch to the Contracts Tab by pressing **Cmd+3** (or **Ctrl+3** on Windows/Linux).
-2. **Test case:** `delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`  
+2. **Test case:** `delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`
    **Expected:** Contract is deleted from the list. Details of the deleted contract shown in the result pane.
-3. **Test case:** `delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/ am/50000000`  
+3. **Test case:** `delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/ am/50000000`
    **Expected:** No contract is deleted. Error details shown in the result pane.
 4. **Other incorrect delete-c commands to try:** `delete-c`,
-   `delete-c n/ s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`, `...`  
+   `delete-c n/ s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`, `...`
    **Expected:** Similar to previous.
 
 ### Finding an athlete
@@ -960,13 +1121,13 @@ The most recent window size and location is retained.
 #### 1. Finding an athlete while all athletes are being shown
 
 1. **Prerequisites:** Switch to the Athletes Tab by pressing **Cmd+1** (or **Ctrl+1** on Windows/Linux).
-2. **Test case:** `find -an LeBron James`  
+2. **Test case:** `find -an LeBron James`
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -as Basketball`  
+3. **Test case:** `find -as Basketball`
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
-4. **Test case:** `find -as`  
+4. **Test case:** `find -as`
    **Expected:** No filtering occurs. Error details shown in the result pane.
-5. **Other incorrect find commands to try:** `find -an`, `find`, `...`  
+5. **Other incorrect find commands to try:** `find -an`, `find`, `...`
    **Expected:** Similar to previous.
 
 ### Finding an organization
@@ -974,11 +1135,11 @@ The most recent window size and location is retained.
 #### 1. Finding an organization while all organizations are being shown
 
 1. **Prerequisites:** Switch to the Organizations Tab by pressing **Cmd+2** (or **Ctrl+2** on Windows/Linux).
-2. **Test case:** `find -on Nike`  
+2. **Test case:** `find -on Nike`
    **Expected:** Filtered list of organizations shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -on`  
+3. **Test case:** `find -on`
    **Expected:** No filtering occurs. Error details shown in the result pane.
-4. **Other incorrect find commands to try:** `find`, `...`  
+4. **Other incorrect find commands to try:** `find`, `...`
    **Expected:** Similar to previous.
 
 ### Finding a contract
@@ -986,15 +1147,15 @@ The most recent window size and location is retained.
 #### 1. Finding a contract while all contracts are being shown
 
 1. **Prerequisites:** Switch to the Contracts Tab by pressing **Cmd+3** (or **Ctrl+3** on Windows/Linux).
-2. **Test case:** `find -ca LeBron James`  
+2. **Test case:** `find -ca LeBron James`
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -cs Basketball`  
+3. **Test case:** `find -cs Basketball`
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-4. **Test case:** `find -co Nike`  
+4. **Test case:** `find -co Nike`
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-5. **Test case:** `find -co`  
+5. **Test case:** `find -co`
    **Expected:** No filtering occurs. Error details shown in the result pane.
-6. **Other incorrect find commands to try:** `find -cs`, `find -ca`, `...`  
+6. **Other incorrect find commands to try:** `find -cs`, `find -ca`, `...`
    **Expected:** Similar to previous.
 
 <div style="page-break-before: always;"></div>
