@@ -41,10 +41,10 @@ Given below are my contributions to the project.
 * **Documentation:**
     * **User Guide:**
         * Authored and maintained almost the entire User Guide, ensuring all features were clearly explained with accurate examples and consistent formatting. (Pull requests [\#122](https://github.com/AY2526S1-CS2103T-F13-3/tp/pull/122), [\#166](https://github.com/AY2526S1-CS2103T-F13-3/tp/pull/166))
-        * Improved overall structure, tone, and flow to make the guide beginner-friendly and professional. 
+        * Improved overall structure, tone, and flow to make the guide beginner-friendly and professional.
     * **Developer Guide:**
         * Wrote the **Appendix: Instructions for Manual Testing** and **Appendix: Requirements** sections in full. (Pull requests [\#123](https://github.com/AY2526S1-CS2103T-F13-3/tp/pull/123), [\#249](https://github.com/AY2526S1-CS2103T-F13-3/tp/pull/249))
-        * Documented the design and implementation of core features such as athlete management. 
+        * Documented the design and implementation of core features such as athlete management.
         * Reviewed and standardized formatting and style across the document to ensure professionalism and readability.
 
 ---
