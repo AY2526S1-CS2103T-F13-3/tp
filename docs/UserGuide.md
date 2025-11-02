@@ -29,7 +29,7 @@ This guide is designed for **sports agents and talent managers** operating in Si
 
 <div markdown="block" class="alert alert-warning">
 
-**⚠️ Important:** playbook.io follows Singapore conventions: phone numbers are 8-digit, contract amounts are in SGD, and dates use DDMMYYYY format.
+**⚠️ Important:** playbook.io follows Singapore conventions: phone numbers are 8-digit, contract amounts are in SGD, and dates use DDMMYYYY format (spaces, hyphens, and slashes are accepted).
 </div>
 
 ### What You'll Need
@@ -319,17 +319,26 @@ Contracts link athletes with organizations and track the business relationships 
 - `n/NAME`: Athlete's full name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
 - `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
 - `o/ORG_NAME`: Organization's name (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
-- `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format)
-- `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format)
+- `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format; spaces, hyphens, and slashes accepted)
+- `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format; spaces, hyphens, and slashes accepted)
 - `am/AMOUNT`: Contract amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
 
 **Examples:**
 
 ```
 add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000
-add-c n/Cristiano Ronaldo s/Football o/Manchester United sd/01072023 ed/31122025 am/50000000
-add-c n/Michael Jordan s/Basketball o/IMG Academy sd/01012020 ed/31122024 am/5000000
+add-c n/Cristiano Ronaldo s/Football o/Manchester United sd/01 07 2023 ed/31 12 2025 am/50000000
+add-c n/Michael Jordan s/Basketball o/IMG Academy sd/01/01/2020 ed/31/12/2024 am/5000000
 ```
+
+<div markdown="block" class="alert alert-info">
+**💡 Date Format Flexibility:** Notice how the examples above show different date formats:
+- `01012024` (canonical DDMMYYYY)
+- `01 07 2023` and `31 12 2025` (spaced format)
+- `01/01/2020` and `31/12/2024` (slash format)
+
+All these formats are equivalent and will be processed identically by the system.
+</div>
 
 **Expected Output:**
 
@@ -361,16 +370,16 @@ Contract created: Athlete: Lebron James; Sport: Basketball; Organization: Nike; 
 - `n/NAME`: Athlete's full name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
 - `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
 - `o/ORG_NAME`: Organization's name (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
-- `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format)
-- `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format)
+- `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format; spaces, hyphens, and slashes accepted)
+- `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format; spaces, hyphens, and slashes accepted)
 - `am/AMOUNT`: Contract amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
 
   **Examples:**
 
 ```
 delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000
-delete-c n/Cristiano Ronaldo s/Football o/Manchester United sd/01072023 ed/31122025 am/50000000
-delete-c n/Michael Jordan s/Basketball o/IMG Academy sd/01012020 ed/31122024 am/5000000
+delete-c n/Cristiano Ronaldo s/Football o/Manchester United sd/01-07-2023 ed/31-12-2025 am/50000000
+delete-c n/Michael Jordan s/Basketball o/IMG Academy sd/01/01/2020 ed/31/12/2024 am/5000000
 ```
 
 **Expected Output:**
@@ -557,8 +566,8 @@ Exiting playbook.io as requested ...
    - Limitation rationale: The 50-character limit covers most professional email addresses while preventing excessively long entries.
      
    <br>
-- `DATE`: Date (must be in the DDMMYYYY format)
-   - Format rationale: The DDMMYYYY format is commonly used in Singapore and avoids ambiguity in date interpretation.
+- `DATE`: Date (must be in the DDMMYYYY format; spaces, hyphens, and slashes accepted)
+   - Format rationale: The DDMMYYYY format is commonly used in Singapore and avoids ambiguity in date interpretation. For user convenience, separators like spaces ("01 01 2025"), hyphens ("01-01-2025"), and slashes ("01/01/2025") are automatically removed during processing.
 
    <br>
 - `AMOUNT`: Amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
