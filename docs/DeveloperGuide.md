@@ -122,10 +122,10 @@ Here's a (partial) class diagram of the `Logic` component:
 The sequence diagrams below illustrate the interactions within the `Logic` component,
 taking the `add-a` and `delete-a` commands as examples.
 
-<puml src="diagrams/AlternateAddAthleteSD.puml" width="800" />
-<puml src="diagrams/ParsingAddSequenceDiagram.puml" width="800" />
-<puml src="diagrams/AlternateDeleteAthleteSD.puml" width="800" />
-<puml src="diagrams/ParsingDeleteSequenceDiagram.puml" width="800" />
+<puml src="diagrams/AlternateAddAthleteSD.puml" width="650" />
+<puml src="diagrams/ParsingAddSequenceDiagram.puml" width="600" />
+<puml src="diagrams/AlternateDeleteAthleteSD.puml" width="650" />
+<puml src="diagrams/ParsingDeleteSequenceDiagram.puml" width="600" />
 
 <div style="page-break-before: always;"></div>
 
@@ -163,7 +163,7 @@ How the parsing works:
 **API** : [
 `Model.java`](https://github.com/AY2526S1-CS2103T-F13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<puml src="diagrams/ModelClassDiagram.puml" width="550" />
+<puml src="diagrams/ModelClassDiagram.puml" width="700" />
 
 The `Model` component,
 
@@ -207,9 +207,12 @@ The application has been designed to handle large contract amounts that are comm
 
 * **Data Type**: Contract amounts use `long` integers (64-bit) instead of `int` (32-bit)
 * **Maximum Value**: Up to 9,223,372,036,854,775,807 (approximately 9.2 quintillion)
-* **Limit Applied**: Both individual contract amounts and total contract amounts for an athlete or organization cannot exceed this maximum value
-* **Overflow Protection**: The `ensureNoTotalOverflow()` method validates total contract amounts using predicate-based filtering and checks both athlete and organization totals before adding new contracts
-* **Validation Logic**: Uses `sumForPredicate()` to calculate current totals and `wouldOverflow()` to detect if adding a new contract would exceed the maximum limit
+* **Limit Applied**: Both individual contract amounts and total contract amounts for an athlete or organization cannot
+  exceed this maximum value
+* **Overflow Protection**: The `ensureNoTotalOverflow()` method validates total contract amounts using predicate-based
+  filtering and checks both athlete and organization totals before adding new contracts
+* **Validation Logic**: Uses `sumForPredicate()` to calculate current totals and `wouldOverflow()` to detect if adding a
+  new contract would exceed the maximum limit
 * **UI Display**: Contract totals are properly formatted using `NumberFormat` for large amounts
 
 **Why `long` Instead of `int`**
@@ -249,7 +252,8 @@ The following flags are supported:
 | `-co` | Finds contracts by organization name |
 | `-cs` | Finds contracts by sport             |
 
-Example usage:  
+Example usage:
+
 ```
 find -an Lionel
 ```
@@ -808,7 +812,7 @@ otherwise)
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
-2. Should be able to hold up to 1000 athletes, organizations, and contracts while maintaining an average response time 
+2. Should be able to hold up to 1000 athletes, organizations, and contracts while maintaining an average response time
    of under 2 seconds for common operations (e.g., adding, deleting, or searching) under typical usage conditions.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands), typically
    around 50–60 words per minute (WPM), should be able to accomplish most of the tasks faster using commands than using
@@ -817,7 +821,7 @@ otherwise)
    input is detected.
 5. Should allow the application to be packaged and distributed in a portable format (e.g., JAR or Docker container) for
    ease of deployment across environments.
-6. Should allow a new user to perform basic operations (e.g., adding, deleting and finding athletes, organizations, 
+6. Should allow a new user to perform basic operations (e.g., adding, deleting and finding athletes, organizations,
    and contracts) within 10 minutes of using the application, by following the provided user guide.
 7. Should provide consistent response times (<2 seconds) for retrieval commands such as searching athletes,
    organizations, or contracts under normal usage load.
@@ -1007,7 +1011,9 @@ The most recent window size and location is retained.
 4. Re-launch playbook.io.
 
 **Expected:**
-- If `contractlist.json` is not empty but one or more of the other files are missing, all JSON files are re-generated as empty lists.
+
+- If `contractlist.json` is not empty but one or more of the other files are missing, all JSON files are re-generated as
+  empty lists.
 - Otherwise, only the missing files are automatically generated as empty lists.
 
 ##### 1.2 Simulate a corrupted file
