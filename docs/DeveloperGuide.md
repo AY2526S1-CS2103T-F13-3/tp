@@ -490,18 +490,6 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 - **Alternative approach (future consideration):**
   Introduce a unique `contractId` field to allow safe contract editing later.
 
-**Aspect: Partial editing**
-
-- Only provided optional fields are updated.
-- Missing parameters remain the same.
-
----
-
-**Summary**
-
-The **Edit** feature introduces safe, partial, and controlled updates for athletes and organizations, while maintaining identifier integrity and data consistency.
-By disallowing name/sport or organization name edits, and excluding contracts from editing, the design ensures that all records remain uniquely identifiable and logically consistent across the playbook.io system.
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -1193,3 +1181,116 @@ The app detects that the files are corrupted and loads empty lists for all entit
 
 **Expected:**
 Data is persisted correctly in the JSON files.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Effort
+
+### Difficulty Level
+
+playbook.io is more complex than the original AddressBook Level 3 (AB3). While AB3 only manages one type of thing (Persons), our app handles **three different types**—Athletes, Organizations, and Contracts—each with their own details and connections to each other. This made the project much more challenging:
+
+---
+
+### Challenges Faced
+
+#### 1. Linking Entities Together
+
+One of the hardest parts was making sure Athletes, Organizations, and Contracts stayed properly connected:
+
+- **Deleting things**: When you try to delete an organization, what happens to its athletes and contracts? We had to handle this carefully.
+- **Checking references**: When adding a contract, we need to make sure the athlete and organization actually exist.
+- **Error messages**: When something goes wrong with these connections, we need to tell the user what happened clearly.
+
+#### 2. Expanding the Command System
+
+Making commands work for three different types instead of one was tricky:
+
+- **Avoiding copy-paste**: We didn't want to write the same code three times, so we had to find smart ways to reuse logic.
+- **Different inputs**: Each entity type has different information, so the command parsers had to handle this.
+- **Clear commands**: We needed command names that made sense and didn't confuse users.
+
+#### 3. Making the UI Work
+
+Showing three different types of lists in the interface was challenging:
+
+- **Switching views**: Users need to easily switch between Athletes, Organizations, and Contracts.
+- **Keeping things in sync**: The UI needs to always show the right information when you switch or make changes.
+- **Smooth performance**: The app should still run fast even when displaying lots of data.
+
+#### 4. Consistent Error Messages
+
+We wanted all error messages to look and feel the same:
+
+- **Standard format**: Every command should report errors in a similar way.
+- **Code reviews**: We checked each other's code multiple times to make sure messages were consistent.
+- **Documentation**: We made sure the error messages in the code matched what we wrote in the user guide.
+
+---
+
+### Effort Required
+
+The project took about **40-50% more work** than the baseline AB3:
+
+| What We Did | How Much Effort |
+|-------------|-----------------|
+| Basic AB3 stuff | ~100% |
+| Adding three entity types | +25% |
+| Testing and fixing bugs | +15% |
+| Documentation | +10% |
+| **Total** | **~140-150%** |
+
+We spent a lot of time on:
+- Finding and fixing bugs when different parts of the code interacted
+- Cleaning up code to keep it organized as things got more complex
+- Writing tests for all the new features and how they work together
+- Writing clear documentation for users and developers
+
+---
+
+### What We Accomplished
+
+#### Features That Work
+- You can add, view, and delete all three types (Athletes, Organizations, Contracts)
+- You can search for any entity using different fields
+- Entities are properly linked and validated
+
+#### Good Code Quality
+- Over 70% of our code is tested with automated tests
+- Code is well-organized and easy to understand
+- All commands give clear, consistent error messages
+
+#### Good Documentation
+- User Guide explains how to use every command with examples
+- Developer Guide explains how the code works with diagrams
+- FAQ section answers common questions
+
+#### Good Teamwork
+- Everyone knew what they were responsible for
+- We reviewed each other's code before merging
+- We communicated regularly through meetings and updates
+
+---
+
+### What We Reused from AB3
+
+About **15-20% less work** thanks to reusing parts of AB3:
+
+#### Code Structure (~10% saved)
+- **Commands**: We adapted AB3's command structure instead of starting from scratch
+- **Data management**: We extended AB3's existing classes instead of rewriting everything
+- **Storage**: We used AB3's file saving system and just added support for new entity types
+
+#### User Interface (~5% saved)
+- **Lists**: We adapted AB3's list display for our three entity types
+- **Cards**: We modified AB3's card design to show different information
+- **Window layout**: We kept AB3's basic window structure
+
+---
+
+### What We Learned
+
+- **Plan first**: Spending time designing how entities connect saved us from rewriting code later
+- **Build step by step**: Adding one entity type at a time helped us catch problems early
+- **Test while coding**: Writing tests as we went found bugs faster
+- **Document as you go**: Writing documentation while coding was easier than doing it all at the end
