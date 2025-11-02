@@ -254,6 +254,8 @@ add-o o/IMG Academy p/88889999 e/talent@imgacad.com
 
 **Expected Output:**
 
+![add-o](images/add-o.png)
+
 ```
 New organization added: Nike; Phone: 98765432; Email: partnerships@nike.com
 ```
@@ -416,6 +418,8 @@ find -co Nike           # Find contracts with organizations like "Nike"
 
 **Expected Output for `find -an James`:**
 
+![find-an](images/find-an.png)
+
 ```
 Showing 1 athlete closely matching "James".
 You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux) to show all data again.
@@ -529,23 +533,39 @@ Exiting playbook.io as requested ...
 - `NAME`: Full Name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
    - Character restrictions: Only letters, hyphens (-), and apostrophes (') are allowed to accommodate legitimate name formats like "O'Brien", "Mary-Jane", or "Jean-Claude" while preventing special characters that could cause display or data processing issues.
    - Limitation rationale: The 50-character limit accommodates most athlete names while preventing extremely long entries that could affect display formatting and system performance.
+    
+  <br>
 - `SPORT`: Sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
    - Character restrictions: Only letters are allowed to maintain consistency in sport names and prevent formatting issues.
    - Limitation rationale: The 50-character limit covers all major sports names and disciplines while preventing extremely long entries that could affect display formatting and system performance.
+ 
+   <br>
 - `AGE`: Age (positive integers only, ranging from 1 to 99)
    - Limitation rationale: Covers the realistic age range for professional athletes across all sports.
+   
+   <br>
 - `ORG_NAME`: Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
    - Character restrictions: Only alphanumeric characters, hyphens (-), apostrophes ('), and ampersands (&) are allowed to accommodate legitimate organization names like "McDonald's" or "Hewlett-Packard" while preventing special characters that could cause display or data processing issues.
    - Limitation rationale: The 50-character limit accommodates most organization names, including full legal names and brand names, while preventing extremely long entries that could affect display formatting and system performance.
+    
+   <br>
 - `PHONE`: Phone number (8-digit Singapore phone number only; must start with 6, 8, or 9)
    - Regional requirement: Singapore uses 8-digit phone numbers for both mobile and landline services. This validation ensures data consistency for local operations.
+     
+   <br>
 - `EMAIL`: Email address (case-insensitive; must follow standard email format; maximum of 50 characters)
    - Limitation rationale: The 50-character limit covers most professional email addresses while preventing excessively long entries.
+     
+   <br>
 - `DATE`: Date (must be in the DDMMYYYY format)
    - Format rationale: The DDMMYYYY format is commonly used in Singapore and avoids ambiguity in date interpretation.
+
+   <br>
 - `AMOUNT`: Amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
    - Currency: All amounts are in Singapore Dollars (SGD) 
    - Format rationale: Integer-only format simplifies calculations and prevents errors. The maximum value accommodates even the largest sports contracts globally.
+    
+   <br>
 - `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
   
 ### Keyboard Shortcuts
@@ -697,9 +717,13 @@ This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which
 
 **Athlete**: An individual sports performer managed by the agent, with contact details and sport specialization.
 
+**Command Line Interface**: A text-based interface that allows users to interact with the application by typing commands.
+
 **Contract**: A business agreement between an athlete and organization, including financial terms and duration.
 
 **Fuzzy Matching**: A search method that finds results even with typos or partial matches, using intelligent algorithms.
+
+**Graphical User Interface**: visual interface that allows users to interact with the application through graphical elements such as buttons, menus, and icons.
 
 **Organization**: Any business entity that contracts with athletes - teams, sponsors, agencies, brands, etc.
 
