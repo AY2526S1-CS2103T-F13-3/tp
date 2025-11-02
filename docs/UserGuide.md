@@ -138,7 +138,7 @@ Let's try some basic operations to get you started:
 3. **Search for Athletes**
 
    ```
-   find -an LeBron
+   find an/ LeBron
    ```
 
 4. **Clear the Search**
@@ -389,34 +389,34 @@ The search functionality uses **fuzzy matching** to help you find what you're lo
 
 #### Search Command
 
-**Command:** `find -[FLAG] KEYWORD`
+**Command:** `find [FLAG]/ KEYWORD`
 **Parameters:**
 - `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
   **Available Search Types:**
 
 | Flag  | Searches                  | Example               |
 | ----- | ------------------------- | --------------------- |
-| `-an` | Athlete names             | `find -an LeBron`     |
-| `-as` | Athlete sports            | `find -as Basketball` |
-| `-on` | Organization names        | `find -on Nike`       |
-| `-ca` | Contracts by athlete name | `find -ca LeBron`     |
-| `-cs` | Contracts by sport        | `find -cs Basketball` |
-| `-co` | Contracts by organization | `find -co Nike`       |
+| `an/` | Athlete names             | `find an/ LeBron`     |
+| `as/` | Athlete sports            | `find as/ Basketball` |
+| `on/` | Organization names        | `find on/ Nike`       |
+| `ca/` | Contracts by athlete name | `find ca/ LeBron`     |
+| `cs/` | Contracts by sport        | `find cs/ Basketball` |
+| `co/` | Contracts by organization | `find co/ Nike`       |
 
 <div style="page-break-before: always;"></div>
 
 **Examples:**
 
 ```
-find -an James          # Find athletes with names like "James"
-find -as Basketball     # Find athletes with sports like "Basketball"
-find -on Nike           # Find organizations with names like "Nike"
-find -ca LeBron         # Find contracts with athletes named like "LeBron"
-find -cs Basketball     # Find all contracts athletes' sports named like "Basketball"
-find -co Nike           # Find contracts with organizations like "Nike"
+find an/ James          # Find athletes with names like "James"
+find as/ Basketball     # Find athletes with sports like "Basketball"
+find on/ Nike           # Find organizations with names like "Nike"
+find ca/ LeBron         # Find contracts with athletes named like "LeBron"
+find cs/ Basketball     # Find all contracts athletes' sports named like "Basketball"
+find co/ Nike           # Find contracts with organizations like "Nike"
 ```
 
-**Expected Output for `find -an James`:**
+**Expected Output for `find an/ James`:**
 
 ![find-an](images/find-an.png)
 
@@ -513,7 +513,7 @@ Exiting playbook.io as requested ...
 | `delete-o` | `delete-o o/ORG_NAME`                                                                                                                         | Delete organization  |
 | `add-c`    | `add-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                        | Add new contract     |
 | `delete-c` | `delete-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                     | Delete contract      |
-| `find`     | `find -an KEYWORD`<br/>`find -as KEYWORD` <br/> `find -on KEYWORD` <br/> `find -ca KEYWORD` <br/> `find -co KEYWORD` <br/> `find -cs KEYWORD` | Search/filter data   |
+| `find`     | `find an/ KEYWORD`<br/>`find as/ KEYWORD` <br/> `find on/ KEYWORD` <br/> `find ca/ KEYWORD` <br/> `find co/ KEYWORD` <br/> `find cs/ KEYWORD` | Search/filter data   |
 | `refresh`  | `refresh`                                                                                                                                     | Clear all filters    |
 | `help`     | `help`                                                                                                                                        | Open help window     |
 | `exit`     | `exit`                                                                                                                                        | Close application    |
@@ -586,16 +586,16 @@ Exiting playbook.io as requested ...
 **Daily Management:**
 
 1. Start each day with `refresh` to see all your data
-2. Use `find -an [name]` to quickly locate specific athletes
-3. Check contract expiry dates regularly with `find -cs [sport]`
+2. Use `find an/ [name]` to quickly locate specific athletes
+3. Check contract expiry dates regularly with `find cs/ [sport]`
 4. Keep contact information updated for all entities
 
 <div style="page-break-before: always;"></div>
 
 **Contract Negotiation Season:**
 
-1. Use `find -ca [athlete]` to see all contracts for an athlete
-2. Cross-reference with `find -co [organization]` to see organization's other deals
+1. Use `find ca/ [athlete]` to see all contracts for an athlete
+2. Cross-reference with `find co/ [organization]` to see organization's other deals
 3. Track contract amounts and dates systematically
 4. Add new contracts immediately after signing
 
@@ -609,7 +609,7 @@ Exiting playbook.io as requested ...
 ### Common Pitfalls & Solutions
 
 **Problem:** "Error: Athlete not found" when adding contracts
-**Solution:** Use `find -an [name]` first to verify the exact name spelling
+**Solution:** Use `find an/ [name]` first to verify the exact name spelling
 
 **Problem:** Too many search results
 **Solution:** Use more specific keywords or combine with tab switching

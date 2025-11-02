@@ -40,6 +40,8 @@ public class AddOrganizationCommandParser implements Parser<AddOrganizationComma
      */
     @Override
     public AddOrganizationCommand parse(String args) throws ParseException {
+        ParserUtil.ensureNoAdditionalPrefixes(args, PREFIX_ORG, PREFIX_PHONE, PREFIX_EMAIL);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_ORG, PREFIX_PHONE, PREFIX_EMAIL);
 

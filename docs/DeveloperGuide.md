@@ -245,17 +245,17 @@ The following flags are supported:
 
 | Flag  | Description                          |
 |-------|--------------------------------------|
-| `-an` | Finds athletes by name               |
-| `-as` | Finds athletes by sport              |
-| `-on` | Finds organizations by name          |
-| `-ca` | Finds contracts by athlete name      |
-| `-co` | Finds contracts by organization name |
-| `-cs` | Finds contracts by sport             |
+| `an/` | Finds athletes by name               |
+| `as/` | Finds athletes by sport              |
+| `on/` | Finds organizations by name          |
+| `ca/` | Finds contracts by athlete name      |
+| `co/` | Finds contracts by organization name |
+| `cs/` | Finds contracts by sport             |
 
 Example usage:
 
 ```
-find -an Lionel
+find an/ Lionel
 ```
 
 Upon execution, the command:
@@ -298,8 +298,8 @@ The matching mechanism performs **three-tier Levenshtein-based fuzzy matching** 
    edits based on keyword length.
 3. **Word-by-word Levenshtein match** — splits the text into words and matches each token individually.
 
-This approach allows tolerant and human-friendly searches (e.g., `find -an leo` matches “Lionel Messi”;
-`find -co arsnal` matches “Arsenal”).
+This approach allows tolerant and human-friendly searches (e.g., `find an/ leo` matches “Lionel Messi”;
+`find co/ arsnal` matches “Arsenal”).
 
 <puml src="diagrams/FindMatchingActivityDiagram.puml" alt="FindMatchingActivityDiagram" width="700" />
 
@@ -317,7 +317,7 @@ Persistent data stored on disk remains unchanged.
 
 The following scenario demonstrates how a typical command executes:
 
-**Step 1.** The user executes `find -co Arsenal`.  
+**Step 1.** The user executes `find co/ Arsenal`.  
 **Step 2.** The parser constructs a `FindCommand` with scope `CONTRACT_ORGANIZATION` and keyword `Arsenal`.  
 **Step 3.** The command invokes `model.updateFilteredContractList(predicate)`.  
 **Step 4.** The UI’s observable list updates, displaying all contracts linked to organizations matching “Arsenal”.  
@@ -960,13 +960,13 @@ The most recent window size and location is retained.
 #### 1. Finding an athlete while all athletes are being shown
 
 1. **Prerequisites:** Switch to the Athletes Tab by pressing **Cmd+1** (or **Ctrl+1** on Windows/Linux).
-2. **Test case:** `find -an LeBron James`  
+2. **Test case:** `find an/ LeBron James`  
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -as Basketball`  
+3. **Test case:** `find as/ Basketball`  
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
-4. **Test case:** `find -as`  
+4. **Test case:** `find as/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
-5. **Other incorrect find commands to try:** `find -an`, `find`, `...`  
+5. **Other incorrect find commands to try:** `find an/`, `find`, `...`  
    **Expected:** Similar to previous.
 
 ### Finding an organization
@@ -974,9 +974,9 @@ The most recent window size and location is retained.
 #### 1. Finding an organization while all organizations are being shown
 
 1. **Prerequisites:** Switch to the Organizations Tab by pressing **Cmd+2** (or **Ctrl+2** on Windows/Linux).
-2. **Test case:** `find -on Nike`  
+2. **Test case:** `find on/ Nike`  
    **Expected:** Filtered list of organizations shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -on`  
+3. **Test case:** `find on/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
 4. **Other incorrect find commands to try:** `find`, `...`  
    **Expected:** Similar to previous.
@@ -986,15 +986,15 @@ The most recent window size and location is retained.
 #### 1. Finding a contract while all contracts are being shown
 
 1. **Prerequisites:** Switch to the Contracts Tab by pressing **Cmd+3** (or **Ctrl+3** on Windows/Linux).
-2. **Test case:** `find -ca LeBron James`  
+2. **Test case:** `find ca/ LeBron James`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find -cs Basketball`  
+3. **Test case:** `find cs/ Basketball`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-4. **Test case:** `find -co Nike`  
+4. **Test case:** `find co/ Nike`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-5. **Test case:** `find -co`  
+5. **Test case:** `find co/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
-6. **Other incorrect find commands to try:** `find -cs`, `find -ca`, `...`  
+6. **Other incorrect find commands to try:** `find cs/`, `find ca/`, `...`  
    **Expected:** Similar to previous.
 
 <div style="page-break-before: always;"></div>

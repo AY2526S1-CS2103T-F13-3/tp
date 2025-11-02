@@ -9,6 +9,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.AthleteParserUtil;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.athlete.Name;
 import seedu.address.model.athlete.Sport;
@@ -24,7 +25,10 @@ public class DeleteAthleteCommandParser implements Parser<DeleteAthleteCommand> 
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteAthleteCommand parse(String args) throws ParseException {
+        ParserUtil.ensureNoAdditionalPrefixes(args, PREFIX_NAME, PREFIX_SPORT);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SPORT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_SPORT);
 
         if (argMultimap.getValue(PREFIX_NAME).isEmpty()
                 || argMultimap.getValue(PREFIX_SPORT).isEmpty()) {

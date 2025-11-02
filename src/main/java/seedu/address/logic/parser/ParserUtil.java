@@ -2,6 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Locale;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,6 +27,9 @@ public class ParserUtil {
      * Message used when an index provided by the user is invalid.
      */
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_ADDITIONAL_FIELD_DETECTED = "Error: Additional field detected";
+
+    private static final Pattern PREFIX_PATTERN = Pattern.compile("(?i)(^|\\s)([a-z]+/)");
 
     // ============================================================
     // Common utility
@@ -39,6 +49,23 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Ensures no additional prefixes beyond {@code allowed} appear in {@code args}.
+     */
+    public static void ensureNoAdditionalPrefixes(String args, Prefix... allowed) throws ParseException {
+        requireNonNull(args);
+        Set<String> permitted = Stream.of(allowed)
+                .map(prefix -> prefix.getPrefix().toLowerCase(Locale.ENGLISH))
+                .collect(Collectors.toSet());
+        Matcher matcher = PREFIX_PATTERN.matcher(args);
+        while (matcher.find()) {
+            String detected = matcher.group(2).toLowerCase(Locale.ENGLISH);
+            if (!permitted.contains(detected)) {
+                throw new ParseException(MESSAGE_ADDITIONAL_FIELD_DETECTED);
+            }
+        }
     }
 
     // ============================================================
