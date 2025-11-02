@@ -54,6 +54,7 @@
         "data-types-and-overflow-protection": "Data Types and Overflow Protection",
         "implementation": "Implementation",
         "implemented-find-command": "[Implemented] Find command",
+        "proposed-edit-feature": "[Proposed] Edit feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -165,8 +166,8 @@
       "headingKeywords": {}
     },
     {
-      "src": "team/cameron.md",
-      "title": "Cameron's Project Portfolio Page",
+      "src": "team/cameronlzy.md",
+      "title": "Cameron Loh's Project Portfolio Page",
       "headings": {
         "project-playbook-io": "Project: playbook.io"
       },
