@@ -9,25 +9,25 @@ skinparam ArrowFontStyle plain
 skinparam shadowing false
 
 ' ==== Objects (Runtime Instances) ====
-object userInput as "<u>userInput : String</u>" {
+object "__userInput : String__" as userInput {
   value = "edit-a n/LeBron James s/Basketball e/lebron@newagency.com p/98765432"
 }
 
-object parser as "<u>parser : EditAthleteCommandParser</u>"
+object "__parser : EditAthleteCommandParser__" as parser
 
-object command as "<u>command : EditAthleteCommand</u>" {
+object "__command : EditAthleteCommand__" as command {
   name = "LeBron James"
   sport = "Basketball"
 }
 
-object descriptor as "<u>descriptor : EditAthleteDescriptor</u>" {
+object "__descriptor : EditAthleteDescriptor__" as descriptor {
   phone = "98765432"
   email = "lebron@newagency.com"
 }
 
-object model as "<u>model : Model</u>"
+object "__model : Model__" as model
 
-object targetAthlete as "<u>targetAthlete : Athlete</u>" {
+object "__targetAthlete : Athlete__" as targetAthlete {
   name = "LeBron James"
   sport = "Basketball"
   phone = "99887766"
@@ -35,7 +35,7 @@ object targetAthlete as "<u>targetAthlete : Athlete</u>" {
   age = "40"
 }
 
-object editedAthlete as "<u>editedAthlete : Athlete</u>" {
+object "__editedAthlete : Athlete__" as editedAthlete {
   name = "LeBron James"
   sport = "Basketball"
   phone = "98765432"
@@ -43,7 +43,7 @@ object editedAthlete as "<u>editedAthlete : Athlete</u>" {
   age = "40"
 }
 
-object result as "<u>result : CommandResult</u>" {
+object "__result : CommandResult__" as result {
   feedbackToUser = "Edited athlete: LeBron James - Basketball"
 }
 
