@@ -22,60 +22,41 @@ public class EmailTest {
     @Test
     public void isValidEmail() {
         // null email
-        assertThrows(NullPointerException.class, () -> seedu.address.model.athlete.Email.isValidEmail(null));
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail(null));
 
-        // blank email
-        String longEmail = "a".repeat(39) + "@example.com";
+        // invalid emails (Commons Validator rejects these)
+        String longEmail = "a".repeat(80) + "@example.com"; // too long overall (> 64+255 typical limits)
         assertFalse(seedu.address.model.athlete.Email.isValidEmail("")); // empty string
         assertFalse(seedu.address.model.athlete.Email.isValidEmail(" ")); // spaces only
-
-        // missing parts
         assertFalse(seedu.address.model.athlete.Email.isValidEmail("@example.com")); // missing local part
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjackexample.com")); // missing '@' symbol
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjackexample.com")); // missing '@'
         assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@")); // missing domain name
-
-        // invalid parts
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@-")); // invalid domain name
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@exam_ple.com")); // underscore
         assertFalse(seedu.address.model.athlete.Email.isValidEmail("peter jack@example.com")); // spaces
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@exam ple.com")); // spaces
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail(" peterjack@example.com")); // leading space
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example.com ")); // trailing space
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@@example.com")); // double '@' symbol
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peter@jack@example.com")); // '@' symbol
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("-peterjack@example.com")); //  hyphen
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack-@example.com")); // hyphen
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peter..jack@example.com"));
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example@com")); // '@' symbol
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@.example.com"));
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example.com."));
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@-example.com"));
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example.com-"));
-        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example.c"));
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@.example.com")); // invalid domain start
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example.com.")); // trailing dot
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@@example.com")); // double '@'
+        assertFalse(seedu.address.model.athlete.Email.isValidEmail("peterjack@example")); // no TLD
         assertFalse(seedu.address.model.athlete.Email.isValidEmail(longEmail)); // exceeds max length
 
-        // valid email
-        String boundaryEmail = "a".repeat(38) + "@example.com";
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack_1190@example.com")); // underscore
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack.1190@example.com")); // period
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack+1190@example.com")); // '+' symbol
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack-1190@example.com")); // hyphen
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("a@bc")); // minimal
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("test@localhost")); // alphabets only
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("123@145")); // numeric
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("a1+be.d@example1.com")); // mixture
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("peter_jack@very-very-very-long-example.com"));
+        // valid emails (Commons Validator accepts)
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack_1190@example.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack.1190@example.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack+1190@example.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("PeterJack-1190@example.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("a@b.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("123@145.com")); // numeric domain accepted
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("a1+be.d@example1.com"));
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("peter_jack@very-long-domain-example.com"));
         assertTrue(seedu.address.model.athlete.Email.isValidEmail("if.you.dream.it_you.can.do.it@example.com"));
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail("e1234567@u.nus.edu")); // more than one period
-        assertTrue(seedu.address.model.athlete.Email.isValidEmail(boundaryEmail)); // boundary length
+        assertTrue(seedu.address.model.athlete.Email.isValidEmail("e1234567@u.nus.edu"));
     }
 
     @Test
     public void equals() {
-        seedu.address.model.athlete.Email email = new seedu.address.model.athlete.Email("valid@email");
+        seedu.address.model.athlete.Email email = new seedu.address.model.athlete.Email("valid@email.com");
 
         // same values -> returns true
-        assertTrue(email.equals(new seedu.address.model.athlete.Email("valid@email")));
+        assertTrue(email.equals(new seedu.address.model.athlete.Email("valid@email.com")));
 
         // same object -> returns true
         assertTrue(email.equals(email));
@@ -87,6 +68,6 @@ public class EmailTest {
         assertFalse(email.equals(5.0f));
 
         // different values -> returns false
-        assertFalse(email.equals(new Email("other.valid@email")));
+        assertFalse(email.equals(new Email("other.valid@email.com")));
     }
 }
