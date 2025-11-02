@@ -414,13 +414,13 @@ Each parser builds an **Edit Descriptor**:
 
 **Step 3.** The command locates the target record:
 - `edit-a` finds the athlete using the pair `(NAME, SPORT)`
-- `edit-o` finds the organization using `ORG_NAME` 
+- `edit-o` finds the organization using `ORG_NAME`  
 If no matching record exists, the command displays an error message and terminates.
 
 **Step 4.** The command creates a new edited object:
 - Copies all existing field values from the target
 - Replaces only the editable fields provided in the descriptor
-  (identifier fields — `NAME`, `SPORT` for athletes and `NAME` for organizations — remain unchanged)
+  (identifier fields — `NAME`, `SPORT` for athletes and `ORG_NAME` for organizations — remain unchanged)
 - Validates all new field values using existing validators (`Email`, `Phone`, etc.)
 
 **Step 5.** The command updates the model:
@@ -473,13 +473,13 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 **Aspect: Identifier immutability**
 
-- **Alternative 1 (current choice):** Prevent editing identifier fields (NAME/SPORT for athletes, ORG_NAME for organizations).
-  - **Pros:** Ensures data integrity; avoids ambiguous lookups and duplicate keys.
+- **Alternative 1 (current choice):** Prevent editing identifier fields (`NAME` and `SPORT` for athletes, `ORG_NAME` for organizations).
+  - **Pros:** Ensures data integrity and avoids ambiguous lookups and duplicate keys.
   - **Cons:** Requires deletion and re-creation if identifiers need to change.
 
 - **Alternative 2:** Allow editing identifiers with additional checks.
   - **Pros:** Flexible for rare rename cases.
-  - **Cons:** Increases complexity; risk of identity collisions or inconsistent references.
+  - **Cons:** Increases complexity and risk of identity collisions or inconsistent references.
 
 ---
 
