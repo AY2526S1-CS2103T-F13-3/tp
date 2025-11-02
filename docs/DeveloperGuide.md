@@ -50,7 +50,7 @@ charge of the app launch and shut down.
 
 The bulk of the app's work is done by the following four components:
 
-- [_`UI`_](#ui-component): The UI of the App.
+- [_`User Interface`_](#ui-component): The user interface (UI) of the App.
 - [_`Logic`_](#logic-component): The command executor.
 - [_`Model`_](#model-component): Holds the data of the App in memory.
 - [_`Storage`_](#storage-component): Reads data from, and writes data to, the hard disk.
@@ -489,18 +489,6 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 - **Alternative approach (future consideration):**
   Introduce a unique `contractId` field to allow safe contract editing later.
-
-**Aspect: Partial editing**
-
-- Only provided optional fields are updated.
-- Missing parameters remain the same.
-
----
-
-**Summary**
-
-The **Edit** feature introduces safe, partial, and controlled updates for athletes and organizations, while maintaining identifier integrity and data consistency.
-By disallowing name/sport or organization name edits, and excluding contracts from editing, the design ensures that all records remain uniquely identifiable and logically consistent across the playbook.io system.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -992,6 +980,7 @@ otherwise)
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Organization**: Any business entity that contracts with athletes - teams, sponsors, agencies, brands, etc.
 * **Sports Agent**: A professional who represents athletes in contract negotiations and career management.
+* **User Interface**: The means by which users interact with the application, encompassing all interaction methods including graphical elements, text-based commands, and input mechanisms.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1010,7 +999,7 @@ Given below are instructions to test the app manually.
 2. Open a terminal, navigate (`cd`) to that folder, and run:
 
    ```
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
 **Expected:**
@@ -1019,7 +1008,10 @@ Shows the GUI. The window size may not be optimum.
 #### 2. Saving window preferences
 
 1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-2. Re-launch the app by double-clicking the jar file.
+2. Re-launch the app by running the same command in the terminal:
+```
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
+```
 
 **Expected:**
 The most recent window size and location is retained.
@@ -1193,3 +1185,161 @@ The app detects that the files are corrupted and loads empty lists for all entit
 
 **Expected:**
 Data is persisted correctly in the JSON files.
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Effort
+
+### Difficulty level
+
+playbook.io is more complex than the original AddressBook Level 3 (AB3). While AB3 only manages one type of thing (Persons), our app handles **three different types**—Athletes, Organizations, and Contracts—each with their own details and connections to each other. This made the project much more challenging:
+
+---
+
+### Challenges faced
+
+#### 1. Linking entities together
+
+One of the hardest parts was making sure Athletes, Organizations, and Contracts stayed properly connected:
+
+- **Deleting things**: When you try to delete an organization, what happens to its athletes and contracts? We had to handle this carefully.
+- **Checking references**: When adding a contract, we need to make sure the athlete and organization actually exist.
+- **Error messages**: When something goes wrong with these connections, we need to tell the user what happened clearly.
+
+#### 2. Expanding the command system
+
+Making commands work for three different types instead of one was tricky:
+
+- **Avoiding copy-paste**: We didn't want to write the same code three times, so we had to find smart ways to reuse logic.
+- **Different inputs**: Each entity type has different information, so the command parsers had to handle this.
+- **Clear commands**: We needed command names that made sense and didn't confuse users.
+
+#### 3. Making the UI work
+
+Showing three different types of lists in the interface was challenging:
+
+- **Switching views**: Users need to easily switch between Athletes, Organizations, and Contracts.
+- **Keeping things in sync**: The UI needs to always show the right information when you switch or make changes.
+- **Smooth performance**: The app should still run fast even when displaying lots of data.
+
+#### 4. Consistent error messages
+
+We wanted all error messages to look and feel the same:
+
+- **Standard format**: Every command should report errors in a similar way.
+- **Code reviews**: We checked each other's code multiple times to make sure messages were consistent.
+- **Documentation**: We made sure the error messages in the code matched what we wrote in the user guide.
+
+---
+
+### Effort required
+
+The project took about **40-50% more work** than the baseline AB3:
+
+| What We Did | How Much Effort |
+|-------------|-----------------|
+| Basic AB3 stuff | ~100% |
+| Adding three entity types | +25% |
+| Testing and fixing bugs | +15% |
+| Documentation | +10% |
+| **Total** | **~140-150%** |
+
+We spent a lot of time on:
+- Finding and fixing bugs when different parts of the code interacted
+- Cleaning up code to keep it organized as things got more complex
+- Writing tests for all the new features and how they work together
+- Writing clear documentation for users and developers
+
+---
+
+### What we accomplished
+
+#### Features that work
+- You can add, view, and delete all three types (Athletes, Organizations, Contracts)
+- You can search for any entity using different fields
+- Entities are properly linked and validated
+
+#### Good code quality
+- Over 70% of our code is tested with automated tests
+- Code is well-organized and easy to understand
+- All commands give clear, consistent error messages
+
+#### Good documentation
+- User Guide explains how to use every command with examples
+- Developer Guide explains how the code works with diagrams
+- FAQ section answers common questions
+
+#### Good teamwork
+- Everyone knew what they were responsible for
+- We reviewed each other's code before merging
+- We communicated regularly through meetings and updates
+
+---
+
+### What we reused from AB3
+
+About **15-20% less work** thanks to reusing parts of AB3:
+
+#### Code structure (~10% saved)
+- **Commands**: We adapted AB3's command structure instead of starting from scratch
+- **Data management**: We extended AB3's existing classes instead of rewriting everything
+- **Storage**: We used AB3's file saving system and just added support for new entity types
+
+#### User interface (~5% saved)
+- **Lists**: We adapted AB3's list display for our three entity types
+- **Cards**: We modified AB3's card design to show different information
+- **Window layout**: We kept AB3's basic window structure
+
+---
+
+### What we learned
+
+- **Plan first**: Spending time designing how entities connect saved us from rewriting code later
+- **Build step by step**: Adding one entity type at a time helped us catch problems early
+- **Test while coding**: Writing tests as we went found bugs faster
+- **Document as you go**: Writing documentation while coding was easier than doing it all at the end
+
+
+--------------------------------------------------------------------------------------------------------------------
+
+## Appendix: Planned Enhancements
+
+**Team size:** 5
+
+### 1. Add Edit command for all entities (Athlete, Organization, Contract)
+
+**Current issue:** Users currently need to delete and re-add an entity if they make a mistake (e.g., incorrect phone number or organization name). This is inconvenient and error-prone, especially when managing multiple related entities.
+
+**Planned enhancement:** We plan to introduce an `edit` command that allows users to modify the details of existing entities directly without deleting them. The command will follow a format similar to AB3's edit implementation but extended for multiple entity types as seen under [[Proposed] Edit feature](#proposed-edit-feature).
+
+---
+
+### 2. Allow more flexible phone number formats for international support
+
+**Current issue:** The current system is localized to Singapore and only accepts 8-digit phone numbers without spaces, country codes, or symbols (e.g., `91234567`). This restriction limits scalability and prevents international users or organizations from being added.
+
+**Planned enhancement:** As we plan to expand playbook.io for international use, we will enhance the phone number validation logic to support a wider range of formats. The updated validation will accept optional country codes (e.g., `+65`, `+1`), spaces, and hyphens while still rejecting invalid characters.
+
+---
+
+### 3. Increase character limits for text fields
+
+**Current issue:** The current system restricts name, organization name, email, and sport fields to a fixed maximum length (e.g., 50 characters) due to UI display limitations. Longer names or organization titles may be truncated or misaligned in the interface, so the restriction was added to maintain readability and prevent layout issues.
+
+**Planned enhancement:** In future iterations, we plan to enhance the UI to handle longer text inputs gracefully. Once the UI supports dynamic text wrapping and resizing, we will allow longer inputs for names, organization names, emails, and sports. This will better accommodate users with longer names or international organizations without causing UI overflow problems.
+
+---
+
+### 4. Enhance Find command to support multiple flags and flexible search variations
+
+**Current issue:** The current `find` command only supports searching by one flag at a time (e.g., `find -an James`). Users cannot combine multiple criteria (e.g., name and sport), and search matching is limited to exact or partial word matches. This makes filtering less efficient for large datasets.
+
+**Planned enhancement:** We plan to enhance the `find` command to support multiple flags and more flexible search variations. Users will be able to search using a combination of attributes (e.g., name, sport, organization) within a single command. The command parser will be updated to handle multiple flag-value pairs and perform case-insensitive, partial, and multi-word matching.
+
+---
+
+### 5. Allow more variations and special characters in Athlete and Organization Names
+
+**Current issue:** Currently, the system restricts certain characters such as `/` in athlete and organization names. This limitation exists because these characters are used internally to detect command parameters, which can cause parsing errors or incorrect field detection. As a result, legitimate names like "Formula/One Academy" cannot be added.
+
+**Planned enhancement:** We plan to refine the command parsing logic to properly handle special characters in names while still correctly identifying prefixes. This will involve improving input tokenization and validation to distinguish between actual command prefixes (e.g., `n/`, `p/`) and similar characters within user-provided text.
