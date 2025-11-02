@@ -1008,7 +1008,10 @@ Shows the GUI. The window size may not be optimum.
 #### 2. Saving window preferences
 
 1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-2. Re-launch the app by double-clicking the jar file.
+2. Re-launch the app by running the same command in the terminal:
+```
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
+```
 
 **Expected:**
 The most recent window size and location is retained.
