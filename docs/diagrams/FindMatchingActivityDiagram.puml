@@ -8,19 +8,19 @@ start
 
 if () then ([haystack contains keyword])
     :Immediate match found;
-else ([no substring match])
+else ([else])
     :Compute Levenshtein distance between
     haystack and keyword;
 
     if () then ([within allowable threshold])
         :Match found based on edit distance;
-    else ([above threshold])
+    else ([else])
         :Split haystack into words;
         :Compare each token using Levenshtein distance;
 
         if () then ([token within threshold])
             :Match found from word-level comparison;
-        else ([no token match])
+        else ([else])
             :No match found;
         endif
     endif
