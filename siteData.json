@@ -73,7 +73,20 @@
         "finding-an-athlete": "Finding an athlete",
         "finding-an-organization": "Finding an organization",
         "finding-a-contract": "Finding a contract",
-        "saving-data": "Saving data"
+        "saving-data": "Saving data",
+        "appendix-effort": "Appendix: Effort",
+        "difficulty-level": "Difficulty level",
+        "challenges-faced": "Challenges faced",
+        "effort-required": "Effort required",
+        "what-we-accomplished": "What we accomplished",
+        "what-we-reused-from-ab3": "What we reused from AB3",
+        "what-we-learned": "What we learned",
+        "appendix-planned-enhancements": "Appendix: Planned Enhancements",
+        "1-add-edit-command-for-all-entities-athlete-organization-contract": "1. Add Edit command for all entities (Athlete, Organization, Contract)",
+        "2-allow-more-flexible-phone-number-formats-for-international-support": "2. Allow more flexible phone number formats for international support",
+        "3-increase-character-limits-for-text-fields": "3. Increase character limits for text fields",
+        "4-enhance-find-command-to-support-multiple-flags-and-flexible-search-variations": "4. Enhance Find command to support multiple flags and flexible search variations",
+        "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in Athlete and Organization Names"
       },
       "headingKeywords": {}
     },
