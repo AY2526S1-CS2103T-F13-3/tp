@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.organization.AddOrganizationCommand;
+import seedu.address.model.athlete.Email;
 import seedu.address.model.organization.Organization;
-import seedu.address.model.organization.OrganizationEmail;
 import seedu.address.model.organization.OrganizationName;
 import seedu.address.model.organization.OrganizationPhone;
 import seedu.address.testutil.OrganizationBuilder;
@@ -86,7 +86,7 @@ public class AddOrganizationCommandParserTest {
         // invalid email
         assertParseFailure(parser,
                 ORG_DESC + PHONE_DESC + INVALID_EMAIL_DESC,
-                OrganizationEmail.MESSAGE_CONSTRAINTS);
+                Email.MESSAGE_CONSTRAINTS);
 
         // multiple invalids — only first reported
         assertParseFailure(parser,

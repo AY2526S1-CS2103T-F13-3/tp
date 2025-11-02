@@ -1,6 +1,6 @@
 ---
   layout: default.md
-  title: "Cameron Lee's Project Portfolio Page"
+  title: "Cameron Loh's Project Portfolio Page"
 ---
 
 ### Project: playbook.io

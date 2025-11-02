@@ -355,7 +355,7 @@ The **Edit** feature enables users to update existing **athlete** and **organiza
 without deleting and recreating them.
 This feature improves data maintenance by allowing users to correct or update details such as contact information, age, and email, while keeping unique identifiers intact.
 
-Contracts **cannot be edited** due to the absence of a unique ID field (contracts are uniquely defined by multiple parameters such as athlete, sport, organization, and duration). Editing any of these would make it impossible to reliably identify the original contract. Thus, the `edit-c` command is intentionally **unsupported**.
+Contracts **cannot be edited** due to the absence of a unique identity field (contracts are uniquely defined by multiple parameters such as athlete, sport, organization, and duration). Editing any of these would make it impossible to reliably identify the original contract. Thus, the `edit-c` command is intentionally **unsupported**.
 
 ---
 
@@ -393,10 +393,10 @@ At least **one optional parameter** must be specified; otherwise, the command wi
 - `edit-a n/LeBron James s/Basketball p/98765432 e/lebron@newagency.com`
 - `edit-o o/Nike p/91234567 e/partnerships@nikeglobal.com`
 
-These commands:
-	•	Locate the target athlete or organization using their identifier fields (name + sport for athlete, name for organization)
-	•	Modify only the editable attributes
-	•	Validate and save the updated record via the Model
+These commands:  
+   •	Locate the target athlete or organization using their identifier fields (name + sport for athlete, name for organization)  
+	•	Modify only the editable attributes  
+	•	Validate and save the updated record via the Model  
 
 ⸻
 #### How it works
@@ -413,14 +413,14 @@ Each parser builds an **Edit Descriptor**:
   which stores only the fields provided by the user (wrapped in `Optional<>`).
 
 **Step 3.** The command locates the target record:
-- `edit-a` finds the athlete using the pair `(name, sport)`
-- `edit-o` finds the organization using `organization name`
+- `edit-a` finds the athlete using the pair `(NAME, SPORT)`
+- `edit-o` finds the organization using `ORG_NAME` 
 If no matching record exists, the command displays an error message and terminates.
 
 **Step 4.** The command creates a new edited object:
 - Copies all existing field values from the target
 - Replaces only the editable fields provided in the descriptor
-  (identifier fields — `name`, `sport` for athletes and `name` for organizations — remain unchanged)
+  (identifier fields — `NAME`, `SPORT` for athletes and `NAME` for organizations — remain unchanged)
 - Validates all new field values using existing validators (`Email`, `Phone`, etc.)
 
 **Step 5.** The command updates the model:
@@ -446,7 +446,7 @@ with corresponding modifications to support editable fields instead of creation.
 **1. Edit Athlete**
 
 ```
-edit-a n/NAME s/SPORT [p/PHONE] [e/EMAIL] [a/AGE] [...]
+edit-a n/NAME s/SPORT [p/PHONE] [e/EMAIL] [a/AGE]
 ```
 
 - `n/` and `s/` together locate the athlete.
@@ -463,7 +463,7 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 ```
 
 - `o/` identifies the organization.
-- Only `p/`, `e/`, and similar fields are editable.
+- Only `p/`, `e/` are editable.
 - Example:
   ```
   edit-o o/Nike e/partners@nike.com
@@ -473,20 +473,20 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 **Aspect: Identifier immutability**
 
-- **Alternative 1 (current choice):** Prevent editing identifier fields (name/sport for athletes, name for organizations).
+- **Alternative 1 (current choice):** Prevent editing identifier fields (NAME/SPORT for athletes, ORG_NAME for organizations).
   - **Pros:** Ensures data integrity; avoids ambiguous lookups and duplicate keys.
   - **Cons:** Requires deletion and re-creation if identifiers need to change.
 
 - **Alternative 2:** Allow editing identifiers with additional checks.
   - **Pros:** Flexible for rare rename cases.
-  - **Cons:** Increases complexity; risk of ID collisions or inconsistent references.
+  - **Cons:** Increases complexity; risk of identity collisions or inconsistent references.
 
 ---
 
 **Aspect: Contract immutability**
 
 - **Rationale:**
-  Each contract is identified by a combination of attributes — athlete, sport, organization, start date, end date, and amount — rather than a single unique ID.
+  Each contract is identified by a combination of attributes — athlete, sport, organization, start date, end date, and amount — rather than a single unique identity.
   Editing any of these would make the original contract indistinguishable, so contract editing is disabled by design.
 
 - **Alternative approach (future consideration):**
@@ -496,9 +496,8 @@ edit-o o/ORG_NAME [p/PHONE] [e/EMAIL]
 
 **Aspect: Partial editing**
 
-- Only provided fields are updated.
-- Missing parameters mean “no change”.
-- This matches the behavior of other playbook.io commands (e.g., `find` and `delete` using name-based lookups).
+- Only provided optional fields are updated.
+- Missing parameters remain the same.
 
 ---
 
