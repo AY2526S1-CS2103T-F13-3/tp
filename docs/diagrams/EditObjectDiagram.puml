@@ -1,0 +1,60 @@
+@startuml
+title EditAthleteCommand Object Diagram
+
+skinparam objectFontSize 15
+skinparam defaultFontSize 15
+skinparam ArrowColor #444444
+skinparam ArrowThickness 1.1
+skinparam ArrowFontStyle plain
+skinparam shadowing false
+
+' ==== Objects (Runtime Instances) ====
+object "__userInput : String__" as userInput {
+  value = "edit-a n/LeBron James s/Basketball e/lebron@newagency.com p/98765432"
+}
+
+object "__parser : EditAthleteCommandParser__" as parser
+
+object "__command : EditAthleteCommand__" as command {
+  name = "LeBron James"
+  sport = "Basketball"
+}
+
+object "__descriptor : EditAthleteDescriptor__" as descriptor {
+  phone = "98765432"
+  email = "lebron@newagency.com"
+}
+
+object "__model : Model__" as model
+
+object "__targetAthlete : Athlete__" as targetAthlete {
+  name = "LeBron James"
+  sport = "Basketball"
+  phone = "99887766"
+  email = "james@example.com"
+  age = "40"
+}
+
+object "__editedAthlete : Athlete__" as editedAthlete {
+  name = "LeBron James"
+  sport = "Basketball"
+  phone = "98765432"
+  email = "lebron@newagency.com"
+  age = "40"
+}
+
+object "__result : CommandResult__" as result {
+  feedbackToUser = "Edited athlete: LeBron James - Basketball"
+}
+
+' ==== Relationships (Directional) ====
+userInput --> parser
+parser --> "creates" command
+command --> "contains" descriptor
+command --> "executes" model
+model --> "finds by \n name and sport " targetAthlete
+descriptor --> "applies to" editedAthlete
+model --> "replaces" editedAthlete
+command --> "return        " result
+
+@enduml
