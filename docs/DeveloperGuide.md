@@ -755,9 +755,25 @@ otherwise)
     * 2b1. playbook.io shows an error message
 
       Use case ends.
-* 2c. Duplicate contract
-
+  
+* 2c. Athlete's total contract amount exceeds 9,223,372,036,854,775,807 
     * 2c1. playbook.io shows an error message
+
+      Use case ends.
+  
+* 2d. Organization's total contract amount exceeds 9,223,372,036,854,775,807
+   * 2d1. playbook.io shows an error message
+
+      Use case ends.
+  
+* 2e. Both athlete's and organization's total contract amount exceeds 9,223,372,036,854,775,807
+    * 2e1. playbook.io shows an error message
+
+      Use case ends.
+  
+* 2f. Duplicate contract
+
+    * 2f1. playbook.io shows an error message
 
       Use case ends.
 
