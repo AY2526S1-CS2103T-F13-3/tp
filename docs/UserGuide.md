@@ -54,8 +54,6 @@ This guide is designed for **sports agents and talent managers** operating in Si
 
 ---
 
-<div style="page-break-before: always;"></div>
-
 ## Quick Start
 
 ### Installation
@@ -79,6 +77,8 @@ This guide is designed for **sports agents and talent managers** operating in Si
 3. **Set Up Home Folder**
 
    Copy the `.jar` file to the folder you want to use as the **home folder** for playbook.io. This is where your data files will be stored.
+
+<div style="page-break-before: always;"></div>
 
 4. **Launch the Application**
 
@@ -113,6 +113,8 @@ The playbook.io interface consists of five main areas:
 4. **Main Display Area** (center): Shows your data lists
 5. **Navigation Tabs** (bottom): Three tabs for switching between Athletes, Organizations, and Contracts views
 
+<div style="page-break-before: always;"></div>
+
 **Navigation Tips:**
 
 - Use **Cmd+1**, **Cmd+2**, **Cmd+3** (or **Ctrl+1**, **Ctrl+2**, **Ctrl+3** on Windows/Linux) to quickly switch between tabs
@@ -139,6 +141,7 @@ Let's try some basic operations to get you started:
    ```
    add-o o/Nike p/98765432 e/john.doe@nike.com
    ```
+<div style="page-break-before: always;"></div>
 
 3. **Search for Athletes**
 
