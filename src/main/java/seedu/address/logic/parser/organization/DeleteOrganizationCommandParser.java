@@ -24,7 +24,10 @@ public class DeleteOrganizationCommandParser implements Parser<DeleteOrganizatio
      */
     @Override
     public DeleteOrganizationCommand parse(String args) throws ParseException {
+        ParserUtil.ensureNoAdditionalPrefixes(args, PREFIX_ORG);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ORG);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_ORG);
 
         if (!argMultimap.getValue(PREFIX_ORG).isPresent()
                 || !argMultimap.getPreamble().isEmpty()) {

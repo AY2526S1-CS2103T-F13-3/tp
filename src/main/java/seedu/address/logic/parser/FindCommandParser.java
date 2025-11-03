@@ -10,6 +10,9 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindCommand.SearchScope;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.athlete.Name;
+import seedu.address.model.athlete.Sport;
+import seedu.address.model.organization.OrganizationName;
 
 /**
  * Parses input arguments and creates a new {@link FindCommand} object.
@@ -19,7 +22,7 @@ public class FindCommandParser implements Parser<FindCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns a FindCommand object for execution.
-     * Expected format: -FLAG KEYWORD, where FLAG is one of: an, as, on, ca, co, cs
+     * Expected format: FLAG/ KEYWORD, where FLAG is one of: an, as, on, ca, co, cs
      *
      * @param args The user input arguments to parse. Cannot be null.
      * @return A FindCommand object with the parsed search scope and keyword.
@@ -37,7 +40,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         // Regex: allow query to be empty (0 or more chars)
-        Pattern pattern = Pattern.compile("^-(?<flag>an|as|on|ca|co|cs)\\s*(?<query>.*)$",
+        Pattern pattern = Pattern.compile("^(?<flag>an|as|on|ca|co|cs)/\\s*(?<query>.*)$",
                 Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(trimmed);
 
@@ -60,9 +63,34 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         SearchScope scope = mapFlagToScope(flag);
+        validateKeywordForScope(scope, keyword);
         return new FindCommand(scope, keyword);
     }
 
+    private void validateKeywordForScope(SearchScope scope, String keyword) throws ParseException {
+        switch (scope) {
+        case ATHLETE_NAME:
+        case CONTRACT_ATHLETE:
+            if (!Name.isValidName(keyword)) {
+                throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            }
+            break;
+        case ATHLETE_SPORT:
+        case CONTRACT_SPORT:
+            if (!Sport.isValidSport(keyword)) {
+                throw new ParseException(Sport.MESSAGE_CONSTRAINTS);
+            }
+            break;
+        case ORGANIZATION_NAME:
+        case CONTRACT_ORGANIZATION:
+            if (!OrganizationName.isValidName(keyword)) {
+                throw new ParseException(OrganizationName.MESSAGE_CONSTRAINTS);
+            }
+            break;
+        default:
+            break;
+        }
+    }
 
     private SearchScope mapFlagToScope(String flag) throws ParseException {
         switch (flag) {

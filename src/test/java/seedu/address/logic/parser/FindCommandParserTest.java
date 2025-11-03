@@ -19,13 +19,13 @@ public class FindCommandParserTest {
     @Test
     public void parse_validAthleteNameCommand_returnsFindCommand() throws Exception {
         FindCommand expected = new FindCommand(SearchScope.ATHLETE_NAME, "alice");
-        assertEquals(expected, parser.parse("-an alice"));
+        assertEquals(expected, parser.parse("an/ alice"));
     }
 
     @Test
     public void parse_validContractOrganizationCommandWithQuotes_returnsFindCommand() throws Exception {
         FindCommand expected = new FindCommand(SearchScope.CONTRACT_ORGANIZATION, "Nike - Partners");
-        assertEquals(expected, parser.parse("  -co   \"Nike - Partners\"  "));
+        assertEquals(expected, parser.parse("  co/   \"Nike - Partners\"  "));
     }
 
     @Test
@@ -35,11 +35,11 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_missingKeyword_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("-an   "));
+        assertThrows(ParseException.class, () -> parser.parse("an/   "));
     }
 
     @Test
     public void parse_unknownFlag_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("-xx something"));
+        assertThrows(ParseException.class, () -> parser.parse("xx/ something"));
     }
 }

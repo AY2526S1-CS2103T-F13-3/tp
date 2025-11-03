@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.athlete.AthleteCommandParserTestUtil.as
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.athlete.DeleteAthleteCommand;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.athlete.Name;
 import seedu.address.model.athlete.Sport;
 
@@ -49,8 +50,7 @@ public class DeleteAthleteCommandParserTest {
     @Test
     public void parse_extraArguments_failure() {
         String input = "n/Alice s/Basketball extra/word";
-        assertParseFailure(parser, input,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteAthleteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, input, ParserUtil.MESSAGE_ADDITIONAL_FIELD_DETECTED);
     }
 
     @Test

@@ -81,7 +81,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_find() throws Exception {
-        String args = " -an Alice";
+        String args = " an/ Alice";
         assertTrue(parser.parseCommand(FindCommand.COMMAND_WORD + args) instanceof FindCommand);
     }
 

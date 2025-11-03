@@ -12,10 +12,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute(find -an Lionel)
+[-> LogicManager : execute(find an/ Lionel)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(find -an Lionel)
+LogicManager -> AddressBookParser : parseCommand(find an/ Lionel)
 activate AddressBookParser
 
 create FindCommand
