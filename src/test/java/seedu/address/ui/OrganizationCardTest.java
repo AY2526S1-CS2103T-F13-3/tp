@@ -36,4 +36,5 @@ public class OrganizationCardTest {
         assertEquals("87654321", organization.getPhone().value);
         assertEquals("contact@testsports.com", organization.getEmail().value);
     }
+
 }

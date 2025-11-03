@@ -11,7 +11,11 @@ import static seedu.address.testutil.athlete.TypicalAthletes.BENSON;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.contract.Contract;
 import seedu.address.testutil.athlete.AthleteBuilder;
+import seedu.address.testutil.contract.ContractBuilder;
 
 public class AthleteTest {
 
@@ -80,5 +84,24 @@ public class AthleteTest {
                 + ", email=" + ALICE.getEmail()
                 + "}";
         assertEquals(expected, ALICE.toString());
+    }
+
+    @Test
+    public void getTotalContractAmount_withContracts_returnsCorrectTotal() {
+        Athlete athlete = new AthleteBuilder().build();
+
+        Contract contract1 = new ContractBuilder()
+                .withAthlete(athlete)
+                .withAmount(1000000L)
+                .build();
+        Contract contract2 = new ContractBuilder()
+                .withAthlete(athlete)
+                .withAmount(2000000L)
+                .build();
+
+        ObservableList<Contract> contracts = FXCollections.observableArrayList(contract1, contract2);
+
+        long totalAmount = athlete.getTotalContractAmount(contracts);
+        assertEquals(3000000L, totalAmount);
     }
 }

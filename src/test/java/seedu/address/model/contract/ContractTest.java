@@ -25,7 +25,7 @@ class ContractTest {
                 .withOrganization(new OrganizationBuilder().withName("Inter Miami").build())
                 .withStartDate("01012024")
                 .withEndDate("01012025")
-                .withAmount(5000000)
+                .withAmount(5000000L)
                 .build();
 
         // Same reference
@@ -53,7 +53,7 @@ class ContractTest {
         assertFalse(base.isSameContract(new ContractBuilder(base).withEndDate("02012025").build()));
 
         // Change amount -> not same
-        assertFalse(base.isSameContract(new ContractBuilder(base).withAmount(6000000).build()));
+        assertFalse(base.isSameContract(new ContractBuilder(base).withAmount(6000000L).build()));
     }
 
     @Test
@@ -66,7 +66,7 @@ class ContractTest {
         assertNotEquals(null, a);
 
         // differ one field -> not equal
-        Contract diffAmount = new ContractBuilder(a).withAmount(42).build();
+        Contract diffAmount = new ContractBuilder(a).withAmount(42L).build();
         assertNotEquals(a, diffAmount);
     }
 
@@ -77,7 +77,7 @@ class ContractTest {
                 .withSport("Swimming")
                 .withStartDate("01012024")
                 .withEndDate("31122024")
-                .withAmount(123)
+                .withAmount(123L)
                 .build();
 
         assertEquals("01012024", c.getStartDate().value);

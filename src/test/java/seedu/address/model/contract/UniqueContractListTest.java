@@ -69,15 +69,15 @@ class UniqueContractListTest {
     void setContract_targetNotInList_throwsContractNotFoundException() {
         UniqueContractList list = new UniqueContractList();
         Contract target = new ContractBuilder().build();
-        Contract edited = new ContractBuilder(target).withAmount(999).build();
+        Contract edited = new ContractBuilder(target).withAmount(999L).build();
         assertThrows(ContractNotFoundException.class, () -> list.setContract(target, edited));
     }
 
     @Test
     void setContract_duplicateIdentity_throwsDuplicateContractException() {
         UniqueContractList list = new UniqueContractList();
-        Contract c1 = new ContractBuilder().withAmount(100).build();
-        Contract c2 = new ContractBuilder().withAmount(200).build();
+        Contract c1 = new ContractBuilder().withAmount(100L).build();
+        Contract c2 = new ContractBuilder().withAmount(200L).build();
         list.add(c1);
         list.add(c2);
 
@@ -89,10 +89,10 @@ class UniqueContractListTest {
     @Test
     void setContract_success_replaces() {
         UniqueContractList list = new UniqueContractList();
-        Contract original = new ContractBuilder().withAmount(100).build();
+        Contract original = new ContractBuilder().withAmount(100L).build();
         list.add(original);
 
-        Contract edited = new ContractBuilder(original).withAmount(200).build();
+        Contract edited = new ContractBuilder(original).withAmount(200L).build();
         list.setContract(original, edited);
 
         assertTrue(list.contains(edited));
@@ -124,8 +124,8 @@ class UniqueContractListTest {
     @Test
     void setContracts_uniqueList_success() {
         UniqueContractList list = new UniqueContractList();
-        Contract c1 = new ContractBuilder().withAmount(100).build();
-        Contract c2 = new ContractBuilder().withAmount(200).build();
+        Contract c1 = new ContractBuilder().withAmount(100L).build();
+        Contract c2 = new ContractBuilder().withAmount(200L).build();
         list.setContracts(Arrays.asList(c1, c2));
         assertTrue(list.contains(c1));
         assertTrue(list.contains(c2));

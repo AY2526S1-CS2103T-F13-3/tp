@@ -38,4 +38,5 @@ public class AthleteCardTest {
         assertEquals("98765432", athlete.getPhone().value);
         assertEquals("john@example.com", athlete.getEmail().value);
     }
+
 }
