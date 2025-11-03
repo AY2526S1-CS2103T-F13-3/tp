@@ -4,7 +4,7 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 
 start
-:User executes `find co/ Arsenal`;
+:User executes `find co/Arsenal`;
 
 if () then ([command parsed successfully])
     :Parser constructs FindCommand
