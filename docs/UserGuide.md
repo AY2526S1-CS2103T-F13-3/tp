@@ -53,7 +53,6 @@ This guide is designed for **sports agents and talent managers** operating in Si
 - **Power users**: Check [Tips and Best Practices](#tips-and-best-practices) for advanced workflows
 
 ---
-
 ## Quick Start
 
 ### Installation

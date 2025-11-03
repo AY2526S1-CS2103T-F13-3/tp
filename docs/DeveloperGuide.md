@@ -70,8 +70,6 @@ Each of the four main components (also shown in the diagram above),
 - implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API
   `interface` mentioned in the previous point).
 
-<div style="page-break-before: always;"></div>
-
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using
 the `LogicManager.java` class which follows the `Logic` interface.
 Other components interact with a given component through its interface rather than the concrete class (reason: to
