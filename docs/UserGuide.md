@@ -42,7 +42,7 @@ This guide is designed for **sports agents and talent managers** operating in Si
 
 **Technical Requirements:**
 
-- Java 17 or higher installed on your computer
+- Java 17 installed on your computer
 - 50MB of available storage space
 - Any modern operating system (Windows, macOS, Linux)
 
@@ -59,7 +59,7 @@ This guide is designed for **sports agents and talent managers** operating in Si
 
 1. **Check Java Version**
 
-   Ensure you have Java `17` or above installed on your computer.
+   Ensure you have Java `17` installed on your computer.
 
    ```
    java -version
@@ -669,7 +669,7 @@ Do not include currency symbols or commas.**
 **Slow startup:**
 
 - Check available disk space (need 50MB minimum)
-- Ensure Java version is 17 or higher
+- Ensure Java version is 17 
 - Try moving to a different folder location
 
 ### Frequently Asked Questions
@@ -738,7 +738,7 @@ This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which
 
 **System Requirements:**
 
-- **Java Version**: 17 or higher (OpenJDK or Oracle JDK)
+- **Java Version**: 17 (OpenJDK or Oracle JDK)
 - **Memory**: 512MB RAM minimum, 1GB recommended
 - **Storage**: 50MB available space for application and data
 - **Display**: 1024x768 minimum resolution

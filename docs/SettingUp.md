@@ -14,7 +14,7 @@
 ### Steps to take
 1. **Check Java Version**
 
-   Ensure you have Java `17` or above installed on your computer.
+   Ensure you have Java `17` installed on your computer.
 
    ```
    java -version
@@ -64,7 +64,7 @@
 
 If you encounter errors while running the `.jar` file, check:
 
-- That you’re using **Java 17 or newer**
+- That you’re using **Java 17**
 - The `.jar` file is located in a folder you have permission to access
 - You’re using the correct command syntax
 
