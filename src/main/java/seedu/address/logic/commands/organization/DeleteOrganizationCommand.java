@@ -79,9 +79,14 @@ public class DeleteOrganizationCommand extends Command {
             throw new CommandException(MESSAGE_ORGANIZATION_EXISTING_CONTRACT);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.deleteOrganization(organizationToDelete);
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
         return new CommandResult(String.format(
-                MESSAGE_DELETE_ORGANIZATION_SUCCESS, Messages.format(organizationToDelete)));
+                MESSAGE_DELETE_ORGANIZATION_SUCCESS, Messages.format(organizationToDelete)),
+                CommandResult.UiTab.ORGANIZATIONS);
     }
 
     /**

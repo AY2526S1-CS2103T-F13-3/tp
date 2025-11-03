@@ -11,6 +11,7 @@ import static seedu.address.testutil.athlete.TypicalAthletes.getTypicalAddressBo
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.AthleteMessages;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -43,7 +44,9 @@ public class DeleteAthleteCommandTest {
                 new AthleteList(), new ContractList(), new OrganizationList());
         expectedModel.deleteAthlete(ALICE);
 
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
+        CommandResult expectedCommandResult = new CommandResult(expectedMessage, CommandResult.UiTab.ATHLETES);
+
+        assertCommandSuccess(deleteCommand, model, expectedCommandResult, expectedModel);
     }
 
     @Test

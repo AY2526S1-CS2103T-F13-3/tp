@@ -123,4 +123,8 @@ public interface Model {
 
     /** Updates the filtered contract list using the given predicate. */
     void updateFilteredContractList(Predicate<Contract> predicate);
+
+    boolean hasActiveFilters();
+
+    void clearAllFilters();
 }
