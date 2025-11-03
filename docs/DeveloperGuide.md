@@ -1004,7 +1004,7 @@ Given below are instructions to test the app manually.
 2. Open a terminal, navigate (`cd`) to that folder, and run:
 
    ```
-   java -jar "[CS2103T-F13-3][playbook.io].jar"
+   java -jar "[CS2103T-F13-3][playbookio].jar"
    ```
 
 **Expected:**
@@ -1015,7 +1015,7 @@ Shows the GUI. The window size may not be optimum.
 1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 2. Re-launch the app by running the same command in the terminal:
 ```
-   java -jar "[CS2103T-F13-3][playbook.io].jar"
+   java -jar "[CS2103T-F13-3][playbookio].jar"
 ```
 
 **Expected:**
