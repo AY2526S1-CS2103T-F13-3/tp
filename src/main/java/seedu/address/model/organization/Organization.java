@@ -2,7 +2,10 @@ package seedu.address.model.organization;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
@@ -44,6 +47,18 @@ public class Organization {
         return email;
     }
 
+    private static Predicate<Athlete> distinctBySameAthlete() {
+        final List<Athlete> seen = new ArrayList<>();
+        return c -> {
+            boolean dup = seen.stream().anyMatch(existing -> existing.isSameAthlete(c));
+            if (!dup) {
+                seen.add(c);
+                return true;
+            }
+            return false;
+        };
+    }
+
     /**
      * Returns a list of all athletes associated with this organization, given a list of all contracts.
      *
@@ -58,7 +73,7 @@ public class Organization {
         return allContracts.stream()
                 .filter(contract -> isSameOrganization(contract.getOrganization()))
                 .map(Contract::getAthlete)
-                .distinct()
+                .filter(distinctBySameAthlete())
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 

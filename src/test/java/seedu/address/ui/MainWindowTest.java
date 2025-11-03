@@ -24,7 +24,8 @@ public class MainWindowTest {
                 new JsonAddressBookStorage(java.nio.file.Paths.get("test")),
                 new JsonUserPrefsStorage(java.nio.file.Paths.get("test")),
                 new JsonAthleteListStorage(java.nio.file.Paths.get("test")),
-                new JsonContractListStorage(java.nio.file.Paths.get("test")),
+                new JsonContractListStorage(java.nio.file.Paths.get("test"),
+                    java.nio.file.Paths.get("test"), java.nio.file.Paths.get("test")),
                 new JsonOrganizationListStorage(java.nio.file.Paths.get("test"))));
 
         assertNotNull(logic);

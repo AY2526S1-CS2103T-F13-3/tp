@@ -150,7 +150,8 @@ class MainAppTest {
                 new JsonAddressBookStorage(tempDir.resolve("addressBook.json")),
                 new JsonUserPrefsStorage(prefsPath),
                 new JsonAthleteListStorage(tempDir.resolve("athletes.json")),
-                new JsonContractListStorage(tempDir.resolve("contracts.json")),
+                new JsonContractListStorage(tempDir.resolve("contracts.json"),
+                    tempDir.resolve("athletes.json"), tempDir.resolve("organizations.json")),
                 new JsonOrganizationListStorage(tempDir.resolve("organizations.json")));
 
         mainApp.storage = storage;
@@ -174,7 +175,8 @@ class MainAppTest {
                 new JsonAddressBookStorage(tempDir.resolve("addressBook.json")),
                 new JsonUserPrefsStorage(tempDir.resolve("prefs.json")),
                 new JsonAthleteListStorage(tempDir.resolve("athletes.json")),
-                new JsonContractListStorage(tempDir.resolve("contracts.json")),
+                new JsonContractListStorage(tempDir.resolve("contracts.json"),
+                    tempDir.resolve("athletes.json"), tempDir.resolve("organizations.json")),
                 new JsonOrganizationListStorage(tempDir.resolve("organizations.json")));
 
         UserPrefs userPrefs = new UserPrefs();

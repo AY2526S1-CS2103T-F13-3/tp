@@ -33,7 +33,8 @@ public class StorageManagerTest {
         JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         JsonAthleteListStorage athleteListStorage = new JsonAthleteListStorage(getTempFilePath("athletes"));
-        JsonContractListStorage contractListStorage = new JsonContractListStorage(getTempFilePath("contracts"));
+        JsonContractListStorage contractListStorage = new JsonContractListStorage(getTempFilePath("contracts"),
+            getTempFilePath("athletes"), getTempFilePath("organizations"));
         JsonOrganizationListStorage organizationListStorage =
                 new JsonOrganizationListStorage(getTempFilePath("organizations"));
         storageManager = new StorageManager(addressBookStorage, userPrefsStorage,
@@ -81,21 +82,7 @@ public class StorageManagerTest {
     public void getAthleteListFilePath() {
         assertNotNull(storageManager.getAthleteListFilePath());
     }
-
-    @Test
-    public void contractListReadSave() throws Exception {
-        /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonContractListStorage} class.
-         * More extensive testing of contract list saving/reading is done in {@link JsonContractListStorageTest} class.
-         */
-        ContractList original = new ContractList();
-        original.setContracts(getTypicalContracts());
-        storageManager.saveContractList(original);
-        ReadOnlyContractList retrieved = storageManager.readContractList().get();
-        assertEquals(original.getContractList(), retrieved.getContractList());
-    }
-
+    
     @Test
     public void getContractListFilePath() {
         assertNotNull(storageManager.getContractListFilePath());

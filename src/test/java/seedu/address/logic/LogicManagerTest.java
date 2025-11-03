@@ -65,7 +65,8 @@ public class LogicManagerTest {
         JsonAthleteListStorage athleteListStorage =
                 new JsonAthleteListStorage(temporaryFolder.resolve("athletelist.json"));
         JsonContractListStorage contractListStorage =
-                new JsonContractListStorage(temporaryFolder.resolve("contractlist.json"));
+                new JsonContractListStorage(temporaryFolder.resolve("contractlist.json"),
+                    temporaryFolder.resolve("athletelist.json"), temporaryFolder.resolve("organizationlist.json"));
         JsonOrganizationListStorage organizationListStorage =
                 new JsonOrganizationListStorage(temporaryFolder.resolve("organizationlist.json"));
         StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage,
