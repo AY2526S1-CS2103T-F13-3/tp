@@ -659,13 +659,13 @@ Do not include currency symbols or commas.**
 
 ### Performance Issues
 
-**Large datasets (1000+ entries):**
+**Large Datasets (1000+ entries):**
 
 - Use search filters instead of browsing all data
 - Close and restart the application weekly
 - Consider archiving old contracts to separate files
 
-**Slow startup:**
+**Slow Startup:**
 
 - Check available disk space (need 50MB minimum)
 - Ensure Java version is 17 or higher
