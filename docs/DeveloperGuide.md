@@ -199,7 +199,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
-### Data Types and Overflow Protection
+### Data types and overflow protection
 
 **Contract Amount Handling**
 
@@ -957,7 +957,7 @@ otherwise)
 
 <div style="page-break-before: always;"></div>
 
-### Non-Functional Requirements
+### Non-functional requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
 2. Should be able to hold up to 1000 athletes, organizations, and contracts while maintaining an average response time
@@ -989,16 +989,16 @@ otherwise)
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Instructions For Manual Testing
+## Appendix: Instructions for manual testing
 
 Given below are instructions to test the app manually.
 
 > **Note:** These instructions only provide a starting point for testers to work on;
 > testers are expected to do more *exploratory* testing.
 
-### Launch And Shutdown
+### Launch and shutdown
 
-#### 1. Initial Launch
+#### 1. Initial launch
 
 1. Download the jar file and copy into an empty folder.
 2. Open a terminal, navigate (`cd`) to that folder, and run:
@@ -1010,7 +1010,7 @@ Given below are instructions to test the app manually.
 **Expected:**
 Shows the GUI. The window size may not be optimum.
 
-#### 2. Saving Window Preferences
+#### 2. Saving window preferences
 
 1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 2. Re-launch the app by running the same command in the terminal:
@@ -1023,7 +1023,7 @@ The most recent window size and location is retained.
 
 <div style="page-break-before: always;"></div>
 
-### Adding An Athlete
+### Adding an athlete
 
 #### 1. Adding an athlete while all athletes are being shown
 
@@ -1036,7 +1036,7 @@ The most recent window size and location is retained.
    `...`  
    **Expected:** Similar to previous.
 
-### Deleting An Athlete
+### Deleting an athlete
 
 #### 1. Deleting an athlete while all athletes are being shown
 
@@ -1050,7 +1050,7 @@ The most recent window size and location is retained.
 4. **Other incorrect delete-a commands to try:** `delete-a`, `delete-a n/Lebron James s/Basket-ball`, `...`  
    **Expected:** Similar to previous.
 
-### Adding An Organization
+### Adding an organization
 
 #### 1. Adding an organization while all organizations are being shown
 
@@ -1063,7 +1063,7 @@ The most recent window size and location is retained.
 4. **Other incorrect add-o commands to try:** `add-o`, `add-o o/&Nike p/98765432 e/partnerships@nike.com`, `...`  
    **Expected:** Similar to previous.
 
-### Deleting An Organization
+### Deleting an organization
 
 #### 1. Deleting an organization while all organizations are being shown
 
@@ -1077,7 +1077,7 @@ The most recent window size and location is retained.
 4. **Other incorrect delete-o commands to try:** `delete-o`, `delete-o o/Nike!`, `...`  
    **Expected:** Similar to previous.
 
-### Adding A Contract
+### Adding a contract
 
 #### 1. Adding a contract while all contracts are being shown
 
@@ -1094,7 +1094,7 @@ The most recent window size and location is retained.
 
 <div style="page-break-before: always;"></div>
 
-### Deleting A Contract
+### Deleting a contract
 
 #### 1. Deleting a contract while all contracts are being shown
 
@@ -1107,7 +1107,7 @@ The most recent window size and location is retained.
    `delete-c n/ s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000`, `...`  
    **Expected:** Similar to previous.
 
-### Finding An Athlete
+### Finding an athlete
 
 #### 1. Finding an athlete while all athletes are being shown
 
@@ -1121,7 +1121,7 @@ The most recent window size and location is retained.
 5. **Other incorrect find commands to try:** `find an/`, `find`, `...`  
    **Expected:** Similar to previous.
 
-### Finding An Organization
+### Finding an organization
 
 #### 1. Finding an organization while all organizations are being shown
 
@@ -1133,7 +1133,7 @@ The most recent window size and location is retained.
 4. **Other incorrect find commands to try:** `find`, `...`  
    **Expected:** Similar to previous.
 
-### Finding A Contract
+### Finding a contract
 
 #### 1. Finding a contract while all contracts are being shown
 
@@ -1151,7 +1151,7 @@ The most recent window size and location is retained.
 
 <div style="page-break-before: always;"></div>
 
-### Saving Data
+### Saving data
 
 #### 1. Dealing with missing/corrupted data files
 
@@ -1180,7 +1180,7 @@ The app detects that the files are corrupted and loads empty lists for all entit
 > **⚠️ Important:**
 > New JSON files are only created once data is written (e.g., after adding an athlete, contract, or organization).
 
-#### 2. Normal Save
+#### 2. Normal save
 
 ##### 2.1 Simulate saving data after adding entries
 
@@ -1195,13 +1195,13 @@ Data is persisted correctly in the JSON files.
 
 ## Appendix: Effort
 
-### Difficulty Level
+### Difficulty level
 
 playbook.io is more complex than the original AddressBook Level 3 (AB3). While AB3 only manages one type of thing (Persons), our app handles **three different types**—Athletes, Organizations, and Contracts—each with their own details and connections to each other. This made the project much more challenging:
 
 ---
 
-### Challenges Faced
+### Challenges faced
 
 #### 1. Linking entities together
 
@@ -1239,7 +1239,7 @@ We wanted all error messages to look and feel the same:
 
 ---
 
-### Effort Required
+### Effort required
 
 The project took about **40-50% more work** than the baseline AB3:
 
@@ -1259,7 +1259,7 @@ We spent a lot of time on:
 
 ---
 
-### What We Accomplished
+### What we accomplished
 
 #### Features that work
 - You can add, view, and delete all three types (Athletes, Organizations, Contracts)
@@ -1285,7 +1285,7 @@ We spent a lot of time on:
 
 ---
 
-### What We Reused From AB3
+### What we reused from AB3
 
 About **15-20% less work** thanks to reusing parts of AB3:
 
@@ -1301,7 +1301,7 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 ---
 
-### What We Learned
+### What we learned
 
 - **Plan first**: Spending time designing how entities connect saved us from rewriting code later
 - **Build step by step**: Adding one entity type at a time helped us catch problems early
@@ -1311,7 +1311,7 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Appendix: Planned Enhancements
+## Appendix: Planned enhancements
 
 **Team size:** 5
 
