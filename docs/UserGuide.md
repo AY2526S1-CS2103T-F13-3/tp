@@ -474,6 +474,7 @@ You can refresh the display anytime using **Cmd+R** (macOS) or **Ctrl+R** (Windo
 #### Getting Help
 
 **Command:** `help`
+
 ![Help Window](images/help_window.png)
 
 Opens the help window with quick reference information and links to documentation.
