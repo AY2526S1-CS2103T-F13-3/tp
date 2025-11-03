@@ -506,6 +506,10 @@ Exiting playbook.io as requested ...
 
 </div>
 
+
+> **Note:** Any text after these commands (separated by a space) is ignored. For example, `help now` or `exit please` will still execute the respective commands.
+
+
 <div style="page-break-before: always;"></div>
 
 ---
