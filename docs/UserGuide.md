@@ -119,6 +119,11 @@ The playbook.io interface consists of five main areas:
 - Press **F1** for help or use the `help` command
 - Use **Cmd+R** (or **Ctrl+R** on Windows/Linux) to refresh and clear any active search filters
 
+<div markdown="block" class="alert alert-info">
+
+**💡 Tip:** Add, delete, and find commands automatically redirect you to the corresponding entity tab (Athletes, Organizations, or Contracts)
+</div>
+
 ### Your First Commands
 
 Let's try some basic operations to get you started:
@@ -427,8 +432,8 @@ You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux
 <div markdown="block" class="alert alert-warning">
 
 **⚠️ Important:**
-- After a find command, the filtered list in the active tab does not refresh automatically if you add or delete an athlete, organization, or contract. The list still shows the previous results until refresh is executed. However, any updated details (e.g., contract amounts) are reflected in the displayed entries.
-- Running another find clears the old results and shows a new filtered list based on the latest criteria.
+- Add or delete operations after a find command will clear the filter and redirect you to the corresponding tab.
+- Running another find command clears previous results, displays the new filtered list, and redirects you to the corresponding tab.
 - For keywords, spaces do not matter, so multiple consecutive spaces are treated as a single space.
 </div>
 
