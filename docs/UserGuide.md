@@ -644,6 +644,8 @@ If you need to reset your data, delete the entire folder instead.
 - Contracts must have unique parameter combinations
 - Try slightly different name variations if needed
 
+<div style="page-break-before: always;"></div>
+
 **"Error: Amount should be a numeric integer between 1 and 9,223,372,036,854,775,807(inclusive).
 Do not include currency symbols or commas.**
 - Contract amounts must be positive integers only
@@ -690,6 +692,8 @@ No, editing is not allowed for athletes, organizations, or contracts once they'v
 
 This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which is the largest whole number the system can handle. Realistically, this number (over 9 quintillion) far exceeds the total amount of money in the world, so it's highly unlikely you'll ever encounter this limit in practice. This constraint exists purely as a technical limitation of the programming language used.
 
+<div style="page-break-before: always;"></div>
+
 ### Getting More Help
 
 **Additional Resources:**
@@ -704,8 +708,6 @@ This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which
 2. Note any error messages displayed
 3. Include your operating system and Java version
 4. Submit via GitHub Issues with detailed description
-
-<div style="page-break-before: always;"></div>
 
 ---
 
@@ -747,6 +749,8 @@ This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which
 - All data stored locally in JSON format
 - No internet connection required for operation
 - Data files are human-readable and portable
+
+<div style="page-break-before: always;"></div>
 
 ### Contact Information
 
