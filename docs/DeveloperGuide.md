@@ -382,8 +382,7 @@ Contracts **cannot be edited** due to the absence of a unique identity field (co
 | `e/EMAIL`  | Optional — Email address of the organization (case-insensitive; must follow standard email format; maximum of 50 characters). |
 
 Unspecified fields remain unchanged, and identifier fields (e.g., `NAME`, `SPORT`, or `ORG_NAME`) cannot be updated.  
-At least **one optional parameter** must be specified; otherwise, the command will result in an error.
-
+The command requires at least one optional parameter. If none are provided, an error will be thrown.
 
 #### Example usages
 
