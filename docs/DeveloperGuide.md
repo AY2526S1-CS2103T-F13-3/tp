@@ -24,8 +24,6 @@ This project also makes use of the [_Apache Commons Validator_](https://commons.
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
-<div style="page-break-before: always;"></div>
-
 ---
 
 ## **Design**
@@ -57,6 +55,8 @@ The bulk of the app's work is done by the following four components:
 
 [_`Commons`_](#common-classes) represents a collection of classes used by multiple other components.
 
+<div style="page-break-before: always;"></div>
+
 ### How the architecture components interact with each other
 
 The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues
@@ -81,6 +81,8 @@ class diagram below.
 <puml src="diagrams/ComponentManagers.puml" width="300" />
 
 The sections below give more details of each component.
+
+<div style="page-break-before: always;"></div>
 
 ### UI component
 
