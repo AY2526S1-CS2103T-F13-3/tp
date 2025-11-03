@@ -86,7 +86,8 @@
         "2-allow-more-flexible-phone-number-formats-for-international-support": "2. Allow more flexible phone number formats for international support",
         "3-increase-character-limits-for-text-fields": "3. Increase character limits for text fields",
         "4-enhance-find-command-to-support-multiple-flags-and-flexible-search-variations": "4. Enhance Find command to support multiple flags and flexible search variations",
-        "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in Athlete and Organization Names"
+        "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in Athlete and Organization Names",
+        "6-support-more-flexible-date-formats": "6. Support More Flexible Date Formats"
       },
       "headingKeywords": {}
     },
