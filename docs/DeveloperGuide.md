@@ -201,26 +201,26 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ### Data types and overflow protection
 
-**Contract Amount Handling**
+**Contract amount handling**
 
 The application has been designed to handle large contract amounts that are common in professional sports:
 
-* **Data Type**: Contract amounts use `long` integers (64-bit) instead of `int` (32-bit)
-* **Maximum Value**: Up to 9,223,372,036,854,775,807 (approximately 9.2 quintillion)
-* **Limit Applied**: Both individual contract amounts and total contract amounts for an athlete or organization cannot
+* **Data type**: Contract amounts use `long` integers (64-bit) instead of `int` (32-bit)
+* **Maximum value**: Up to 9,223,372,036,854,775,807 (approximately 9.2 quintillion)
+* **Limit applied**: Both individual contract amounts and total contract amounts for an athlete or organization cannot
   exceed this maximum value
-* **Overflow Protection**: The `ensureNoTotalOverflow()` method validates total contract amounts using predicate-based
+* **Overflow protection**: The `ensureNoTotalOverflow()` method validates total contract amounts using predicate-based
   filtering and checks both athlete and organization totals before adding new contracts
-* **Validation Logic**: Uses `sumForPredicate()` to calculate current totals and `wouldOverflow()` to detect if adding a
+* **Validation logic**: Uses `sumForPredicate()` to calculate current totals and `wouldOverflow()` to detect if adding a
   new contract would exceed the maximum limit
-* **UI Display**: Contract totals are properly formatted using `NumberFormat` for large amounts
+* **UI display**: Contract totals are properly formatted using `NumberFormat` for large amounts
 
-**Why `long` Instead of `int`**
+**Why `long` instead of `int`**
 
-* **Real-world Requirements**: Professional sports contracts can exceed $2 billion (`int` limit: ~2.1 billion)
-* **Cumulative Totals**: Popular athletes/organizations can have total contracts exceeding `int` limits
+* **Real-world requirements**: Professional sports contracts can exceed $2 billion (`int` limit: ~2.1 billion)
+* **Cumulative totals**: Popular athletes/organizations can have total contracts exceeding `int` limits
 * **Future-proofing**: Protects against inflation and larger contract values
-* **Error Prevention**: Eliminates negative overflow display bugs in UI chips
+* **Error prevention**: Eliminates negative overflow display bugs in UI chips
 
 <div style="page-break-before: always;"></div>
 
@@ -255,7 +255,7 @@ The following flags are supported:
 Example usage:
 
 ```
-find an/ Lionel
+find an/Lionel
 ```
 
 Upon execution, the command:
@@ -298,8 +298,8 @@ The matching mechanism performs **three-tier Levenshtein-based fuzzy matching** 
    edits based on keyword length.
 3. **Word-by-word Levenshtein match** — splits the text into words and matches each token individually.
 
-This approach allows tolerant and human-friendly searches (e.g., `find an/ leo` matches “Lionel Messi”;
-`find co/ arsnal` matches “Arsenal”).
+This approach allows tolerant and human-friendly searches (e.g., `find an/leo` matches “Lionel Messi”;
+`find co/arsnal` matches “Arsenal”).
 
 <puml src="diagrams/FindMatchingActivityDiagram.puml" alt="FindMatchingActivityDiagram" width="700" />
 
@@ -317,7 +317,7 @@ Persistent data stored on disk remains unchanged.
 
 The following scenario demonstrates how a typical command executes:
 
-**Step 1.** The user executes `find co/ Arsenal`.  
+**Step 1.** The user executes `find co/Arsenal`.  
 **Step 2.** The parser constructs a `FindCommand` with scope `CONTRACT_ORGANIZATION` and keyword `Arsenal`.  
 **Step 3.** The command invokes `model.updateFilteredContractList(predicate)`.  
 **Step 4.** The UI’s observable list updates, displaying all contracts linked to organizations matching “Arsenal”.  
