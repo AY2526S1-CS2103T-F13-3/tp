@@ -506,10 +506,6 @@ Exiting playbook.io as requested ...
 
 </div>
 
-
-> **Note:** Any text after these commands (separated by a space) is ignored. For example, `help now` or `exit please` will still execute the respective commands.
-
-
 <div style="page-break-before: always;"></div>
 
 ---
@@ -534,6 +530,9 @@ Exiting playbook.io as requested ...
 <div markdown="block" class="alert alert-info">
 
 **💡 Tip:** All commands and flags (like `add-a`, `delete-c`, or `n/`) are **case-insensitive**, so you can type `ADD-a`, `Add-A`, or `aDd-A` and it will work the same.
+
+
+> **Note:** The `refresh`, `help`, and `exit` commands ignore any text after the command (separated by a space). For example, `refresh now`, `help please`, or `exit application` will all execute their respective commands.
 
 </div>
 
