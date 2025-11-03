@@ -14,6 +14,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.AthleteParserUtil;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.athlete.Age;
@@ -34,6 +35,8 @@ public class AddAthleteCommandParser implements Parser<AddAthleteCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddAthleteCommand parse(String args) throws ParseException {
+        ParserUtil.ensureNoAdditionalPrefixes(args, PREFIX_NAME, PREFIX_SPORT, PREFIX_AGE, PREFIX_PHONE, PREFIX_EMAIL);
+
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_SPORT, PREFIX_AGE, PREFIX_PHONE, PREFIX_EMAIL);
 

@@ -15,6 +15,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.athlete.Athlete;
 
+
 /**
  * Adds an athlete to playbook.io.
  */
@@ -66,9 +67,14 @@ public class AddAthleteCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ATHLETE);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addAthlete(toAdd);
         assert model.hasAthlete(toAdd) : "Athlete should exist in model after adding";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, AthleteMessages.format(toAdd)));
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, AthleteMessages.format(toAdd)),
+                CommandResult.UiTab.ATHLETES);
     }
 
     /**

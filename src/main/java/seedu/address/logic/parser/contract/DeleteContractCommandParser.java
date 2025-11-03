@@ -13,6 +13,7 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ContractParserUtil;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.athlete.Name;
@@ -40,6 +41,9 @@ public class DeleteContractCommandParser implements Parser<DeleteContractCommand
      */
     @Override
     public DeleteContractCommand parse(String args) throws ParseException {
+        ParserUtil.ensureNoAdditionalPrefixes(args,
+                PREFIX_NAME, PREFIX_ORG, PREFIX_START_DATE, PREFIX_END_DATE, PREFIX_SPORT, PREFIX_AMOUNT);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
                 args,
                 PREFIX_NAME, // athlete

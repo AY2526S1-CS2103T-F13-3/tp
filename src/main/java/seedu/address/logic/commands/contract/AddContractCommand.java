@@ -116,9 +116,14 @@ public class AddContractCommand extends Command {
 
         ensureNoTotalOverflow(model, athlete, organization);
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addContract(toAdd);
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, ContractMessages.format(toAdd)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, ContractMessages.format(toAdd)),
+                CommandResult.UiTab.CONTRACTS);
     }
 
     private Athlete findAthleteByNameOrThrow(Model model, Name name, Sport sport) throws CommandException {

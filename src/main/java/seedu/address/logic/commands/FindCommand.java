@@ -21,13 +21,13 @@ public class FindCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Filters the requested list by keyword (case-insensitive, allows close matches).\n"
             + "Exactly one flag must be supplied:\n"
-            + "  -an KEYWORD    Shows athletes whose name closely matches KEYWORD.\n"
-            + "  -as KEYWORD    Shows athletes whose sport closely matches KEYWORD.\n"
-            + "  -on KEYWORD    Shows organizations whose name closely matches KEYWORD.\n"
-            + "  -ca KEYWORD    Shows contracts whose athlete's name closely matches KEYWORD.\n"
-            + "  -co KEYWORD    Shows contracts whose organization name closely matches KEYWORD.\n"
-            + "  -cs KEYWORD    Shows contracts whose sport closely matches KEYWORD.\n"
-            + "Example: " + COMMAND_WORD + " -an Lionel";
+            + "  an/ KEYWORD    Shows athletes whose name closely matches KEYWORD.\n"
+            + "  as/ KEYWORD    Shows athletes whose sport closely matches KEYWORD.\n"
+            + "  on/ KEYWORD    Shows organizations whose name closely matches KEYWORD.\n"
+            + "  ca/ KEYWORD    Shows contracts whose athlete's name closely matches KEYWORD.\n"
+            + "  co/ KEYWORD    Shows contracts whose organization name closely matches KEYWORD.\n"
+            + "  cs/ KEYWORD    Shows contracts whose sport closely matches KEYWORD.\n"
+            + "Example: " + COMMAND_WORD + " an/ Lionel";
 
     private static final String MESSAGE_RESULTS_FORMAT = "Showing %1$d %2$s closely matching \"%3$s\".\n"
             + "You can refresh the display anytime using Cmd+R (macOS) "

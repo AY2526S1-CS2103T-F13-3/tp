@@ -292,6 +292,16 @@ public class AddContractCommandTest {
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("Should not be called");
         }
+
+        @Override
+        public boolean hasActiveFilters() {
+            throw new AssertionError("Should not be called");
+        }
+
+        @Override
+        public void clearAllFilters() {
+            throw new AssertionError("Should not be called");
+        }
     }
 
     private class ModelStubAcceptingContractAdded extends ModelStub {

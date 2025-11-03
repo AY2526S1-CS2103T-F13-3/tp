@@ -46,7 +46,7 @@ You can reach us at the email `simantak@u.nus.edu`
 <img src="images/cameronlzy.png" width="200px">
 
 [[github](http://github.com/cameronlzy)]
-[[portfolio](team/cameron.md)]
+[[portfolio](team/cameronlzy.md)]
 
 * Role: Developer
 * Responsibilities: Testing

@@ -83,9 +83,13 @@ public class DeleteAthleteCommand extends Command {
             throw new CommandException(AthleteMessages.MESSAGE_EXISTING_CONTRACT);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.deleteAthlete(athleteToDelete);
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
         return new CommandResult(String.format(MESSAGE_DELETE_ATHLETE_SUCCESS,
-                AthleteMessages.format(athleteToDelete)));
+                AthleteMessages.format(athleteToDelete)), CommandResult.UiTab.ATHLETES);
 
     }
 

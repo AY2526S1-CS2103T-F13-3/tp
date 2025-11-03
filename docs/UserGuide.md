@@ -68,8 +68,8 @@ This guide is designed for **sports agents and talent managers** operating in Si
    java -version
    ```
 
-   **Mac users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html) to install the correct JDK version.  
-   **Windows users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html) to install the correct JDK version.  
+   **Mac users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationMac.html) to install the correct JDK version.
+   **Windows users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationWindows.html) to install the correct JDK version.
    **Linux users:** Follow the setup guide [here](https://se-education.org/guides/tutorials/javaInstallationLinux.html) to install the correct JDK version.
 
 2. **Download playbook.io**
@@ -85,14 +85,14 @@ This guide is designed for **sports agents and talent managers** operating in Si
    Open a terminal, navigate (`cd`) to that folder, and run:
 
    ```
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
    For example, if your `.jar` file is in the Downloads folder:
 
    ```
    cd Downloads
-   java -jar playbook.jar
+   java -jar "[CS2103T-F13-3][playbook.io].jar"
    ```
 
 5. **First Look**
@@ -110,7 +110,7 @@ The playbook.io interface consists of five main areas:
 1. **Menu Bar** (top): File and Help menus for application settings and documentation
 2. **Command Box** (top area): Text input field where you type commands to interact with the application
 3. **Result Pane** (top area): Displays the outcome of your commands, such as success messages, or error notifications
-4. **Main Display Area** (center): Shows your data lists 
+4. **Main Display Area** (center): Shows your data lists
 5. **Navigation Tabs** (bottom): Three tabs for switching between Athletes, Organizations, and Contracts views
 
 **Navigation Tips:**
@@ -118,6 +118,11 @@ The playbook.io interface consists of five main areas:
 - Use **Cmd+1**, **Cmd+2**, **Cmd+3** (or **Ctrl+1**, **Ctrl+2**, **Ctrl+3** on Windows/Linux) to quickly switch between tabs
 - Press **F1** for help or use the `help` command
 - Use **Cmd+R** (or **Ctrl+R** on Windows/Linux) to refresh and clear any active search filters
+
+<div markdown="block" class="alert alert-info">
+
+**💡 Tip:** Add, delete, and find commands automatically redirect you to the corresponding entity tab (Athletes, Organizations, or Contracts)
+</div>
 
 ### Your First Commands
 
@@ -138,7 +143,7 @@ Let's try some basic operations to get you started:
 3. **Search for Athletes**
 
    ```
-   find -an LeBron
+   find an/ LeBron
    ```
 
 4. **Clear the Search**
@@ -191,8 +196,8 @@ New athlete added: Lebron James; Sport: Basketball; Age: 40; Phone: 99876543; Em
 
 <div markdown="block" class="alert alert-warning">
 
-**⚠️ Important:** 
-- Athlete names and sports together must be unique. You cannot add two athletes with the exact same name and sport combination.  
+**⚠️ Important:**
+- Athlete names and sports together must be unique. You cannot add two athletes with the exact same name and sport combination.
 - For athlete names and sports, spaces do not matter, so multiple consecutive spaces are treated as a single space.
 
 </div>
@@ -262,7 +267,7 @@ New organization added: Nike; Phone: 98765432; Email: partnerships@nike.com
 
 <div markdown="block" class="alert alert-warning">
 
-**⚠️ Important:** 
+**⚠️ Important:**
 - Each organization name must be unique. You cannot add two organizations with the same name.
 - For organization names, spaces do not matter, so multiple consecutive spaces are treated as a single space.
 
@@ -300,7 +305,7 @@ Deleted Organization: Nike; Phone: 98765432; Email: partnerships@nike.com
 
 <div markdown="block" class="alert alert-warning">
 
-**⚠️ Important:** 
+**⚠️ Important:**
 - You cannot delete an organization if it has active contracts. You must delete all associated contracts first before removing the organization.
 - For organization names, spaces do not matter, so multiple consecutive spaces are treated as a single space.
 
@@ -389,34 +394,34 @@ The search functionality uses **fuzzy matching** to help you find what you're lo
 
 #### Search Command
 
-**Command:** `find -[FLAG] KEYWORD`
+**Command:** `find [FLAG]/ KEYWORD`
 **Parameters:**
 - `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
   **Available Search Types:**
 
 | Flag  | Searches                  | Example               |
 | ----- | ------------------------- | --------------------- |
-| `-an` | Athlete names             | `find -an LeBron`     |
-| `-as` | Athlete sports            | `find -as Basketball` |
-| `-on` | Organization names        | `find -on Nike`       |
-| `-ca` | Contracts by athlete name | `find -ca LeBron`     |
-| `-cs` | Contracts by sport        | `find -cs Basketball` |
-| `-co` | Contracts by organization | `find -co Nike`       |
+| `an/` | Athlete names             | `find an/ LeBron`     |
+| `as/` | Athlete sports            | `find as/ Basketball` |
+| `on/` | Organization names        | `find on/ Nike`       |
+| `ca/` | Contracts by athlete name | `find ca/ LeBron`     |
+| `cs/` | Contracts by sport        | `find cs/ Basketball` |
+| `co/` | Contracts by organization | `find co/ Nike`       |
 
 <div style="page-break-before: always;"></div>
 
 **Examples:**
 
 ```
-find -an James          # Find athletes with names like "James"
-find -as Basketball     # Find athletes with sports like "Basketball"
-find -on Nike           # Find organizations with names like "Nike"
-find -ca LeBron         # Find contracts with athletes named like "LeBron"
-find -cs Basketball     # Find all contracts athletes' sports named like "Basketball"
-find -co Nike           # Find contracts with organizations like "Nike"
+find an/ James          # Find athletes with names like "James"
+find as/ Basketball     # Find athletes with sports like "Basketball"
+find on/ Nike           # Find organizations with names like "Nike"
+find ca/ LeBron         # Find contracts with athletes named like "LeBron"
+find cs/ Basketball     # Find all contracts athletes' sports named like "Basketball"
+find co/ Nike           # Find contracts with organizations like "Nike"
 ```
 
-**Expected Output for `find -an James`:**
+**Expected Output for `find an/ James`:**
 
 ![find-an](images/find-an.png)
 
@@ -427,8 +432,8 @@ You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux
 <div markdown="block" class="alert alert-warning">
 
 **⚠️ Important:**
-- After a find command, the filtered list in the active tab does not refresh automatically if you add or delete an athlete, organization, or contract. The list still shows the previous results until refresh is executed. However, any updated details (e.g., contract amounts) are reflected in the displayed entries. 
-- Running another find clears the old results and shows a new filtered list based on the latest criteria.
+- Add or delete operations after a find command will clear the filter and redirect you to the corresponding tab.
+- Running another find command clears previous results, displays the new filtered list, and redirects you to the corresponding tab.
 - For keywords, spaces do not matter, so multiple consecutive spaces are treated as a single space.
 </div>
 
@@ -513,14 +518,14 @@ Exiting playbook.io as requested ...
 | `delete-o` | `delete-o o/ORG_NAME`                                                                                                                         | Delete organization  |
 | `add-c`    | `add-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                        | Add new contract     |
 | `delete-c` | `delete-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                     | Delete contract      |
-| `find`     | `find -an KEYWORD`<br/>`find -as KEYWORD` <br/> `find -on KEYWORD` <br/> `find -ca KEYWORD` <br/> `find -co KEYWORD` <br/> `find -cs KEYWORD` | Search/filter data   |
+| `find`     | `find an/ KEYWORD`<br/>`find as/ KEYWORD` <br/> `find on/ KEYWORD` <br/> `find ca/ KEYWORD` <br/> `find co/ KEYWORD` <br/> `find cs/ KEYWORD` | Search/filter data   |
 | `refresh`  | `refresh`                                                                                                                                     | Clear all filters    |
 | `help`     | `help`                                                                                                                                        | Open help window     |
 | `exit`     | `exit`                                                                                                                                        | Close application    |
 
 <div markdown="block" class="alert alert-info">
 
-**💡 Tip:** All commands and flags (like `add`, `delete-a`, or `n/`) are **case-insensitive**, so you can type `ADD`, `Add`, or `aDd` and it will work the same. 
+**💡 Tip:** All commands and flags (like `add`, `delete-a`, or `n/`) are **case-insensitive**, so you can type `ADD`, `Add`, or `aDd` and it will work the same.
 
 </div>
 
@@ -533,41 +538,41 @@ Exiting playbook.io as requested ...
 - `NAME`: Full Name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
    - Character restrictions: Only letters, hyphens (-), and apostrophes (') are allowed to accommodate legitimate name formats like "O'Brien", "Mary-Jane", or "Jean-Claude" while preventing special characters that could cause display or data processing issues.
    - Limitation rationale: The 50-character limit accommodates most athlete names while preventing extremely long entries that could affect display formatting and system performance.
-    
+
   <br>
 - `SPORT`: Sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
    - Character restrictions: Only letters are allowed to maintain consistency in sport names and prevent formatting issues.
    - Limitation rationale: The 50-character limit covers all major sports names and disciplines while preventing extremely long entries that could affect display formatting and system performance.
- 
+
    <br>
 - `AGE`: Age (positive integers only, ranging from 1 to 99)
    - Limitation rationale: Covers the realistic age range for professional athletes across all sports.
-   
+
    <br>
 - `ORG_NAME`: Name of the organization (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
    - Character restrictions: Only alphanumeric characters, hyphens (-), apostrophes ('), and ampersands (&) are allowed to accommodate legitimate organization names like "McDonald's" or "Hewlett-Packard" while preventing special characters that could cause display or data processing issues.
    - Limitation rationale: The 50-character limit accommodates most organization names, including full legal names and brand names, while preventing extremely long entries that could affect display formatting and system performance.
-    
+
    <br>
 - `PHONE`: Phone number (8-digit Singapore phone number only; must start with 6, 8, or 9)
    - Regional requirement: Singapore uses 8-digit phone numbers for both mobile and landline services. This validation ensures data consistency for local operations.
-     
+
    <br>
 - `EMAIL`: Email address (case-insensitive; must follow standard email format; maximum of 50 characters)
    - Limitation rationale: The 50-character limit covers most professional email addresses while preventing excessively long entries.
-     
+
    <br>
 - `DATE`: Date (must be in the DDMMYYYY format)
    - Format rationale: The DDMMYYYY format is commonly used in Singapore and avoids ambiguity in date interpretation.
 
    <br>
 - `AMOUNT`: Amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
-   - Currency: All amounts are in Singapore Dollars (SGD) 
+   - Currency: All amounts are in Singapore Dollars (SGD)
    - Format rationale: Integer-only format simplifies calculations and prevents errors. The maximum value accommodates even the largest sports contracts globally.
-    
+
    <br>
 - `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
-  
+
 ### Keyboard Shortcuts
 
 | Shortcut               | Action            | Description                  |
@@ -586,16 +591,16 @@ Exiting playbook.io as requested ...
 **Daily Management:**
 
 1. Start each day with `refresh` to see all your data
-2. Use `find -an [name]` to quickly locate specific athletes
-3. Check contract expiry dates regularly with `find -cs [sport]`
+2. Use `find an/ [name]` to quickly locate specific athletes
+3. Check contract expiry dates regularly with `find cs/ [sport]`
 4. Keep contact information updated for all entities
 
 <div style="page-break-before: always;"></div>
 
 **Contract Negotiation Season:**
 
-1. Use `find -ca [athlete]` to see all contracts for an athlete
-2. Cross-reference with `find -co [organization]` to see organization's other deals
+1. Use `find ca/ [athlete]` to see all contracts for an athlete
+2. Cross-reference with `find co/ [organization]` to see organization's other deals
 3. Track contract amounts and dates systematically
 4. Add new contracts immediately after signing
 
@@ -609,7 +614,7 @@ Exiting playbook.io as requested ...
 ### Common Pitfalls & Solutions
 
 **Problem:** "Error: Athlete not found" when adding contracts
-**Solution:** Use `find -an [name]` first to verify the exact name spelling
+**Solution:** Use `find an/ [name]` first to verify the exact name spelling
 
 **Problem:** Too many search results
 **Solution:** Use more specific keywords or combine with tab switching
@@ -645,7 +650,7 @@ If you need to reset your data, delete the entire folder instead.
 - Contracts must have unique parameter combinations
 - Try slightly different name variations if needed
 
-**"Error: Amount should be a numeric integer between 1 and 9,223,372,036,854,775,807(inclusive). 
+**"Error: Amount should be a numeric integer between 1 and 9,223,372,036,854,775,807(inclusive).
 Do not include currency symbols or commas.**
 - Contract amounts must be positive integers only
 - Maximum supported amount: 9,223,372,036,854,775,807
@@ -669,23 +674,23 @@ Do not include currency symbols or commas.**
 - Try moving to a different folder location
 
 ### Frequently Asked Questions
-**Why can't I use my international phone numbers?**    
+**Why can't I use my international phone numbers?**
 
 playbook.io is designed for agents operating in Singapore and currently supports only 8-digit Singapore phone numbers. This ensures data consistency and simplifies local operations.
 
-**Can I track contracts in different currencies?**  
+**Can I track contracts in different currencies?**
 
 All contract amounts are in Singapore Dollars (SGD). If you need to track international contracts, we recommend converting amounts to SGD at the time of entry.
 
-**Why does the system say "duplicate athlete" when I'm adding someone with a different phone number?**  
+**Why does the system say "duplicate athlete" when I'm adding someone with a different phone number?**
 
 Athletes are identified by their name and sport combination, not by contact details. This is because athletes often share managers or have contact details managed by agencies. If you need to add an athlete with the same name, they must be in a different sport. We intentionally avoid using more specific identifiers like NRIC numbers, as doing so would improve duplicate detection but require collecting sensitive personal data, increasing privacy risks and regulatory compliance obligations.
 
-**Can an athlete and an organization have the same phone number or email?**  
+**Can an athlete and an organization have the same phone number or email?**
 
 Yes, this is allowed and intentional. Athletes and organizations are separate entities in the system, and it's common in practice for them to share contact details. This flexibility reflects real-world scenarios where contact information overlaps between different entities you manage.
 
-**Can I edit athlete, organization, or contract information after adding them?**  
+**Can I edit athlete, organization, or contract information after adding them?**
 No, editing is not allowed for athletes, organizations, or contracts once they've been added to the system. If you need to make changes or entered incorrect information, please delete the entry and create a new one with the correct details.
 
 ### Why can't the total contract amount exceed 9,223,372,036,854,775,807?
