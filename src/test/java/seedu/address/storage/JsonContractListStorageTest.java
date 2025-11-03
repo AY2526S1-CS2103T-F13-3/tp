@@ -1,10 +1,7 @@
 package seedu.address.storage;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.contract.TypicalContracts.MESSI_MIAMI;
-import static seedu.address.testutil.contract.TypicalContracts.getTypicalContracts;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -15,14 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.exceptions.DataLoadingException;
-import seedu.address.model.athlete.AthleteList;
-import seedu.address.model.contract.Contract;
 import seedu.address.model.contract.ContractList;
 import seedu.address.model.contract.ReadOnlyContractList;
-import seedu.address.model.organization.OrganizationList;
-import seedu.address.testutil.OrganizationBuilder;
-import seedu.address.testutil.athlete.AthleteBuilder;
-import seedu.address.testutil.contract.ContractBuilder;
 
 public class JsonContractListStorageTest {
 

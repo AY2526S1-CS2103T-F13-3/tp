@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static seedu.address.testutil.TypicalOrganizations.getTypicalOrganizations;
 import static seedu.address.testutil.athlete.TypicalAthletes.getTypicalAthletes;
-import static seedu.address.testutil.contract.TypicalContracts.getTypicalContracts;
 
 import java.nio.file.Path;
 
@@ -16,8 +15,6 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.athlete.AthleteList;
 import seedu.address.model.athlete.ReadOnlyAthleteList;
-import seedu.address.model.contract.ContractList;
-import seedu.address.model.contract.ReadOnlyContractList;
 import seedu.address.model.organization.OrganizationList;
 import seedu.address.model.organization.ReadOnlyOrganizationList;
 
@@ -82,7 +79,7 @@ public class StorageManagerTest {
     public void getAthleteListFilePath() {
         assertNotNull(storageManager.getAthleteListFilePath());
     }
-    
+
     @Test
     public void getContractListFilePath() {
         assertNotNull(storageManager.getContractListFilePath());
