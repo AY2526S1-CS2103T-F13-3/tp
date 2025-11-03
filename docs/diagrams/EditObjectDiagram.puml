@@ -10,7 +10,7 @@ skinparam shadowing false
 
 ' ==== Objects (Runtime Instances) ====
 object "__userInput : String__" as userInput {
-  value = "edit-a n/LeBron James s/Basketball e/lebron@newagency.com p/98765432"
+  value = "edit-a n/LeBron James s/Basketball p/98765432 e/lebron@newagency.com"
 }
 
 object "__parser : EditAthleteCommandParser__" as parser

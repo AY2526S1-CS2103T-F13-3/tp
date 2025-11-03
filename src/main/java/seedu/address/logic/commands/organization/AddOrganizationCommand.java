@@ -61,9 +61,14 @@ public class AddOrganizationCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_ORGANIZATION);
         }
 
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.addOrganization(toAdd);
         assert model.hasOrganization(toAdd) : "Organization should exist in model after adding";
-        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)),
+                CommandResult.UiTab.ORGANIZATIONS);
     }
 
     /**

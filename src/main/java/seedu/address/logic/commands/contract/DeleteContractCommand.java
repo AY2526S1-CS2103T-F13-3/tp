@@ -114,9 +114,14 @@ public class DeleteContractCommand extends Command {
         }
 
         Contract toDelete = match.get();
+        boolean hadActiveFilters = model.hasActiveFilters();
         model.deleteContract(toDelete);
+        if (hadActiveFilters) {
+            model.clearAllFilters();
+        }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, ContractMessages.format(toDelete)));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, ContractMessages.format(toDelete)),
+                CommandResult.UiTab.CONTRACTS);
     }
 
     /**

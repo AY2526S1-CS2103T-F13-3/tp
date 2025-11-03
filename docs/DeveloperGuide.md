@@ -1343,3 +1343,13 @@ About **15-20% less work** thanks to reusing parts of AB3:
 **Current issue:** Currently, the system restricts certain characters such as `/` in athlete and organization names. This limitation exists because these characters are used internally to detect command parameters, which can cause parsing errors or incorrect field detection. As a result, legitimate names like "Formula/One Academy" cannot be added.
 
 **Planned enhancement:** We plan to refine the command parsing logic to properly handle special characters in names while still correctly identifying prefixes. This will involve improving input tokenization and validation to distinguish between actual command prefixes (e.g., `n/`, `p/`) and similar characters within user-provided text.
+
+---
+
+### 6. Support More Flexible Date Formats
+
+**Current issue:** Currently, the system only accepts dates in the strict `DDMMYYYY` format with no spaces, hyphens, or slashes (e.g., `01012024`). This limitation can be unintuitive for users accustomed to different date formats and increases the likelihood of input errors when entering contract dates.
+
+**Planned enhancement:** We plan to enhance the date validation logic to accept more flexible date formats. The updated system will support common variations such as `DD-MM-YYYY`, `DD/MM/YYYY`, and `DD MM YYYY` (e.g., `01-01-2024`, `01/01/2024`, `01 01 2024`). This will improve user experience by accommodating different date entry preferences while maintaining proper validation.
+
+---

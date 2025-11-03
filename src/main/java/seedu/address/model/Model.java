@@ -123,4 +123,17 @@ public interface Model {
 
     /** Updates the filtered contract list using the given predicate. */
     void updateFilteredContractList(Predicate<Contract> predicate);
+
+    /**
+     * Returns true if there are any active filters currently applied
+     * to the contract list.
+     *
+     * @return true if there are active filters, false otherwise.
+     */
+    boolean hasActiveFilters();
+
+    /**
+     * Clears all active filters and restores the full contract list view.
+     */
+    void clearAllFilters();
 }
