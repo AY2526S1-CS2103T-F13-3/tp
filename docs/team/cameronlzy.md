@@ -20,7 +20,7 @@ Given below are my contributions to the project.
 ---
 
 * **Code Contributed:**
-    * [RepoSense link](https://nus-cs2103-ay2526s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2025-09-19T00%3A00%3A00&filteredFileName=&tabOpen=true&tabType=authorship&tabAuthor=cameronl&tabRepo=AY2526S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false)
+    * [RepoSense link](https://nus-cs2103-ay2526s1.github.io/tp-dashboard/?search=&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2025-09-19T00%3A00%3A00&filteredFileName=&tabOpen=true&tabType=authorship&tabAuthor=cameronlzy&tabRepo=AY2526S1-CS2103T-F13-3%2Ftp%5Bmaster%5D&authorshipIsMergeGroup=false)
 
 ---
 
@@ -64,5 +64,6 @@ Given below are my contributions to the project.
 * **Tools:**
     * Maintained and standardized PlantUML styling across all diagrams (`style.puml`).
     * Helped refine Gradle testing configurations for consistent results across development environments.
+    * Used Apache Commons Validator to do email verification
 
 ---
