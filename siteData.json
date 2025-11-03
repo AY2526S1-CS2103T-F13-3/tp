@@ -82,12 +82,13 @@
         "what-we-reused-from-ab3": "What we reused from AB3",
         "what-we-learned": "What we learned",
         "appendix-planned-enhancements": "Appendix: Planned Enhancements",
-        "1-add-edit-command-for-all-entities-athlete-organization-contract": "1. Add Edit command for all entities (Athlete, Organization, Contract)",
+        "1-streamline-the-editing-workflow-for-existing-entities": "1. Streamline the editing workflow for existing entities",
         "2-allow-more-flexible-phone-number-formats-for-international-support": "2. Allow more flexible phone number formats for international support",
         "3-increase-character-limits-for-text-fields": "3. Increase character limits for text fields",
         "4-enhance-find-command-to-support-multiple-flags-and-flexible-search-variations": "4. Enhance Find command to support multiple flags and flexible search variations",
         "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in Athlete and Organization Names",
-        "6-support-more-flexible-date-formats": "6. Support More Flexible Date Formats"
+        "6-support-more-flexible-date-formats": "6. Support more flexible date formats",
+        "7-implement-realistic-date-range-validation": "7. Implement realistic date range validation"
       },
       "headingKeywords": {}
     },
@@ -162,7 +163,6 @@
         "common-error-messages": "Common Error Messages",
         "performance-issues": "Performance Issues",
         "frequently-asked-questions": "Frequently Asked Questions",
-        "why-can-t-the-total-contract-amount-exceed-9-223-372-036-854-775-807": "Why can't the total contract amount exceed 9,223,372,036,854,775,807?",
         "getting-more-help": "Getting More Help",
         "appendix": "Appendix",
         "glossary": "Glossary",
