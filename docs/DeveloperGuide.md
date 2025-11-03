@@ -1341,7 +1341,7 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 ---
 
-### 4. Enhance Find command to support multiple flags and flexible search variations
+### 4. Enhance find command to support multiple flags and flexible search variations
 
 **Current issue:** The current `find` command only supports searching by one flag at a time (e.g., `find an/James`). Users cannot combine multiple criteria (e.g., name and sport), and search matching is limited to exact or partial word matches. This makes filtering less efficient for large datasets.
 
@@ -1349,7 +1349,7 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 ---
 
-### 5. Allow more variations and special characters in Athlete and Organization Names
+### 5. Allow more variations and special characters in athlete and organization names
 
 **Current issue:** Currently, the system restricts certain characters such as `/` in athlete and organization names. This limitation exists because these characters are used internally to detect command parameters, which can cause parsing errors or incorrect field detection. Additionally, the system only accepts ASCII characters, preventing users from entering names with accents, diacritics, or non-Latin scripts (e.g., "José García", "李明", "François Müller"). This limits the system's usability for international athletes and organizations.
 
