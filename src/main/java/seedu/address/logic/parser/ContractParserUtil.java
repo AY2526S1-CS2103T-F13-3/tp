@@ -101,7 +101,7 @@ public class ContractParserUtil {
         requireNonNull(name);
         String trimmed = name.trim();
         // letters, spaces, apostrophes, and hyphens allowed
-        if (!trimmed.matches("^[A-Za-z][A-Za-z' -]*$")) {
+        if (!trimmed.matches("^(?=.{1,50}$)[A-Za-z0-9][A-Za-z0-9' &-]*$")) {
             throw new ParseException(OrganizationName.MESSAGE_CONSTRAINTS);
         }
         return new OrganizationName(trimmed);
