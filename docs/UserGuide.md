@@ -259,8 +259,6 @@ add-o o/IMG Academy p/88889999 e/talent@imgacad.com
 
 **Expected Output:**
 
-![add-o](images/add-o.png)
-
 ```
 New organization added: Nike; Phone: 98765432; Email: partnerships@nike.com
 ```
@@ -593,8 +591,6 @@ Exiting playbook.io as requested ...
 3. Regularly review the contract list to keep track of upcoming expiries
 4. Keep contact information updated for all entities
 
-<div style="page-break-before: always;"></div>
-
 **Contract Negotiation Season:**
 
 1. Use `find ca/NAME` to see all contracts for an athlete
@@ -654,8 +650,6 @@ Do not include currency symbols or commas.**
 - Maximum supported amount: 9,223,372,036,854,775,807
 - No commas, currency symbols, or decimal points allowed
 - Use whole numbers only (e.g., 50000000 for $50 million)
-
-<div style="page-break-before: always;"></div>
 
 ### Performance Issues
 
