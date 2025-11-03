@@ -14,8 +14,9 @@ pageNav: 3
 ## **Acknowledgements**
 
 This project was built upon the [_AddressBook-Level3 (AB3)_](https://github.com/nus-cs2103-AY2526S1/tp) codebase
-provided by the National University of Singapore’s **CS2103T Software Engineering** module.
+provided by the National University of Singapore's **CS2103T Software Engineering** module.
 
+Several AI coding tools were also used (eg: Claude Code, ChatGPT) to help the teams move fast and debug issues.
 ---
 
 ## **Setting up, getting started**
