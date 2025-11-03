@@ -529,7 +529,7 @@ Exiting playbook.io as requested ...
 
 <div markdown="block" class="alert alert-info">
 
-**💡 Tip:** All commands and flags (like `add-a`, `delete-c`, or `n/`) are **case-insensitive**, so you can type `ADD`, `Add`, or `aDd` and it will work the same.
+**💡 Tip:** All commands and flags (like `add-a`, `delete-c`, or `n/`) are **case-insensitive**, so you can type `ADD-a`, `Add-A`, or `aDd-A` and it will work the same.
 
 </div>
 
@@ -612,16 +612,16 @@ Exiting playbook.io as requested ...
 
 ### Common Pitfalls & Solutions
 
-**Problem:** "Error: Athlete not found" when adding contracts
+**Problem:** "Error: Athlete not found" when adding contracts  
 **Solution:** Use `find an/NAME` first to verify the exact name spelling
 
-**Problem:** Too many search results
+**Problem:** Too many search results  
 **Solution:** Use more specific keywords or combine with tab switching
 
-**Problem:** Slow performance with large datasets
+**Problem:** Slow performance with large datasets  
 **Solution:** Use search filters regularly instead of browsing all data
 
-**Problem:** App behaves unexpectedly after deleting files
+**Problem:** App behaves unexpectedly after deleting files  
 **Solution:** Never delete individual JSON files in the `data` folder.
 If you need to reset your data, delete the entire folder instead.
 
@@ -660,13 +660,13 @@ Do not include currency symbols or commas.**
 
 ### Performance Issues
 
-**Large Datasets (1000+ entries):**
+**Large datasets (1000+ entries):**
 
 - Use search filters instead of browsing all data
 - Close and restart the application weekly
 - Consider archiving old contracts to separate files
 
-**Slow Startup:**
+**Slow startup:**
 
 - Check available disk space (need 50MB minimum)
 - Ensure Java version is 17 or higher

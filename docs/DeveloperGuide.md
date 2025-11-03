@@ -847,7 +847,7 @@ otherwise)
     * 2a1. playbook.io returns an empty list
 
       Use case ends.
-
+  
 <div style="page-break-before: always;"></div>
 
 **Use case: UC08 - Find Organization**
