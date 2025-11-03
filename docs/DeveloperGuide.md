@@ -974,7 +974,7 @@ otherwise)
 
 ### Non-functional requirements
 
-1. Should work on any _mainstream OS_ as long as it has Java `17` or above installed.
+1. Should work on any _mainstream OS_ as long as it has Java `17` installed.
 2. Should be able to hold up to 1000 athletes, organizations, and contracts while maintaining an average response time
    of under 2 seconds for common operations (e.g., adding, deleting, or searching) under typical usage conditions.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands), typically
