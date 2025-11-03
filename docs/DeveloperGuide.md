@@ -1021,6 +1021,8 @@ Shows the GUI. The window size may not be optimum.
 **Expected:**
 The most recent window size and location is retained.
 
+<div style="page-break-before: always;"></div>
+
 ### Adding an athlete
 
 #### 1. Adding an athlete while all athletes are being shown
@@ -1033,8 +1035,6 @@ The most recent window size and location is retained.
 4. **Other incorrect add-a commands to try:** `add-a`, `add-a n/Messi2 s/Football a/39 p/87654321 e/cr7@example.com`,
    `...`  
    **Expected:** Similar to previous.
-
-<div style="page-break-before: always;"></div>
 
 ### Deleting an athlete
 
@@ -1077,6 +1077,8 @@ The most recent window size and location is retained.
 4. **Other incorrect delete-o commands to try:** `delete-o`, `delete-o o/Nike!`, `...`  
    **Expected:** Similar to previous.
 
+<div style="page-break-before: always;"></div>
+
 ### Adding a contract
 
 #### 1. Adding a contract while all contracts are being shown
@@ -1091,8 +1093,6 @@ The most recent window size and location is retained.
 4. **Other incorrect add-c commands to try:** `add-c`,
    `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.90`, `...`  
    **Expected:** Similar to previous.
-
-<div style="page-break-before: always;"></div>
 
 ### Deleting a contract
 
@@ -1148,8 +1148,6 @@ The most recent window size and location is retained.
    **Expected:** No filtering occurs. Error details shown in the result pane.
 6. **Other incorrect find commands to try:** `find cs/`, `find ca/`, `...`  
    **Expected:** Similar to previous.
-
-<div style="page-break-before: always;"></div>
 
 ### Saving data
 
