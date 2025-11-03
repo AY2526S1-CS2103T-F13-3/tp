@@ -422,8 +422,10 @@ find co/Nike           # Find contracts with organizations like "Nike"
 
 **Expected Output for `find an/James`:**
 
+![find](images/find.png)
+
 ```
-Showing 1 athlete closely matching "James".
+Showing 2 athlete closely matching "James".
 You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux) to show all data again.
 ```
 <div markdown="block" class="alert alert-warning">
@@ -445,6 +447,8 @@ You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux
 - **Case insensitive**: "NIKE" and "nike" both work
 
 </div>
+
+<div style="page-break-before: always;"></div>
 
 #### Clearing Search Results
 
@@ -477,7 +481,6 @@ You can refresh the display anytime using **Cmd+R** (macOS) or **Ctrl+R** (Windo
 
 Opens the help window with quick reference information and links to documentation.
 
-<div style="page-break-before: always;"></div>
 
 **Keyboard Shortcut:** **F1**
 
@@ -502,6 +505,8 @@ Exiting playbook.io as requested ...
 **💡 Tip:** Your data is automatically saved after every command, so you never have to worry about losing information.
 
 </div>
+
+<div style="page-break-before: always;"></div>
 
 ---
 
