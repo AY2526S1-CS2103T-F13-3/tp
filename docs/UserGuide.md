@@ -172,7 +172,7 @@ Athletes are the heart of your business. playbook.io makes it easy to track thei
 **Parameters:**
 
 - `n/NAME`: Full name of the athlete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
-- `s/SPORT`: Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
+- `s/SPORT`: Sport of the athlete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters, including spaces)
 - `a/AGE`: Age of the athlete (positive integers only, ranging from 1 to 99)
 - `p/PHONE`: Phone number of the athlete (8-digit Singapore phone number only; must start with 6, 8, or 9)
 - `e/EMAIL`: Email address of the athlete (case-insensitive; must follow standard email format; maximum of 50 characters)
@@ -209,7 +209,7 @@ New athlete added: Lebron James; Sport: Basketball; Age: 40; Phone: 99876543; Em
 **Parameters:**
 
 - `n/NAME`: Full name of the athlete to delete (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
-- `s/SPORT`: Sport of the athlete to delete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
+- `s/SPORT`: Sport of the athlete to delete (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters, including spaces)
 
 **Examples:**
 
@@ -320,7 +320,7 @@ Contracts link athletes with organizations and track the business relationships 
 **Parameters:**
 
 - `n/NAME`: Athlete's full name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
-- `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
+- `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters, including spaces)
 - `o/ORG_NAME`: Organization's name (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
 - `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format)
 - `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format)
@@ -362,7 +362,7 @@ Contract created: Athlete: Lebron James; Sport: Basketball; Organization: Nike; 
 **Parameters:**
 
 - `n/NAME`: Athlete's full name (spaces allowed, case-insensitive; accepts alphabetic characters, hyphens, and apostrophes; must start with a letter; maximum of 50 characters, including spaces)
-- `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
+- `s/SPORT`: Athlete's sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters, including spaces)
 - `o/ORG_NAME`: Organization's name (spaces allowed, case-insensitive; accepts alphanumeric characters, hyphens, apostrophes, and ampersands; must start with a alphanumeric character; maximum of 50 characters, including spaces)
 - `sd/DDMMYYYY`: Start date (must be in the DDMMYYYY format)
 - `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format)
@@ -544,7 +544,7 @@ Exiting playbook.io as requested ...
    - Limitation rationale: The 50-character limit accommodates most athlete names while preventing extremely long entries that could affect display formatting and system performance.
 
   <br>
-- `SPORT`: Sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters)
+- `SPORT`: Sport (spaces allowed, case-insensitive; alphabetic characters only; maximum of 50 characters, including spaces)
    - Character restrictions: Only letters are allowed to maintain consistency in sport names and prevent formatting issues.
    - Limitation rationale: The 50-character limit covers all major sports names and disciplines while preventing extremely long entries that could affect display formatting and system performance.
 
