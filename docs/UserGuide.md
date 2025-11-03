@@ -143,7 +143,7 @@ Let's try some basic operations to get you started:
 3. **Search for Athletes**
 
    ```
-   find an/ LeBron
+   find an/LeBron
    ```
 
 4. **Clear the Search**
@@ -153,7 +153,7 @@ Let's try some basic operations to get you started:
 
 <div markdown="block" class="alert alert-info">
 
-**💡 Tip:** All commands in playbook.io are designed to be fast to type, simple, and case-insensitive. Use short flags like `-an` (athlete name) and `-on` (organization name) to quickly find what you need.
+**💡 Tip:** All commands in playbook.io are designed to be fast to type, simple, and case-insensitive. Use short flags like `an/` (athlete name) and `on/` (organization name) to quickly find what you need.
 </div>
 
 ---
@@ -394,36 +394,35 @@ The search functionality uses **fuzzy matching** to help you find what you're lo
 
 #### Search Command
 
-**Command:** `find [FLAG]/ KEYWORD`
+**Command:** `find [FLAG]/KEYWORD`
 **Parameters:**
-- `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
-  **Available Search Types:**
+- `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)  
 
-| Flag  | Searches                  | Example               |
-| ----- | ------------------------- | --------------------- |
-| `an/` | Athlete names             | `find an/ LeBron`     |
-| `as/` | Athlete sports            | `find as/ Basketball` |
-| `on/` | Organization names        | `find on/ Nike`       |
-| `ca/` | Contracts by athlete name | `find ca/ LeBron`     |
-| `cs/` | Contracts by sport        | `find cs/ Basketball` |
-| `co/` | Contracts by organization | `find co/ Nike`       |
+**Available Search Types:**
+
+| Flag  | Searches                  | Example           |
+| ----- | ------------------------- | ----------------- |
+| `an/` | Athlete names             | `find an/LeBron`  |
+| `as/` | Athlete sports            | `find as/Basketball` |
+| `on/` | Organization names        | `find on/Nike`    |
+| `ca/` | Contracts by athlete name | `find ca/LeBron`  |
+| `cs/` | Contracts by sport        | `find cs/Basketball` |
+| `co/` | Contracts by organization | `find co/Nike`    |
 
 <div style="page-break-before: always;"></div>
 
 **Examples:**
 
 ```
-find an/ James          # Find athletes with names like "James"
-find as/ Basketball     # Find athletes with sports like "Basketball"
-find on/ Nike           # Find organizations with names like "Nike"
-find ca/ LeBron         # Find contracts with athletes named like "LeBron"
-find cs/ Basketball     # Find all contracts athletes' sports named like "Basketball"
-find co/ Nike           # Find contracts with organizations like "Nike"
+find an/James          # Find athletes with names like "James"
+find as/Basketball     # Find athletes with sports like "Basketball"
+find on/Nike           # Find organizations with names like "Nike"
+find ca/LeBron         # Find contracts with athletes named like "LeBron"
+find cs/Basketball     # Find all contracts athletes' sports named like "Basketball"
+find co/Nike           # Find contracts with organizations like "Nike"
 ```
 
-**Expected Output for `find an/ James`:**
-
-![find-an](images/find-an.png)
+**Expected Output for `find an/James`:**
 
 ```
 Showing 1 athlete closely matching "James".
@@ -432,6 +431,7 @@ You can refresh the display anytime using Cmd+R (macOS) or Ctrl+R (Windows/Linux
 <div markdown="block" class="alert alert-warning">
 
 **⚠️ Important:**
+- Only one flag should be used per command. The parameter for each flag follows the limitations set for its respective entity type
 - Add or delete operations after a find command will clear the filter and redirect you to the corresponding tab.
 - Running another find command clears previous results, displays the new filtered list, and redirects you to the corresponding tab.
 - For keywords, spaces do not matter, so multiple consecutive spaces are treated as a single space.
@@ -510,22 +510,22 @@ Exiting playbook.io as requested ...
 
 ### Quick Syntax Guide
 
-| Command    | Syntax                                                                                                                                        | Description          |
-| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------------| -------------------- |
-| `add-a`    | `add-a n/NAME s/SPORT a/AGE p/PHONE e/EMAIL`                                                                                                  | Add new athlete      |
-| `delete-a` | `delete-a n/NAME s/SPORT`                                                                                                                     | Delete athlete       |
-| `add-o`    | `add-o o/ORG_NAME p/PHONE e/EMAIL`                                                                                                            | Add new organization |
-| `delete-o` | `delete-o o/ORG_NAME`                                                                                                                         | Delete organization  |
-| `add-c`    | `add-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                        | Add new contract     |
-| `delete-c` | `delete-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                     | Delete contract      |
-| `find`     | `find an/ KEYWORD`<br/>`find as/ KEYWORD` <br/> `find on/ KEYWORD` <br/> `find ca/ KEYWORD` <br/> `find co/ KEYWORD` <br/> `find cs/ KEYWORD` | Search/filter data   |
-| `refresh`  | `refresh`                                                                                                                                     | Clear all filters    |
-| `help`     | `help`                                                                                                                                        | Open help window     |
-| `exit`     | `exit`                                                                                                                                        | Close application    |
+| Command    | Syntax                                                                                                                                  | Description          |
+| ---------- |-----------------------------------------------------------------------------------------------------------------------------------------| -------------------- |
+| `add-a`    | `add-a n/NAME s/SPORT a/AGE p/PHONE e/EMAIL`                                                                                            | Add new athlete      |
+| `delete-a` | `delete-a n/NAME s/SPORT`                                                                                                               | Delete athlete       |
+| `add-o`    | `add-o o/ORG_NAME p/PHONE e/EMAIL`                                                                                                      | Add new organization |
+| `delete-o` | `delete-o o/ORG_NAME`                                                                                                                   | Delete organization  |
+| `add-c`    | `add-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                                  | Add new contract     |
+| `delete-c` | `delete-c n/NAME s/SPORT o/ORG sd/DATE ed/DATE am/AMOUNT`                                                                               | Delete contract      |
+| `find`     | `find an/NAME`<br/>`find as/SPORT` <br/> `find on/ORG_NAME` <br/> `find ca/NAME` <br/> `find co/ORG_NAME` <br/> `find cs/SPORT` | Search/filter data   |
+| `refresh`  | `refresh`                                                                                                                               | Clear all filters    |
+| `help`     | `help`                                                                                                                                  | Open help window     |
+| `exit`     | `exit`                                                                                                                                  | Close application    |
 
 <div markdown="block" class="alert alert-info">
 
-**💡 Tip:** All commands and flags (like `add`, `delete-a`, or `n/`) are **case-insensitive**, so you can type `ADD`, `Add`, or `aDd` and it will work the same.
+**💡 Tip:** All commands and flags (like `add-a`, `delete-c`, or `n/`) are **case-insensitive**, so you can type `ADD`, `Add`, or `aDd` and it will work the same.
 
 </div>
 
@@ -570,9 +570,6 @@ Exiting playbook.io as requested ...
    - Currency: All amounts are in Singapore Dollars (SGD)
    - Format rationale: Integer-only format simplifies calculations and prevents errors. The maximum value accommodates even the largest sports contracts globally.
 
-   <br>
-- `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)
-
 ### Keyboard Shortcuts
 
 | Shortcut               | Action            | Description                  |
@@ -591,16 +588,16 @@ Exiting playbook.io as requested ...
 **Daily Management:**
 
 1. Start each day with `refresh` to see all your data
-2. Use `find an/ [name]` to quickly locate specific athletes
-3. Check contract expiry dates regularly with `find cs/ [sport]`
+2. Use `find an/NAME` to quickly locate specific athletes
+3. Regularly review the contract list to keep track of upcoming expiries
 4. Keep contact information updated for all entities
 
 <div style="page-break-before: always;"></div>
 
 **Contract Negotiation Season:**
 
-1. Use `find ca/ [athlete]` to see all contracts for an athlete
-2. Cross-reference with `find co/ [organization]` to see organization's other deals
+1. Use `find ca/NAME` to see all contracts for an athlete
+2. Cross-reference with `find co/ORG_NAME` to see organization's other deals
 3. Track contract amounts and dates systematically
 4. Add new contracts immediately after signing
 
@@ -614,7 +611,7 @@ Exiting playbook.io as requested ...
 ### Common Pitfalls & Solutions
 
 **Problem:** "Error: Athlete not found" when adding contracts
-**Solution:** Use `find an/ [name]` first to verify the exact name spelling
+**Solution:** Use `find an/NAME` first to verify the exact name spelling
 
 **Problem:** Too many search results
 **Solution:** Use more specific keywords or combine with tab switching
@@ -635,7 +632,7 @@ If you need to reset your data, delete the entire folder instead.
 **"Error: Unknown command"**
 
 - Check spelling of command name
-- Ensure you're using the correct flags (e.g., `-an` not `-name`)
+- Ensure you're using the correct flags (e.g., `n/` not `name/`)
 - See [Command Reference](#command-reference) for exact syntax
 
 **"Error: Athlete/Organization/Contract not found"**
@@ -690,10 +687,11 @@ Athletes are identified by their name and sport combination, not by contact deta
 
 Yes, this is allowed and intentional. Athletes and organizations are separate entities in the system, and it's common in practice for them to share contact details. This flexibility reflects real-world scenarios where contact information overlaps between different entities you manage.
 
-**Can I edit athlete, organization, or contract information after adding them?**
+**Can I edit athlete, organization, or contract information after adding them?**  
+
 No, editing is not allowed for athletes, organizations, or contracts once they've been added to the system. If you need to make changes or entered incorrect information, please delete the entry and create a new one with the correct details.
 
-### Why can't the total contract amount exceed 9,223,372,036,854,775,807?
+**Why can't the total contract amount exceed 9,223,372,036,854,775,807?**
 
 This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which is the largest whole number the system can handle. Realistically, this number (over 9 quintillion) far exceeds the total amount of money in the world, so it's highly unlikely you'll ever encounter this limit in practice. This constraint exists purely as a technical limitation of the programming language used.
 
@@ -770,8 +768,8 @@ This is the maximum value for a 64-bit integer (`Long.MAX_VALUE`) in Java, which
 
 **Version Information:**
 
-- Current Version: 1.4
-- Last Updated: November 2024
+- Current Version: 1.6
+- Last Updated: November 2025
 - License: MIT License
 
 ---

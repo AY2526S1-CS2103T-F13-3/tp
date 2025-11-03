@@ -1107,9 +1107,9 @@ The most recent window size and location is retained.
 #### 1. Finding an athlete while all athletes are being shown
 
 1. **Prerequisites:** Switch to the Athletes Tab by pressing **Cmd+1** (or **Ctrl+1** on Windows/Linux).
-2. **Test case:** `find an/ LeBron James`  
+2. **Test case:** `find an/LeBron James`  
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find as/ Basketball`  
+3. **Test case:** `find as/Basketball`  
    **Expected:** Filtered list of athletes shown. Details of the filtered list shown in the result pane.
 4. **Test case:** `find as/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
@@ -1121,7 +1121,7 @@ The most recent window size and location is retained.
 #### 1. Finding an organization while all organizations are being shown
 
 1. **Prerequisites:** Switch to the Organizations Tab by pressing **Cmd+2** (or **Ctrl+2** on Windows/Linux).
-2. **Test case:** `find on/ Nike`  
+2. **Test case:** `find on/Nike`  
    **Expected:** Filtered list of organizations shown. Details of the filtered list shown in the result pane.
 3. **Test case:** `find on/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
@@ -1133,11 +1133,11 @@ The most recent window size and location is retained.
 #### 1. Finding a contract while all contracts are being shown
 
 1. **Prerequisites:** Switch to the Contracts Tab by pressing **Cmd+3** (or **Ctrl+3** on Windows/Linux).
-2. **Test case:** `find ca/ LeBron James`  
+2. **Test case:** `find ca/LeBron James`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-3. **Test case:** `find cs/ Basketball`  
+3. **Test case:** `find cs/Basketball`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
-4. **Test case:** `find co/ Nike`  
+4. **Test case:** `find co/Nike`  
    **Expected:** Filtered list of contracts shown. Details of the filtered list shown in the result pane.
 5. **Test case:** `find co/`  
    **Expected:** No filtering occurs. Error details shown in the result pane.
@@ -1306,11 +1306,11 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 **Team size:** 5
 
-### 1. Add Edit command for all entities (Athlete, Organization, Contract)
+### 1. Streamline the editing workflow for existing entities
 
-**Current issue:** Users currently need to delete and re-add an entity if they make a mistake (e.g., incorrect phone number or organization name). This is inconvenient and error-prone, especially when managing multiple related entities.
+**Current issue:** To edit an entity's details, users must currently delete the entire entity and then re-add it with corrected information. This two-step process is cumbersome and risks data loss if the user forgets details from the original entry. The workflow is also unintuitive for users who expect a direct edit capability.
 
-**Planned enhancement:** We plan to introduce an `edit` command that allows users to modify the details of existing entities directly without deleting them. The command will follow a format similar to AB3's edit implementation but extended for multiple entity types as seen under [[Proposed] Edit feature](#proposed-edit-feature).
+**Planned enhancement:** We plan to streamline the editing workflow by consolidating the delete-and-add process into a single, more intuitive operation. This enhancement will improve the existing edit capability by making it more user-friendly, reducing the risk of accidental data loss, and providing clearer feedback during the modification process.
 
 ---
 
@@ -1332,7 +1332,7 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 ### 4. Enhance Find command to support multiple flags and flexible search variations
 
-**Current issue:** The current `find` command only supports searching by one flag at a time (e.g., `find -an James`). Users cannot combine multiple criteria (e.g., name and sport), and search matching is limited to exact or partial word matches. This makes filtering less efficient for large datasets.
+**Current issue:** The current `find` command only supports searching by one flag at a time (e.g., `find an/James`). Users cannot combine multiple criteria (e.g., name and sport), and search matching is limited to exact or partial word matches. This makes filtering less efficient for large datasets.
 
 **Planned enhancement:** We plan to enhance the `find` command to support multiple flags and more flexible search variations. Users will be able to search using a combination of attributes (e.g., name, sport, organization) within a single command. The command parser will be updated to handle multiple flag-value pairs and perform case-insensitive, partial, and multi-word matching.
 
@@ -1340,16 +1340,24 @@ About **15-20% less work** thanks to reusing parts of AB3:
 
 ### 5. Allow more variations and special characters in Athlete and Organization Names
 
-**Current issue:** Currently, the system restricts certain characters such as `/` in athlete and organization names. This limitation exists because these characters are used internally to detect command parameters, which can cause parsing errors or incorrect field detection. As a result, legitimate names like "Formula/One Academy" cannot be added.
+**Current issue:** Currently, the system restricts certain characters such as `/` in athlete and organization names. This limitation exists because these characters are used internally to detect command parameters, which can cause parsing errors or incorrect field detection. Additionally, the system only accepts ASCII characters, preventing users from entering names with accents, diacritics, or non-Latin scripts (e.g., "José García", "李明", "François Müller"). This limits the system's usability for international athletes and organizations.
 
-**Planned enhancement:** We plan to refine the command parsing logic to properly handle special characters in names while still correctly identifying prefixes. This will involve improving input tokenization and validation to distinguish between actual command prefixes (e.g., `n/`, `p/`) and similar characters within user-provided text.
+**Planned enhancement:** We plan to refine the command parsing logic to properly handle special characters and non-ASCII characters in names while still correctly identifying prefixes. This will involve improving input tokenization and validation to distinguish between actual command prefixes (e.g., `n/`, `p/`) and similar characters within user-provided text, as well as expanding character encoding support to accept Unicode characters for international names.
 
 ---
 
-### 6. Support More Flexible Date Formats
+### 6. Support more flexible date formats
 
 **Current issue:** Currently, the system only accepts dates in the strict `DDMMYYYY` format with no spaces, hyphens, or slashes (e.g., `01012024`). This limitation can be unintuitive for users accustomed to different date formats and increases the likelihood of input errors when entering contract dates.
 
 **Planned enhancement:** We plan to enhance the date validation logic to accept more flexible date formats. The updated system will support common variations such as `DD-MM-YYYY`, `DD/MM/YYYY`, and `DD MM YYYY` (e.g., `01-01-2024`, `01/01/2024`, `01 01 2024`). This will improve user experience by accommodating different date entry preferences while maintaining proper validation.
+
+---
+
+### 7. Implement realistic date range validation
+
+**Current issue:** Currently, the system allows contracts to start and end at any date without validation against logical constraints. This means contracts can be created with start dates before an athlete's birth year, or with impossibly long durations spanning decades. Such invalid data entries compromise the integrity of the contract database and can lead to meaningless or erroneous records.
+
+**Planned enhancement:** We plan to implement comprehensive date range validation to ensure all contract dates are realistic and logically sound. The updated system will validate that contract start dates do not precede the athlete's birth year, and that contract durations fall within reasonable bounds for professional sports agreements. This will prevent the creation of logically impossible contracts while providing clear feedback to users when invalid date ranges are entered.
 
 ---
