@@ -27,7 +27,8 @@ class JsonSerializableContractList {
      * Constructs a {@code JsonSerializableContractList} with the given contracts.
      */
     @JsonCreator
-    public JsonSerializableContractList(@JsonProperty("contracts") List<JsonAdaptedContract> contracts) {
+    public JsonSerializableContractList(
+            @JsonProperty("contracts") List<JsonAdaptedContract> contracts) {
         this.contracts.addAll(contracts);
     }
 

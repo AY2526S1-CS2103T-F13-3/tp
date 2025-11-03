@@ -72,7 +72,9 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getAddressBookFilePath());
         AthleteListStorage athleteListStorage = new JsonAthleteListStorage(userPrefs.getAthleteListFilePath());
         ContractListStorage contractListStorage = new JsonContractListStorage(
-                userPrefs.getContractListFilePath());
+                userPrefs.getContractListFilePath(),
+                userPrefs.getAthleteListFilePath(),
+                userPrefs.getOrganizationListFilePath());
         OrganizationListStorage organizationListStorage = new JsonOrganizationListStorage(
                 userPrefs.getOrganizationListFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, athleteListStorage,
