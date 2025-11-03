@@ -127,8 +127,6 @@ taking the `add-a` command as an example.
 <puml src="diagrams/AlternateAddAthleteSD.puml" width="800" />
 <puml src="diagrams/ParsingAddSequenceDiagram.puml" width="800" />
 
-<div style="page-break-before: always;"></div>
-
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it passes the user input to an `AddressBookParser` object, which
@@ -140,6 +138,8 @@ How the `Logic` component works:
    Although this is shown as a single step in the diagrams above for simplicity, the actual implementation involves
    multiple interactions between the `Command` and the `Model`.
 4. The result of the command execution is encapsulated as a `CommandResult` object, which is returned back from `Logic`.
+
+<div style="page-break-before: always;"></div>
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing user commands:
 
@@ -1077,8 +1077,6 @@ The most recent window size and location is retained.
 4. **Other incorrect delete-o commands to try:** `delete-o`, `delete-o o/Nike!`, `...`  
    **Expected:** Similar to previous.
 
-<div style="page-break-before: always;"></div>
-
 ### Adding a contract
 
 #### 1. Adding a contract while all contracts are being shown
@@ -1093,6 +1091,8 @@ The most recent window size and location is retained.
 4. **Other incorrect add-c commands to try:** `add-c`,
    `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.90`, `...`  
    **Expected:** Similar to previous.
+
+<div style="page-break-before: always;"></div>
 
 ### Deleting a contract
 
@@ -1148,6 +1148,8 @@ The most recent window size and location is retained.
    **Expected:** No filtering occurs. Error details shown in the result pane.
 6. **Other incorrect find commands to try:** `find cs/`, `find ca/`, `...`  
    **Expected:** Similar to previous.
+
+<div style="page-break-before: always;"></div>
 
 ### Saving data
 
@@ -1217,6 +1219,8 @@ Making commands work for three different types instead of one was tricky:
 - **Different inputs**: Each entity type has different information, so the command parsers had to handle this.
 - **Clear commands**: We needed command names that made sense and didn't confuse users.
 
+<div style="page-break-before: always;"></div>
+
 #### 3. Making the UI work
 
 Showing three different types of lists in the interface was challenging:
@@ -1272,6 +1276,8 @@ We spent a lot of time on:
 - Developer Guide explains how the code works with diagrams
 - FAQ section answers common questions
 
+<div style="page-break-before: always;"></div>
+
 #### Good teamwork
 - Everyone knew what they were responsible for
 - We reviewed each other's code before merging
@@ -1322,6 +1328,8 @@ About **15-20% less work** thanks to reusing parts of AB3:
 **Current issue:** The current system is localized to Singapore and only accepts 8-digit phone numbers without spaces, country codes, or symbols (e.g., `91234567`). This restriction limits scalability and prevents international users or organizations from being added.
 
 **Planned enhancement:** As we plan to expand playbook.io for international use, we will enhance the phone number validation logic to support a wider range of formats. The updated validation will accept optional country codes (e.g., `+65`, `+1`), spaces, and hyphens while still rejecting invalid characters.
+
+<div style="page-break-before: always;"></div>
 
 ---
 
