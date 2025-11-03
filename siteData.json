@@ -85,8 +85,8 @@
         "1-streamline-the-editing-workflow-for-existing-entities": "1. Streamline the editing workflow for existing entities",
         "2-allow-more-flexible-phone-number-formats-for-international-support": "2. Allow more flexible phone number formats for international support",
         "3-increase-character-limits-for-text-fields": "3. Increase character limits for text fields",
-        "4-enhance-find-command-to-support-multiple-flags-and-flexible-search-variations": "4. Enhance Find command to support multiple flags and flexible search variations",
-        "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in Athlete and Organization Names",
+        "4-enhance-find-command-to-support-multiple-flags-and-flexible-search-variations": "4. Enhance find command to support multiple flags and flexible search variations",
+        "5-allow-more-variations-and-special-characters-in-athlete-and-organization-names": "5. Allow more variations and special characters in athlete and organization names",
         "6-support-more-flexible-date-formats": "6. Support more flexible date formats",
         "7-implement-realistic-date-range-validation": "7. Implement realistic date range validation"
       },
