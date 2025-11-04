@@ -1104,7 +1104,7 @@ The most recent window size and location is retained.
 3. **Test case:** `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/`  
    **Expected:** No contract is added. Error details shown in the result pane.
 4. **Other incorrect add-c commands to try:** `add-c`,
-   `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.99`, `...`  
+   `add-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/500.90`, `...`  
    **Expected:** Similar to previous.
 
 <div style="page-break-before: always;"></div>
