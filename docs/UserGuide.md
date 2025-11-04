@@ -392,7 +392,8 @@ The search functionality uses **fuzzy matching** to help you find what you're lo
 
 #### Search Command
 
-**Command:** `find [FLAG]/KEYWORD`
+**Command:** `find [FLAG]/KEYWORD`  
+
 **Parameters:**
 - `KEYWORD`: Keyword to be searched (spaces allowed, case-insensitive; cannot be blank or consist of only spaces)  
 
