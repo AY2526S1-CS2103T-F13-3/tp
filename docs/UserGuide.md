@@ -368,7 +368,7 @@ Contract created: Athlete: Lebron James; Sport: Basketball; Organization: Nike; 
 - `ed/DDMMYYYY`: End date (must be in the DDMMYYYY format)
 - `am/AMOUNT`: Contract amount (positive integers only; supports large values up to 9,223,372,036,854,775,807; no currency symbols or commas)
 
-  **Examples:**
+ **Examples:**
 
 ```
 delete-c n/LeBron James s/Basketball o/Nike sd/01012024 ed/01012025 am/50000000
