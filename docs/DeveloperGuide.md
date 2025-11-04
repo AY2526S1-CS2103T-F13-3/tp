@@ -1282,7 +1282,7 @@ We spent a lot of time on:
 - Entities are properly linked and validated
 
 #### Good code quality
-- Over 70% of our code is tested with automated tests
+- CLose to 70% of our code is tested with automated tests
 - Code is well-organized and easy to understand
 - All commands give clear, consistent error messages
 
