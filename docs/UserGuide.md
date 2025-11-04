@@ -676,6 +676,7 @@ Do not include currency symbols or commas.**
 - Try moving to a different folder location
 
 ### Frequently Asked Questions
+
 **Why can't I use my international phone numbers?**
 
 playbook.io is designed for agents operating in Singapore and currently supports only 8-digit Singapore phone numbers. This ensures data consistency and simplifies local operations.
