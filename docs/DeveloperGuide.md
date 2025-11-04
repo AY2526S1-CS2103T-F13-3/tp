@@ -130,11 +130,11 @@ taking the `add-a` command as an example.
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it passes the user input to an `AddressBookParser` object, which
-   in turn creates a parser that matches the command (e.g., `AddAthleteCommandParser` or `DeleteAthleteCommandParser`)
+   in turn creates a parser that matches the command (e.g., `AddAthleteCommandParser`)
    and uses it to parse the command.
 2. This results in a `Command` object (more precisely, an instance of one of its subclasses such as
-   `AddAthleteCommand` or `DeleteAthleteCommand`) which is executed by the `LogicManager`.
-3. The command communicates with the `Model` when executed (e.g., to add or delete an athlete).
+   `AddAthleteCommand`) which is executed by the `LogicManager`.
+3. The command communicates with the `Model` when executed (e.g., to add an athlete).
    Although this is shown as a single step in the diagrams above for simplicity, the actual implementation involves
    multiple interactions between the `Command` and the `Model`.
 4. The result of the command execution is encapsulated as a `CommandResult` object, which is returned back from `Logic`.
